@@ -21,9 +21,15 @@ import type { BlogPost, FAQ, Navigation, PricingItem, SiteSettings, Treatment, W
 const toLocalMediaPath = (url: string): string => {
   try {
     const parsed = new URL(url)
+    const configuredHost = process.env.NEXT_PUBLIC_SERVER_URL
+      ? new URL(process.env.NEXT_PUBLIC_SERVER_URL).hostname
+      : undefined
     const isLocalHost = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1'
+    const isConfiguredHost = configuredHost && parsed.hostname === configuredHost
+    const isKatharaHost = parsed.hostname === 'katharanova.nl' || parsed.hostname === 'www.katharanova.nl'
+    const isPayloadMedia = parsed.pathname.startsWith('/media/') || parsed.pathname.startsWith('/api/media/')
 
-    if (isLocalHost && parsed.pathname.startsWith('/api/media/')) {
+    if ((isLocalHost || isConfiguredHost || isKatharaHost) && isPayloadMedia) {
       return `${parsed.pathname}${parsed.search}`
     }
   } catch {

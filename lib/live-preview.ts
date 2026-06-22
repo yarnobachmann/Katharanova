@@ -1,9 +1,32 @@
 import type { BlogPost, Treatment, Workshop } from './types'
 
+const toLocalMediaPath = (url: string): string => {
+  try {
+    const parsed = new URL(url)
+    const configuredHost = process.env.NEXT_PUBLIC_SERVER_URL
+      ? new URL(process.env.NEXT_PUBLIC_SERVER_URL).hostname
+      : undefined
+    const isLocalHost = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1'
+    const isConfiguredHost = configuredHost && parsed.hostname === configuredHost
+    const isKatharaHost = parsed.hostname === 'katharanova.nl' || parsed.hostname === 'www.katharanova.nl'
+    const isPayloadMedia = parsed.pathname.startsWith('/media/') || parsed.pathname.startsWith('/api/media/')
+
+    if ((isLocalHost || isConfiguredHost || isKatharaHost) && isPayloadMedia) {
+      return `${parsed.pathname}${parsed.search}`
+    }
+  } catch {
+    return url
+  }
+
+  return url
+}
+
 export const mediaUrl = (value: any, fallback = ''): string => {
   if (!value) return fallback
-  if (typeof value === 'string') return value.startsWith('/') || value.startsWith('http') ? value : fallback
-  return value.url || value.thumbnailURL || value.sizes?.large?.url || value.sizes?.card?.url || fallback
+  if (typeof value === 'string') return value.startsWith('/') || value.startsWith('http') ? toLocalMediaPath(value) : fallback
+  const url = value.url || value.thumbnailURL || value.sizes?.large?.url || value.sizes?.card?.url || fallback
+
+  return typeof url === 'string' ? toLocalMediaPath(url) : fallback
 }
 
 export const arrayLabels = (value: any, fallback: string[] = []): string[] => {
