@@ -156,6 +156,7 @@ export async function getAboutPage() {
       hero: mergeHero(aboutPage.hero, data.hero),
       cta: mergeGroup(aboutPage.cta, data.cta),
       portrait: mediaUrl(data.portrait, aboutPage.portrait),
+      stats: data.stats?.length ? data.stats : aboutPage.stats,
       intro: richTextToPlain(data.intro, aboutPage.intro),
       vision: richTextToPlain(data.vision, aboutPage.vision),
       workingMethod: richTextToPlain(data.workingMethod, aboutPage.workingMethod),
@@ -186,8 +187,16 @@ export async function getTreatment(slug: string): Promise<Treatment | undefined>
 export async function getWorkshops(): Promise<Workshop[]> {
   return withPayload(async (payload) => {
     const result: any = await payload.find({ collection: 'workshops', sort: 'date', depth: 2, limit: 50, where: { active: { equals: true } } })
-    return result.docs.map((doc: any) => ({ ...doc, image: mediaUrl(doc.image) }))
+    return result.docs.map((doc: any) => ({
+      ...doc,
+      image: mediaUrl(doc.image),
+      content: richTextToPlain(doc.content, doc.excerpt)
+    }))
   }, workshops)
+}
+
+export async function getWorkshop(slug: string): Promise<Workshop | undefined> {
+  return (await getWorkshops()).find((item) => item.slug === slug)
 }
 
 export async function getWorkshopsPage() {

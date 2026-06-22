@@ -21,6 +21,14 @@
 .meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--text-muted); font-size: var(--text-sm); }
 .meta-row span { display: inline-flex; align-items: center; gap: 7px; }
 .meta-row svg { color: var(--accent); }
+.blog-card.card-dark h3,
+.blog-feature.card-dark h2 { color: var(--text-on-dark); }
+.blog-card.card-dark p,
+.blog-feature.card-dark p,
+.blog-card.card-dark .meta-row,
+.blog-feature.card-dark .meta-row { color: var(--text-on-dark-muted); }
+.blog-card.card-dark .meta-row svg,
+.blog-feature.card-dark .meta-row svg { color: var(--kn-gold-soft); }
 .blog-feature { display: grid; grid-template-columns: 1.05fr 0.95fr; padding: 0; overflow: hidden; width: 100%; }
 .blog-feature .image-frame { height: 100%; min-height: 320px; border-radius: 0; }
 .blog-feature > div:last-child { padding: clamp(1.75rem, 3vw, 2.75rem); display: flex; flex-direction: column; gap: 16px; justify-content: center; }
@@ -48,7 +56,7 @@
   .treatment-card,
   .pricing-card { gap: 12px; }
   .card-icon { width: 46px; height: 46px; }
-  .workshop-card { padding: 0; gap: 14px; }
+.workshop-card { padding: 0; gap: 14px; }
   .workshop-card > :not(.image-frame) { margin-inline: var(--space-5); }
   .workshop-card > .btn { width: calc(100% - 3rem); margin: 0 var(--space-5) var(--space-5); }
   .workshop-meta { grid-template-columns: 1fr; gap: 8px; }

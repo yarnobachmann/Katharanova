@@ -17,6 +17,9 @@ export function AboutPreview({ page: initialPage }: { page: any }) {
     initialData: initialPage,
     normalize: normalizeAboutPage
   })
+  const stats = Array.isArray(page.stats) ? page.stats.filter((stat: any) => stat?.label || stat?.value) : []
+  const methodSteps = Array.isArray(page.methodSteps) ? page.methodSteps.filter((step: any) => step?.title || step?.description) : []
+  const forWho = Array.isArray(page.forWho) ? page.forWho.filter(Boolean) : []
 
   return (
     <main>
@@ -26,7 +29,7 @@ export function AboutPreview({ page: initialPage }: { page: any }) {
           <aside className="sticky about-portrait">
             <ImageFrame src={page.portrait} alt="Portret Kathara Nova" ratio="3 / 4" tone="clay" />
             <div className="stats">
-              {page.stats.map((stat: any) => <Card key={stat.label} tone="sand" className="stat-card"><strong>{stat.value}</strong><small>{stat.label}</small></Card>)}
+              {stats.map((stat: any, index: number) => <Card key={stat.label || index} tone="sand" className="stat-card"><strong>{stat.value}</strong><small>{stat.label}</small></Card>)}
             </div>
           </aside>
           <Reveal className="prose-stack" stagger variant="section">
@@ -36,13 +39,13 @@ export function AboutPreview({ page: initialPage }: { page: any }) {
               <h2>{page.workingMethodTitle || 'Werkwijze'}</h2>
               <RichTextRenderer content={page.workingMethod} />
               <div className="method-list">
-                {page.methodSteps.map((step: any, index: number) => <div key={step.title || index}><span>{index + 1}</span><p><strong>{step.title}</strong><br />{step.description}</p></div>)}
+                {methodSteps.map((step: any, index: number) => <div key={step.title || index}><span>{index + 1}</span><p><strong>{step.title}</strong><br />{step.description}</p></div>)}
               </div>
             </section>
             <section>
               <h2>{page.forWhoTitle || 'Voor wie mijn begeleiding bedoeld is'}</h2>
               <div className="list-checks">
-                {page.forWho.map((item: string) => <div key={item}><CheckCircle2 size={20} />{item}</div>)}
+                {forWho.map((item: string) => <div key={item}><CheckCircle2 size={20} />{item}</div>)}
               </div>
             </section>
             <Card tone="sage">

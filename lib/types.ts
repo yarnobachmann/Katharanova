@@ -74,6 +74,8 @@ export type Workshop = {
   tone: Tone
   active: boolean
   featured: boolean
+  content?: RichBlock[] | string
+  seo?: { metaTitle?: string; metaDescription?: string }
 }
 
 export type BlogPost = {
@@ -99,7 +101,7 @@ export type RichBlock = {
 export type PricingItem = {
   title: string
   price: string
-  unit: string
+  unit?: string
   description: string
   features: string[]
   ctaLabel: string

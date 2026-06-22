@@ -18,7 +18,6 @@ export const PricingItems: CollectionConfig = {
   fields: [
     { name: 'title', label: 'Titel', type: 'text', required: true },
     { name: 'price', label: 'Prijs', type: 'text', required: true },
-    { name: 'unit', label: 'Eenheid', type: 'text', required: true },
     { name: 'description', label: 'Omschrijving', type: 'textarea', required: true },
     { name: 'features', label: 'Punten', type: 'array', fields: [{ name: 'label', label: 'Tekst', type: 'text', required: true }] },
     { name: 'ctaLabel', label: 'Knoptekst', type: 'text', required: true },

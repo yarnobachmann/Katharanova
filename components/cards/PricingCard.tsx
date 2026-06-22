@@ -12,7 +12,7 @@ export function PricingCard({ item }: { item: PricingItem }) {
       {item.featured ? <span className="pricing-badge"><Badge tone="solid">Meest gekozen</Badge></span> : null}
       <div>
         <h3>{item.title}</h3>
-        <div className="price"><span>{item.price}</span><small>{item.unit}</small></div>
+        <div className="price"><span>{item.price}</span></div>
       </div>
       <p>{item.description}</p>
       <ul>

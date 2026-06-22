@@ -17,8 +17,8 @@ export function BlogPagePreview({ page: initialPage, posts, selected }: { page: 
   })
   const postCategories = (post: BlogPost) => post.categories?.length ? post.categories : [post.category]
   const categories = ['Alles', ...Array.from(new Set(posts.flatMap(postCategories).filter(Boolean)))]
-  const featured = posts.find((post) => post.featured) || posts[0]
-  const rest = posts.filter((post) => post.slug !== featured?.slug)
+  const featured = posts.find((post) => post.featured)
+  const rest = featured ? posts.filter((post) => post.slug !== featured.slug) : posts
   const filtered = selected === 'Alles' ? rest : rest.filter((post) => postCategories(post).includes(selected))
   const showFeatured = featured && (selected === 'Alles' || postCategories(featured).includes(selected))
 

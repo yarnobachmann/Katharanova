@@ -23,7 +23,7 @@ export function WorkshopCard({ workshop }: { workshop: Workshop }) {
         <div><Users size={15} /><dt>Plekken</dt><dd>{workshop.spotsLabel}</dd></div>
         <div><Tag size={15} /><dt>Prijs</dt><dd>{workshop.price}</dd></div>
       </dl>
-      <Button href="/contact" size="sm" fullWidth>Aanmelden</Button>
+      <Button href={`/workshops/${workshop.slug}`} size="sm" fullWidth>Meer info</Button>
     </Card>
   )
 }

@@ -94,6 +94,7 @@ export function normalizeAboutPage(initial: any, data: any) {
     hero: normalizeHero(initial.hero, data.hero),
     cta: normalizeGroup(initial.cta, data.cta),
     portrait: mediaUrl(data.portrait, initial.portrait),
+    stats: Array.isArray(data.stats) && data.stats.length ? data.stats : initial.stats || [],
     intro: richTextToPlain(data.intro, initial.intro),
     vision: richTextToPlain(data.vision, initial.vision),
     workingMethod: richTextToPlain(data.workingMethod, initial.workingMethod),
@@ -154,7 +155,8 @@ export function normalizeWorkshopList(initial: Workshop[], data: any): Workshop[
     ...data,
     image: mediaUrl(data.image),
     active: data.active ?? true,
-    featured: data.featured ?? false
+    featured: data.featured ?? false,
+    content: richTextToPlain(data.content, data.excerpt)
   } as Workshop
   const index = initial.findIndex((workshop) => workshop.slug === edited.slug || (data.id && (workshop as any).id === data.id))
 
@@ -163,4 +165,15 @@ export function normalizeWorkshopList(initial: Workshop[], data: any): Workshop[
   }
 
   return initial.map((workshop, itemIndex) => itemIndex === index ? { ...workshop, ...edited } : workshop)
+}
+
+export function normalizeWorkshop(initial: Workshop, data: any): Workshop {
+  return {
+    ...initial,
+    ...data,
+    image: mediaUrl(data.image, initial.image),
+    active: data.active ?? initial.active,
+    featured: data.featured ?? initial.featured,
+    content: richTextToPlain(data.content, data.excerpt || initial.content || initial.excerpt)
+  }
 }

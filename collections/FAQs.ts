@@ -9,10 +9,10 @@ export const FAQs: CollectionConfig = {
     plural: 'Veelgestelde vragen'
   },
   admin: {
-    group: 'Website content',
+    group: 'Pagina content',
     useAsTitle: 'question',
     defaultColumns: ['question', 'pageContext', 'order'],
-    description: 'Deze vragen worden onder "Goed om te weten" op de gekozen pagina getoond.'
+    description: 'Deze vragen worden onder "Goed om te weten" op de Tarieven pagina getoond. Voeg hier nieuwe FAQ-items toe.'
   },
   access: { read: () => true, create: admins, update: admins, delete: admins },
   fields: [

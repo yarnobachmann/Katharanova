@@ -251,6 +251,9 @@ export const TarievenPage: GlobalConfig = {
     {
       type: 'collapsible',
       label: 'Goed om te weten',
+      admin: {
+        description: 'De vragen zelf beheer je via Pagina content > Veelgestelde vragen.'
+      },
       fields: [
         { name: 'faqEyebrow', label: 'Label', type: 'text' },
         { name: 'faqTitle', label: 'Titel', type: 'text', admin: { description: 'De vragen zelf komen uit de collectie Veelgestelde vragen.' } },

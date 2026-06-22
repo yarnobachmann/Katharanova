@@ -20,12 +20,12 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
     mimeTypes: ['image/*'],
+    adminThumbnail: ({ doc }) => doc.url as string,
     imageSizes: [
       { name: 'thumbnail', width: 420, height: 280, position: 'centre' },
       { name: 'card', width: 900, height: 640, position: 'centre' },
       { name: 'large', width: 1600, height: 1100, position: 'centre' }
-    ],
-    adminThumbnail: 'thumbnail'
+    ]
   },
   fields: [
     { name: 'alt', label: 'Alt tekst', type: 'text', required: true },

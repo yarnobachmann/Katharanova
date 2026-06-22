@@ -41,7 +41,7 @@ export function getPreviewPath(args: {
   }
 
   if (collectionSlug === 'workshops') {
-    return '/workshops'
+    return slug ? `/workshops/${slug}` : '/workshops'
   }
 
   return '/'

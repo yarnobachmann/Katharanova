@@ -36,8 +36,15 @@
 .back-link:hover { color: var(--text-gold); text-decoration: none; }
 .article-hero-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .article-image-wrap { transform: translateY(-8px); }
-.article-body { padding-block: clamp(2rem,5vw,3.5rem) var(--section-y); }
+.article-body { padding-block: clamp(2.25rem,5vw,4rem) var(--section-y); }
+.article-body > * + * { margin-top: 1.35em; }
 .article-body p { color: var(--text-body); font-size: var(--text-lead); line-height: 1.85; }
+.article-body .side-cta { margin-top: clamp(2rem, 5vw, 3rem); }
+.article-body .side-cta .btn { align-self: flex-start; }
+.workshop-detail .article-body { padding-block: 0; }
+.workshop-detail-card { display: flex; flex-direction: column; gap: 18px; }
+.workshop-detail-card h3 { margin: 0; }
+.workshop-meta-detail { grid-template-columns: 1fr; padding-top: 0; border-top: 0; }
 .article-body .article-lead { font-family: var(--font-display); font-style: italic; font-size: var(--text-h4); line-height: 1.5; color: var(--text-strong); }
 .article-body blockquote { margin: 34px 0; padding-left: 28px; border-left: 3px solid var(--accent); }
 .article-body blockquote span { color: var(--accent-hover); font-size: 22px; }
