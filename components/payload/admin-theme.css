@@ -1,0 +1,147 @@
+:root {
+  --font-body: var(--font-body, system-ui, sans-serif);
+}
+
+html[data-theme='light'],
+body {
+  --theme-bg: #f7f1e6;
+  --theme-elevation-0: #fbf7ef;
+  --theme-elevation-50: #f7f1e6;
+  --theme-elevation-100: #efe6d4;
+  --theme-elevation-150: #e7dcc7;
+  --theme-elevation-200: #d8c3a5;
+  --theme-elevation-250: #cdb793;
+  --theme-elevation-300: #b9a487;
+  --theme-elevation-400: #8f8072;
+  --theme-elevation-500: #6f6257;
+  --theme-elevation-600: #574a40;
+  --theme-elevation-700: #3f352d;
+  --theme-elevation-800: #2a211a;
+  --theme-elevation-900: #17130f;
+  --theme-elevation-1000: #17130f;
+  --theme-text: #2a211a;
+  --theme-input-bg: #fbf7ef;
+  --theme-border-color: rgba(111, 98, 87, 0.22);
+  --theme-success-500: #8c9a78;
+  --theme-warning-500: #c9942e;
+  --theme-error-500: #a7633a;
+  --theme-blue-500: #8c9a78;
+}
+
+.template-minimal,
+.nav,
+.app-header {
+  background: #f7f1e6;
+}
+
+.nav__brand,
+.nav-toggler,
+.btn--style-primary {
+  color: #fff;
+}
+
+.btn--style-primary,
+.pill--style-light {
+  background: linear-gradient(135deg, #c9942e 0%, #e7c16a 100%);
+  border-color: rgba(201, 148, 46, 0.55);
+}
+
+.doc-header,
+.collection-list,
+.dashboard__card,
+.field-type,
+.collapsible,
+.array-field__row {
+  border-color: rgba(111, 98, 87, 0.2);
+}
+
+.nav-group {
+  margin-block: 10px;
+}
+
+.nav-group__toggle,
+.nav-group__label,
+.collapsible__toggle-wrap {
+  color: #2a211a;
+}
+
+.nav-group__toggle {
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #efe6d4;
+  border: 1px solid rgba(111, 98, 87, 0.26);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.nav-group__toggle:hover,
+.nav-group--open .nav-group__toggle {
+  background: #2a211a;
+  color: #f7f1e6;
+  border-color: rgba(201, 148, 46, 0.44);
+}
+
+.nav-group__toggle:hover .nav-group__label,
+.nav-group--open .nav-group__toggle .nav-group__label {
+  color: #f7f1e6;
+}
+
+.nav-group__indicator,
+.nav-group__toggle svg {
+  color: #c9942e;
+}
+
+.document-fields__sidebar-wrap .collapsible,
+.document-fields__sidebar-wrap .collapsible-field,
+.document-fields__sidebar-wrap .field-type.collapsible-field {
+  border: 2px solid rgba(111, 98, 87, 0.26);
+  border-radius: 8px;
+  background: #fbf7ef;
+  box-shadow: 0 10px 24px rgba(42, 33, 26, 0.08);
+}
+
+.document-fields__sidebar-wrap .collapsible__toggle-wrap {
+  min-height: 48px;
+  background: #efe6d4;
+  border-bottom: 1px solid rgba(111, 98, 87, 0.2);
+}
+
+.document-fields__sidebar-wrap .collapsible__toggle,
+.document-fields__sidebar-wrap .collapsible__label,
+.document-fields__sidebar-wrap .row-label {
+  font-size: 15px;
+  font-weight: 800;
+  color: #2a211a;
+}
+
+.document-fields__sidebar-wrap .collapsible__toggle {
+  color: transparent !important;
+}
+
+.document-fields__sidebar-wrap .collapsible--is-open > .collapsible__toggle-wrap,
+.document-fields__sidebar-wrap .collapsible__toggle-wrap:hover {
+  background: #2a211a;
+}
+
+.document-fields__sidebar-wrap .collapsible--is-open > .collapsible__toggle-wrap *,
+.document-fields__sidebar-wrap .collapsible__toggle-wrap:hover * {
+  color: #f7f1e6;
+}
+
+.document-fields__sidebar-wrap .collapsible--is-open > .collapsible__toggle-wrap .collapsible__toggle,
+.document-fields__sidebar-wrap .collapsible__toggle-wrap:hover .collapsible__toggle {
+  color: transparent !important;
+}
+
+.payload-logo path,
+.graphic-logo path {
+  fill: #2a211a;
+}
+
+a,
+.btn--style-secondary,
+.nav__link:hover,
+.nav__link--active {
+  color: #8a641c;
+}

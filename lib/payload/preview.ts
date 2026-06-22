@@ -1,0 +1,72 @@
+import type { GeneratePreviewURL, LivePreviewConfig } from 'payload'
+
+import { serverUrl } from '../env'
+
+const globalRoutes: Record<string, string> = {
+  homepage: '/',
+  'about-page': '/over-mij',
+  'workshops-page': '/workshops',
+  'blog-page': '/blog',
+  'tarieven-page': '/tarieven',
+  'contact-page': '/contact'
+}
+
+const treatmentRoutes: Record<string, string> = {
+  innerlijk: '/innerlijk-werk',
+  'innerlijk-werk': '/innerlijk-werk',
+  opstelling: '/opstelling',
+  transhealing: '/transhealing'
+}
+
+const withSiteURL = (path: string) => `${serverUrl}${path}`
+
+export function getPreviewPath(args: {
+  collectionSlug?: string
+  data?: Record<string, unknown>
+  globalSlug?: string
+}) {
+  const { collectionSlug, data, globalSlug } = args
+  const slug = typeof data?.slug === 'string' ? data.slug : ''
+
+  if (globalSlug) {
+    return globalRoutes[globalSlug] || '/'
+  }
+
+  if (collectionSlug === 'blog-posts') {
+    return slug ? `/blog/${slug}` : '/blog'
+  }
+
+  if (collectionSlug === 'treatments') {
+    return treatmentRoutes[slug] || (slug ? `/${slug}` : '/')
+  }
+
+  if (collectionSlug === 'workshops') {
+    return '/workshops'
+  }
+
+  return '/'
+}
+
+export const livePreview: LivePreviewConfig = {
+  breakpoints: [
+    { label: 'Desktop', name: 'desktop', width: 1440, height: 900 },
+    { label: 'Tablet', name: 'tablet', width: 834, height: 1112 },
+    { label: 'Mobile', name: 'mobile', width: 390, height: 844 }
+  ],
+  url: ({ collectionConfig, data, globalConfig }) =>
+    withSiteURL(getPreviewPath({
+      collectionSlug: collectionConfig?.slug,
+      data,
+      globalSlug: globalConfig?.slug
+    }))
+}
+
+export const previewForCollection =
+  (collectionSlug: string): GeneratePreviewURL =>
+  (doc) =>
+    withSiteURL(getPreviewPath({ collectionSlug, data: doc }))
+
+export const previewForGlobal =
+  (globalSlug: string): GeneratePreviewURL =>
+  () =>
+    withSiteURL(getPreviewPath({ globalSlug }))

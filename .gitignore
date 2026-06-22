@@ -1,0 +1,21 @@
+.env
+.env.*
+!.env.example
+.next
+node_modules
+dist
+payload-types.ts
+media
+dev-server*.log
+.local-postgres/
+.next-dev*.log
+*.tsbuildinfo
+.tmp-*.html
+.agents/
+.codex/
+assets-folder-update/
+Assets folder update-handoff.zip
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

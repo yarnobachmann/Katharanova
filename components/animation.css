@@ -1,0 +1,15 @@
+.reveal, .stagger > * { backface-visibility: hidden; }
+.reveal.is-visible, .stagger.is-visible > * {
+  opacity: 1;
+  visibility: visible;
+  will-change: auto;
+}
+.reveal-image {
+  overflow: visible;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,31 @@
+# Kathara Nova
+
+Production website for Kathara Nova, built with Next.js App Router, TypeScript, Payload CMS, and PostgreSQL.
+
+## Production Environment
+
+Set these variables in the hosting platform:
+
+```env
+DATABASE_URI=postgres://USER:PASSWORD@HOST:5432/kathara_nova?sslmode=require
+PAYLOAD_SECRET=replace-with-a-long-random-secret
+NEXT_PUBLIC_SERVER_URL=https://www.katharanova.nl
+```
+
+`DATABASE_URI` should point to an external managed PostgreSQL database. The previous `.local-postgres` folder was only a temporary local development database and should not be used for production.
+
+## Commands
+
+```bash
+npm run payload:generate
+npm run typecheck
+npm run lint
+npm run build
+npm run seed
+```
+
+Run `npm run seed` only against the database you intentionally want to fill with the Kathara Nova demo content.
+
+## Local Notes
+
+The app does not start PostgreSQL by itself. For production-style testing, use the same kind of external managed PostgreSQL connection string in your local `.env`.
