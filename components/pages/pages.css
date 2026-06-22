@@ -37,14 +37,19 @@
 .back-link:hover { color: var(--text-gold); text-decoration: none; }
 .article-hero-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .article-image-wrap { transform: translateY(-8px); }
-.article-body { padding-block: clamp(2.25rem,5vw,4rem) var(--section-y); }
-.article-body-wide { max-width: 920px; }
-.article-body-wide > * { max-width: 760px; margin-inline: auto; }
-.article-body-wide .side-cta { max-width: 760px; }
-.article-body > * + * { margin-top: 1.35em; }
-.article-body p { color: var(--text-body); font-size: var(--text-lead); line-height: 1.85; }
+.article-section { padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section-y); }
+.article-layout { display: grid; grid-template-columns: minmax(0, 760px) minmax(250px, 320px); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; justify-content: center; }
+.article-body { min-width: 0; }
+.article-body > * + * { margin-top: 1.15em; }
+.article-body p { color: var(--text-body); font-size: clamp(1.08rem, 1.1vw, 1.18rem); line-height: 1.82; }
+.article-content > p:first-child { color: var(--text-strong); font-size: clamp(1.2rem, 1.45vw, 1.38rem); line-height: 1.68; }
 .article-body .side-cta { margin-top: clamp(2rem, 5vw, 3rem); }
 .article-body .side-cta .btn { align-self: flex-start; }
+.article-aside { position: sticky; top: 112px; }
+.article-cta { padding: clamp(1.5rem, 2.5vw, 2rem); }
+.article-cta p,
+.card-dark.article-cta p { color: rgba(251, 247, 239, 0.82); }
+.article-cta .btn { align-self: flex-start; }
 .workshop-detail .article-body { padding-block: 0; }
 .workshop-detail-card { display: flex; flex-direction: column; gap: 18px; }
 .workshop-detail-card h3 { margin: 0; }
@@ -64,6 +69,8 @@
   .treatment-layout .side-stack { order: -1; }
   .contact-layout .side-stack { order: 0; }
   .article-image-wrap { transform: none; margin-top: var(--space-5); }
+  .article-layout { grid-template-columns: minmax(0, 760px); }
+  .article-aside { position: static; }
 }
 
 @media (max-width: 760px) {
@@ -101,7 +108,8 @@
     background: rgba(251,247,239,0.82);
     box-shadow: var(--shadow-xs);
   }
-  .article-body { padding-block: var(--space-6) var(--section-y); }
+  .article-section { padding-block: var(--space-6) var(--section-y); }
+  .article-body > * + * { margin-top: 1em; }
   .article-body blockquote { margin: 26px 0; padding-left: 18px; }
   .article-body blockquote p { font-size: var(--text-h4); }
   .article-image-wrap .image-frame { aspect-ratio: 16 / 10 !important; }

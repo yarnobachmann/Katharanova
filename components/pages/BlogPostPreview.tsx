@@ -32,14 +32,20 @@ export function BlogPostPreview({ post: initialPost, related }: { post: BlogPost
         </div>
       </section>
       <div className="container article-image-wrap"><ImageFrame src={post.image} alt={post.title} ratio="21 / 9" tone={post.tone === 'cream' ? 'sand' : post.tone} /></div>
-      <article className="container article-body article-body-wide">
-        <RichTextRenderer content={post.content} />
-        <Card tone="dark" className="side-cta">
-          <h3>Kathara Nova</h3>
-          <p>Herken je iets in deze woorden? Je hoeft nog niet precies te weten wat je nodig hebt. Stel vrijblijvend je vraag - ik denk graag met je mee.</p>
-          <Button href="/contact">Plan een afspraak</Button>
-        </Card>
-      </article>
+      <section className="article-section">
+        <div className="container article-layout">
+          <article className="article-body article-content">
+            <RichTextRenderer content={post.content} />
+          </article>
+          <aside className="article-aside">
+            <Card tone="dark" className="side-cta article-cta">
+              <h3>Kathara Nova</h3>
+              <p>Herken je iets in deze woorden? Je hoeft nog niet precies te weten wat je nodig hebt. Stel vrijblijvend je vraag - ik denk graag met je mee.</p>
+              <Button href="/contact">Plan een afspraak</Button>
+            </Card>
+          </aside>
+        </div>
+      </section>
       <section className="section recognition">
         <div className="container">
           <SectionHeading align="left" eyebrow="Lees ook" title="Andere woorden voor onderweg" divider />
