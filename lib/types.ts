@@ -25,6 +25,7 @@ export type SiteSettings = {
 
 export type Navigation = {
   navItems: NavItem[]
+  treatmentItems?: NavItem[]
   ctaLabel: string
   ctaHref: string
 }

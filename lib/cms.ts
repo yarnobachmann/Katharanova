@@ -114,9 +114,18 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 export async function getNavigation(): Promise<Navigation> {
   return withPayload(async (payload) => {
-    const data: any = await payload.findGlobal({ slug: 'navigation' })
+    const [data, treatmentResult]: any[] = await Promise.all([
+      payload.findGlobal({ slug: 'navigation' }),
+      payload.find({ collection: 'treatments', sort: 'order', limit: 20, depth: 0 })
+    ])
+    const treatmentItems = treatmentResult.docs.map((doc: any) => ({
+      label: doc.navLabel || doc.title,
+      href: `/${doc.slug}`
+    }))
+
     return {
       navItems: data.navItems?.length ? data.navItems : navigation.navItems,
+      treatmentItems: treatmentItems.length ? treatmentItems : navigation.treatmentItems,
       ctaLabel: data.ctaLabel || navigation.ctaLabel,
       ctaHref: data.ctaHref || navigation.ctaHref
     }

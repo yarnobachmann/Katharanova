@@ -5,7 +5,7 @@ import { Logo } from '@/components/ui/Logo'
 import type { Navigation, SiteSettings } from '@/lib/types'
 
 export function Footer({ settings, navigation }: { settings: SiteSettings; navigation: Navigation }) {
-  const treatments = navigation.navItems.filter((item) => ['/transhealing', '/opstelling', '/innerlijk-werk', '/workshops'].includes(item.href))
+  const treatments = [...(navigation.treatmentItems || []), ...navigation.navItems.filter((item) => item.href === '/workshops')]
   const practice = navigation.navItems.filter((item) => ['/over-mij', '/tarieven', '/contact', '/blog'].includes(item.href))
 
   return (

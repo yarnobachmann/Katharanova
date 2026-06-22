@@ -40,13 +40,15 @@ export const navigation: Navigation = {
   navItems: [
     { label: 'Home', href: '/' },
     { label: 'Over mij', href: '/over-mij' },
-    { label: 'Transhealing', href: '/transhealing' },
-    { label: 'Opstelling', href: '/opstelling' },
-    { label: 'Innerlijk werk', href: '/innerlijk-werk' },
     { label: 'Workshops', href: '/workshops' },
     { label: 'Blog', href: '/blog' },
     { label: 'Tarieven', href: '/tarieven' },
     { label: 'Contact', href: '/contact' }
+  ],
+  treatmentItems: [
+    { label: 'Transhealing', href: '/transhealing' },
+    { label: 'Opstelling', href: '/opstelling' },
+    { label: 'Innerlijk werk', href: '/innerlijk-werk' }
   ],
   ctaLabel: 'Plan een afspraak',
   ctaHref: '/contact'

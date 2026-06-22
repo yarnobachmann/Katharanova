@@ -23,7 +23,8 @@ export const Treatments: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'navLabel', 'order', '_status'],
     livePreview: {},
-    preview: previewForCollection('treatments')
+    preview: previewForCollection('treatments'),
+    description: 'Deze pagina’s verschijnen automatisch in de dropdown “Behandelingen” zodra ze gepubliceerd zijn. Gebruik “Navigatie” alleen voor vaste navbar-links.'
   },
   versions: { drafts: true },
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
