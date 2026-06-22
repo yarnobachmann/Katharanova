@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, Check, Clock, Heart, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, Clock, Heart, MapPin, Sparkles, Tag } from 'lucide-react'
 
 import { Reveal } from '@/components/Reveal'
 import { TreatmentCard } from '@/components/cards/TreatmentCard'
@@ -103,10 +103,19 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
           </div>
           <Reveal stagger variant="cards" className="grid-3">
             {workshops.slice(0, 3).map((workshop) => (
-              <Card key={workshop.slug} tone={workshop.tone} interactive className="mini-workshop">
-                <div><strong>{shortDate(workshop.date)}</strong><span>*</span></div>
+              <Card key={workshop.slug} as="article" tone={workshop.tone} interactive className="mini-workshop">
+                <div className="mini-workshop-top">
+                  <strong>{shortDate(workshop.date)}</strong>
+                  <CalendarHeart size={22} />
+                </div>
                 <h3>{workshop.title}</h3>
-                <span>{workshop.spotsLabel}</span>
+                <p>{workshop.excerpt}</p>
+                <div className="mini-workshop-meta">
+                  <span><MapPin size={15} />{workshop.location}</span>
+                  <span><Clock size={15} />{workshop.durationLabel}</span>
+                  <span><Tag size={15} />{workshop.price}</span>
+                </div>
+                <Button href="/contact" variant="secondary" size="sm" iconRight={<ArrowRight size={15} />}>Aanmelden</Button>
               </Card>
             ))}
           </Reveal>
