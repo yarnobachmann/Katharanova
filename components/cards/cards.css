@@ -83,7 +83,7 @@
   .field select { padding: 11px 12px; }
 }
 
-.faq-list { display: flex; flex-direction: column; gap: 12px; }
+.faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: var(--space-5); }
 .faq-item { background: var(--surface-card); border: 1px solid var(--border-soft); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); overflow: hidden; }
 .faq-item button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: none; border: 0; cursor: pointer; color: var(--text-strong); text-align: left; font-family: var(--font-display); font-size: var(--text-h4); font-weight: 700; }
 .faq-item button svg { transition: transform var(--dur-base) var(--ease-soft); }

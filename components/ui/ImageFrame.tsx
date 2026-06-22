@@ -15,9 +15,11 @@ export function ImageFrame({
   organic?: boolean
   priority?: boolean
 }) {
+  const isPayloadMedia = src?.startsWith('/api/media/file/')
+
   return (
     <div className={`image-frame image-frame-${tone} ${organic ? 'image-frame-organic' : ''}`} style={{ aspectRatio: ratio }}>
-      {src ? <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" priority={priority} /> : null}
+      {src ? <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" priority={priority} unoptimized={isPayloadMedia} /> : null}
       <span className="image-warmth" aria-hidden="true" />
     </div>
   )

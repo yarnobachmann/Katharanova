@@ -40,7 +40,7 @@
   border-color: rgba(201,148,46,0.18);
   box-shadow: 0 4px 14px rgba(201,148,46,0.18);
   text-shadow: none;
-  animation: header-cta-wiggle 60s var(--ease-soft) infinite;
+  animation: header-cta-wiggle 22s var(--ease-soft) infinite;
 }
 .header-appointment-btn:hover {
   box-shadow: 0 8px 20px rgba(201,148,46,0.24);
@@ -125,11 +125,12 @@
 }
 
 @keyframes header-cta-wiggle {
-  0%, 96%, 100% { transform: translateY(0) rotate(0deg); }
-  96.6% { transform: translateY(-1px) rotate(-0.45deg); }
-  97.2% { transform: translateY(0) rotate(0.45deg); }
-  97.8% { transform: translateY(-1px) rotate(-0.25deg); }
-  98.4% { transform: translateY(0) rotate(0deg); }
+  0%, 87%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  88% { transform: translateY(-2px) rotate(-1.4deg) scale(1.025); }
+  89% { transform: translateY(1px) rotate(1.4deg) scale(1.025); }
+  90% { transform: translateY(-2px) rotate(-1deg) scale(1.02); }
+  91% { transform: translateY(0) rotate(0.8deg) scale(1.015); }
+  92% { transform: translateY(0) rotate(0deg) scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
