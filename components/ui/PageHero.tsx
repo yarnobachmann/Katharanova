@@ -8,9 +8,9 @@ export function PageHero({ eyebrow, title, intro, image, tone = 'cream' }: { eye
         <div className="page-hero-copy">
           <div className={`section-heading section-heading-left ${tone === 'dark' ? 'section-heading-light' : ''}`}>
             {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
+            <div className="divider" />
             <h1>{title}</h1>
             {intro ? <p className="lead">{intro}</p> : null}
-            <div className="divider" />
           </div>
         </div>
         {image ? (

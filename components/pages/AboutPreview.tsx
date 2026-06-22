@@ -36,7 +36,7 @@ export function AboutPreview({ page: initialPage }: { page: any }) {
               <h2>{page.workingMethodTitle || 'Werkwijze'}</h2>
               <RichTextRenderer content={page.workingMethod} />
               <div className="method-list">
-                {['Veiligheid', 'Verdieping', 'Integratie'].map((title, index) => <div key={title}><span>{index + 1}</span><p><strong>{title}</strong><br />{['Eerst rust en vertrouwen - zonder druk.', 'Samen kijken naar wat er werkelijk speelt.', 'Inzichten een plek geven in je dagelijks leven.'][index]}</p></div>)}
+                {page.methodSteps.map((step: any, index: number) => <div key={step.title || index}><span>{index + 1}</span><p><strong>{step.title}</strong><br />{step.description}</p></div>)}
               </div>
             </section>
             <section>

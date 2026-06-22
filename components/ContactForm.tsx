@@ -5,7 +5,13 @@ import { useState } from 'react'
 
 import { Button } from './ui/Button'
 
-export function ContactForm() {
+export function ContactForm({
+  intro,
+  availabilityText
+}: {
+  intro?: string
+  availabilityText?: string
+}) {
   const [sent, setSent] = useState(false)
 
   if (sent) {
@@ -21,6 +27,7 @@ export function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+      {intro ? <p className="form-intro">{intro}</p> : null}
       <div className="form-grid">
         <Field label="Naam" name="naam" required placeholder="Je naam" />
         <Field label="E-mailadres" name="email" type="email" required placeholder="naam@voorbeeld.nl" />
@@ -49,7 +56,7 @@ export function ContactForm() {
       </label>
       <div className="form-actions">
         <Button type="submit" size="lg">Verstuur bericht</Button>
-        <small>Je gegevens worden vertrouwelijk behandeld.</small>
+        <small>{availabilityText || 'Je gegevens worden vertrouwelijk behandeld.'}</small>
       </div>
     </form>
   )

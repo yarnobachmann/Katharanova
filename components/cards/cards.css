@@ -89,6 +89,7 @@
 .faq-item-open .faq-panel p { transform: translateY(0); }
 
 .contact-form { display: flex; flex-direction: column; gap: 18px; }
+.form-intro { margin: 0; color: var(--text-muted); line-height: 1.65; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field > span:first-child { color: var(--text-strong); font-size: var(--text-sm); font-weight: 700; }

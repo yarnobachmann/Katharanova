@@ -3,6 +3,7 @@
 import { FAQAccordion } from '@/components/FAQAccordion'
 import { PricingCard } from '@/components/cards/PricingCard'
 import { usePayloadLivePreview } from '@/components/live-preview/usePayloadLivePreview'
+import { CTASection } from '@/components/ui/CTASection'
 import { PageHero } from '@/components/ui/PageHero'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { normalizeSimplePage } from '@/lib/live-preview'
@@ -29,6 +30,7 @@ export function TarievenPreview({ page: initialPage, items, faqItems }: { page: 
           </div>
         </div>
       </section>
+      <CTASection {...page.cta} />
     </main>
   )
 }

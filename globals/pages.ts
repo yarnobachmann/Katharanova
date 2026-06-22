@@ -10,6 +10,18 @@ const heroFields = [
   { name: 'image', label: 'Hero afbeelding', type: 'upload' as const, relationTo: 'media' as const }
 ]
 
+const iconOptions = [
+  { label: 'Klok', value: 'clock' },
+  { label: 'E-mail', value: 'mail' },
+  { label: 'Hart', value: 'heart' },
+  { label: 'Hart handen', value: 'heart-handshake' },
+  { label: 'Locatie', value: 'map-pin' },
+  { label: 'Schild', value: 'shield' },
+  { label: 'Sparkles', value: 'sparkles' },
+  { label: 'Telefoon', value: 'phone' },
+  { label: 'Gebruikers', value: 'users' }
+]
+
 const ctaFields = [
   { name: 'title', label: 'Titel', type: 'text' as const },
   { name: 'text', label: 'Tekst', type: 'textarea' as const },
@@ -43,7 +55,7 @@ export const Homepage: GlobalConfig = {
           type: 'array',
           admin: { description: 'Bijvoorbeeld: Online & op locatie, Sessies 60-90 min.' },
           fields: [
-            { name: 'icon', label: 'Icoon', type: 'select', defaultValue: 'map-pin', options: [{ label: 'Locatie', value: 'map-pin' }, { label: 'Klok', value: 'clock' }, { label: 'Hart', value: 'heart' }, { label: 'Sparkles', value: 'sparkles' }] },
+            { name: 'icon', label: 'Icoon', type: 'select', defaultValue: 'map-pin', options: iconOptions },
             { name: 'label', label: 'Tekst', type: 'text', required: true },
             { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
           ]
@@ -145,7 +157,17 @@ export const AboutPage: GlobalConfig = {
       label: 'Werkwijze',
       fields: [
         { name: 'workingMethodTitle', label: 'Titel', type: 'text' },
-        { name: 'workingMethod', label: 'Tekst', type: 'richText' }
+        { name: 'workingMethod', label: 'Tekst', type: 'richText' },
+        {
+          name: 'methodSteps',
+          label: 'Werkwijze stappen',
+          type: 'array',
+          fields: [
+            { name: 'title', label: 'Titel', type: 'text', required: true },
+            { name: 'description', label: 'Omschrijving', type: 'textarea', required: true },
+            { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
+          ]
+        }
       ]
     },
     {
@@ -183,7 +205,7 @@ export const WorkshopsPage: GlobalConfig = {
         { name: 'groupHealingEyebrow', label: 'Label', type: 'text' },
         { name: 'groupHealingTitle', label: 'Titel', type: 'text' },
         { name: 'groupHealingText', label: 'Tekst', type: 'textarea' },
-        { name: 'groupHealingItems', label: 'Punten', type: 'array', fields: [{ name: 'icon', label: 'Icoon', type: 'text' }, { name: 'title', label: 'Titel', type: 'text' }, { name: 'description', label: 'Omschrijving', type: 'textarea' }] }
+        { name: 'groupHealingItems', label: 'Punten', type: 'array', fields: [{ name: 'icon', label: 'Icoon', type: 'select', defaultValue: 'users', options: iconOptions }, { name: 'title', label: 'Titel', type: 'text' }, { name: 'description', label: 'Omschrijving', type: 'textarea' }] }
       ]
     },
     {
@@ -267,7 +289,7 @@ export const ContactPage: GlobalConfig = {
       type: 'collapsible',
       label: 'Contact informatie',
       fields: [
-        { name: 'contactCards', label: 'Contact kaartjes', type: 'array', fields: [{ name: 'icon', label: 'Icoon', type: 'text' }, { name: 'label', label: 'Label', type: 'text' }, { name: 'value', label: 'Waarde', type: 'text' }, { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }] }
+        { name: 'contactCards', label: 'Contact kaartjes', type: 'array', fields: [{ name: 'icon', label: 'Icoon', type: 'select', defaultValue: 'mail', options: iconOptions }, { name: 'label', label: 'Label', type: 'text' }, { name: 'value', label: 'Waarde', type: 'text' }, { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }] }
       ]
     },
     {

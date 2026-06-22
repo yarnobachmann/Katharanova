@@ -53,6 +53,12 @@ const arrayLabels = (value: any): string[] =>
 const sortByOrder = <T extends { order?: number }>(items: T[] = []): T[] =>
   [...items].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
 
+const methodStepsFallback = [
+  { title: 'Veiligheid', description: 'Eerst rust en vertrouwen - zonder druk.', order: 1 },
+  { title: 'Verdieping', description: 'Samen kijken naar wat er werkelijk speelt.', order: 2 },
+  { title: 'Integratie', description: 'Inzichten een plek geven in je dagelijks leven.', order: 3 }
+]
+
 const categoryLabels = (value: any, fallback?: string): string[] => {
   const labels = Array.isArray(value)
     ? value.map((item) => typeof item === 'string' ? item : item?.title || item?.label).filter(Boolean)
@@ -144,6 +150,7 @@ export async function getAboutPage() {
       intro: richTextToPlain(data.intro, aboutPage.intro),
       vision: richTextToPlain(data.vision, aboutPage.vision),
       workingMethod: richTextToPlain(data.workingMethod, aboutPage.workingMethod),
+      methodSteps: data.methodSteps?.length ? sortByOrder(data.methodSteps) : methodStepsFallback,
       forWho: arrayLabels(data.forWho).length ? arrayLabels(data.forWho) : aboutPage.forWho
     }
   }, aboutPage)

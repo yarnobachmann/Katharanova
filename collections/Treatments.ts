@@ -4,17 +4,24 @@ import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
 
 const toneOptions = ['cream', 'sage', 'clay', 'sand', 'dark']
+const iconOptions = [
+  { label: 'Sparkles', value: 'sparkles' },
+  { label: 'Opstelling', value: 'git-fork' },
+  { label: 'Hart handen', value: 'heart-handshake' },
+  { label: 'Hart', value: 'heart' },
+  { label: 'Schild', value: 'shield' }
+]
 
 export const Treatments: CollectionConfig = {
   slug: 'treatments',
   labels: {
-    singular: 'Behandeling',
-    plural: 'Behandelingen'
+    singular: 'Behandelpagina',
+    plural: 'Behandelpagina’s'
   },
   admin: {
-    group: 'Website content',
+    group: 'Pagina content',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'order', '_status'],
+    defaultColumns: ['title', 'slug', 'navLabel', 'order', '_status'],
     livePreview: {},
     preview: previewForCollection('treatments')
   },
@@ -28,7 +35,7 @@ export const Treatments: CollectionConfig = {
     { name: 'summary', type: 'textarea', required: true },
     { name: 'intro', type: 'textarea', required: true },
     { name: 'mainImage', type: 'upload', relationTo: 'media' },
-    { name: 'icon', type: 'text', defaultValue: 'sparkles' },
+    { name: 'icon', type: 'select', options: iconOptions, defaultValue: 'sparkles' },
     { name: 'tone', type: 'select', options: toneOptions, defaultValue: 'cream', required: true },
     { name: 'order', type: 'number', defaultValue: 0, required: true },
     { name: 'whatTitle', type: 'text', required: true },

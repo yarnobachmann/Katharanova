@@ -21,10 +21,12 @@ export function ContactPreview({ page: initialPage }: { page: any }) {
       <PageHero {...page.hero} />
       <section className="section">
         <div className="container grid-2 contact-layout">
-          <Card tone="cream" className="contact-form-card"><ContactForm /></Card>
+          <Card tone="cream" className="contact-form-card">
+            <ContactForm intro={page.formIntro} availabilityText={page.availabilityText} />
+          </Card>
           <aside className="side-stack">
             <div className="contact-card-list">
-              {page.contactCards.map((card: any) => {
+              {page.contactCards.filter((card: any) => card?.label || card?.value).map((card: any) => {
                 const Icon = (Icons as any)[toIconName(card.icon)] || Icons.Mail
                 return <div key={card.label}><Icon /><span><small>{card.label}</small><strong>{card.value}</strong></span></div>
               })}
@@ -41,6 +43,7 @@ export function ContactPreview({ page: initialPage }: { page: any }) {
   )
 }
 
-function toIconName(name: string) {
+function toIconName(name?: string) {
+  if (!name) return 'Mail'
   return name.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('')
 }

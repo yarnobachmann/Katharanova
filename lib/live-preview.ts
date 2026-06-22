@@ -38,6 +38,12 @@ export const arrayLabels = (value: any, fallback: string[] = []): string[] => {
 export const sortByOrder = <T extends { order?: number }>(items: T[] = []): T[] =>
   [...items].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
 
+const methodStepsFallback = [
+  { title: 'Veiligheid', description: 'Eerst rust en vertrouwen - zonder druk.', order: 1 },
+  { title: 'Verdieping', description: 'Samen kijken naar wat er werkelijk speelt.', order: 2 },
+  { title: 'Integratie', description: 'Inzichten een plek geven in je dagelijks leven.', order: 3 }
+]
+
 export const categoryLabels = (value: any, fallback?: string): string[] => {
   const labels = Array.isArray(value)
     ? value.map((item) => typeof item === 'string' ? item : item?.title || item?.label).filter(Boolean)
@@ -91,6 +97,7 @@ export function normalizeAboutPage(initial: any, data: any) {
     intro: richTextToPlain(data.intro, initial.intro),
     vision: richTextToPlain(data.vision, initial.vision),
     workingMethod: richTextToPlain(data.workingMethod, initial.workingMethod),
+    methodSteps: Array.isArray(data.methodSteps) && data.methodSteps.length ? sortByOrder(data.methodSteps) : initial.methodSteps || methodStepsFallback,
     forWho: arrayLabels(data.forWho, initial.forWho)
   }
 }

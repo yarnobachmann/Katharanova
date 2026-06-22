@@ -110,6 +110,11 @@ export const aboutPage = {
   vision: 'Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet. Klachten en patronen zijn vaak een signaal van iets dat dieper ligt. Wanneer je daar bewust van wordt, ontstaat er ruimte - en daarmee de mogelijkheid om anders te kiezen.',
   workingMethodTitle: 'Werkwijze',
   workingMethod: 'We werken in jouw tempo, met aandacht voor lichaam, emotie en betekenis. Ik combineer energetisch werk, systemisch inzicht en persoonlijke begeleiding, afgestemd op waar jij staat.',
+  methodSteps: [
+    { title: 'Veiligheid', description: 'Eerst rust en vertrouwen - zonder druk.', order: 1 },
+    { title: 'Verdieping', description: 'Samen kijken naar wat er werkelijk speelt.', order: 2 },
+    { title: 'Integratie', description: 'Inzichten een plek geven in je dagelijks leven.', order: 3 }
+  ],
   forWhoTitle: 'Voor wie mijn begeleiding bedoeld is',
   forWho: [
     'Je loopt vast door chronische klachten of stress',
