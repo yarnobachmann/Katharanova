@@ -20,7 +20,7 @@ export function TreatmentPageTemplate({ treatment: initialTreatment }: { treatme
   const Icon = (Icons as any)[toIconName(treatment.icon)] || Icons.Sparkles
   return (
     <main>
-      <PageHero eyebrow={treatment.eyebrow} title={treatment.title} intro={treatment.intro} image={treatment.image} />
+      <PageHero eyebrow={treatment.eyebrow} title={treatment.title} intro={treatment.intro} />
       <section className="section">
         <div className="container grid-2 treatment-layout">
           <Reveal className="prose-stack" stagger variant="section">

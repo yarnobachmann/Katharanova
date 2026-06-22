@@ -32,7 +32,7 @@ export function BlogPostPreview({ post: initialPost, related }: { post: BlogPost
         </div>
       </section>
       <div className="container article-image-wrap"><ImageFrame src={post.image} alt={post.title} ratio="21 / 9" tone={post.tone === 'cream' ? 'sand' : post.tone} /></div>
-      <article className="container-text article-body">
+      <article className="container article-body article-body-wide">
         <RichTextRenderer content={post.content} />
         <Card tone="dark" className="side-cta">
           <h3>Kathara Nova</h3>

@@ -16,6 +16,7 @@
 .side-cta > span { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(231,193,106,0.14); color: var(--kn-gold-soft); display: inline-flex; align-items: center; justify-content: center; }
 .side-cta h3 { margin: 0; color: var(--text-on-dark); }
 .side-cta p { margin: 0; color: var(--text-on-dark-muted); line-height: 1.7; }
+.side-cta.card-dark p { color: rgba(251, 247, 239, 0.78); }
 .about-main { align-items: start; }
 .about-portrait { display: flex; flex-direction: column; gap: 20px; }
 .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
@@ -37,6 +38,9 @@
 .article-hero-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .article-image-wrap { transform: translateY(-8px); }
 .article-body { padding-block: clamp(2.25rem,5vw,4rem) var(--section-y); }
+.article-body-wide { max-width: 920px; }
+.article-body-wide > * { max-width: 760px; margin-inline: auto; }
+.article-body-wide .side-cta { max-width: 760px; }
 .article-body > * + * { margin-top: 1.35em; }
 .article-body p { color: var(--text-body); font-size: var(--text-lead); line-height: 1.85; }
 .article-body .side-cta { margin-top: clamp(2rem, 5vw, 3rem); }
