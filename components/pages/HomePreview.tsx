@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, CalendarHeart, Check, Clock, Heart, MapPin, Sparkles, Tag } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, Clock, Heart, MapPin, Sparkles, Tag, Users } from 'lucide-react'
 
 import { Reveal } from '@/components/Reveal'
 import { TreatmentCard } from '@/components/cards/TreatmentCard'
@@ -113,6 +113,7 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
                 <div className="mini-workshop-meta">
                   <span><MapPin size={15} />{workshop.location}</span>
                   <span><Clock size={15} />{workshop.durationLabel}</span>
+                  <span><Users size={15} />{workshop.spotsLabel}</span>
                   <span><Tag size={15} />{workshop.price}</span>
                 </div>
                 <Button href="/contact" variant="secondary" size="sm" iconRight={<ArrowRight size={15} />}>Aanmelden</Button>
