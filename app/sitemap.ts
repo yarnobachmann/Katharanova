@@ -12,7 +12,11 @@ const staticRoutes = [
   '/contact'
 ]
 
-const treatmentRoute = (slug: string) => (slug === 'innerlijk' ? '/innerlijk-werk' : `/${slug}`)
+const treatmentRoute = (slug: string) => {
+  if (slug === 'innerlijk' || slug === 'innerlijk-werk') return '/innerlijke-werk'
+  if (slug === 'transhealing') return '/transheling'
+  return `/${slug}`
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [treatments, posts] = await Promise.all([getTreatments(), getBlogPosts()])
@@ -40,4 +44,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticEntries, ...treatmentEntries, ...postEntries]
 }
-

@@ -24,7 +24,13 @@ const toLocalMediaPath = (url: string): string => {
 export const mediaUrl = (value: any, fallback = ''): string => {
   if (!value) return fallback
   if (typeof value === 'string') return value.startsWith('/') || value.startsWith('http') ? toLocalMediaPath(value) : fallback
-  const url = value.url || value.thumbnailURL || value.sizes?.large?.url || value.sizes?.card?.url || fallback
+  const url =
+    value.sizes?.large?.url ||
+    value.sizes?.card?.url ||
+    value.sizes?.thumbnail?.url ||
+    value.thumbnailURL ||
+    value.url ||
+    fallback
 
   return typeof url === 'string' ? toLocalMediaPath(url) : fallback
 }

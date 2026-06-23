@@ -44,7 +44,12 @@ export default buildConfig({
   collections: [
     {
       slug: 'users',
-      auth: true,
+      auth: {
+        cookies: {
+          sameSite: 'Lax',
+          secure: process.env.NODE_ENV === 'production'
+        }
+      },
       admin: { useAsTitle: 'email' },
       access: {
         read: ({ req }) => Boolean(req.user),

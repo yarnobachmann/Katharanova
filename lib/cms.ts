@@ -42,13 +42,23 @@ const toLocalMediaPath = (url: string): string => {
 const mediaUrl = (value: any, fallback = ''): string => {
   if (!value) return fallback
   if (typeof value === 'string') return value
-  const url = value.url || value.thumbnailURL || value.sizes?.large?.url || value.sizes?.card?.url || fallback
+  const url =
+    value.sizes?.large?.url ||
+    value.sizes?.card?.url ||
+    value.sizes?.thumbnail?.url ||
+    value.thumbnailURL ||
+    value.url ||
+    fallback
 
   return typeof url === 'string' ? toLocalMediaPath(url) : fallback
 }
 
 const arrayLabels = (value: any): string[] =>
-  Array.isArray(value) ? value.map((item) => item?.label || item).filter(Boolean) : []
+  Array.isArray(value)
+    ? value
+      .map((item) => typeof item === 'string' ? item : item?.label)
+      .filter((label): label is string => typeof label === 'string' && label.trim().length > 0)
+    : []
 
 const sortByOrder = <T extends { order?: number }>(items: T[] = []): T[] =>
   [...items].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))

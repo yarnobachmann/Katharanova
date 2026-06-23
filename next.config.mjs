@@ -27,6 +27,13 @@ const nextConfig = {
         ]
       },
       {
+        source: '/api/media/file/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }
+        ]
+      },
+      {
         source: '/api/:path*',
         headers: [
           { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }

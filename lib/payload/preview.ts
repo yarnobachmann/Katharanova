@@ -12,10 +12,12 @@ const globalRoutes: Record<string, string> = {
 }
 
 const treatmentRoutes: Record<string, string> = {
-  innerlijk: '/innerlijk-werk',
-  'innerlijk-werk': '/innerlijk-werk',
+  innerlijk: '/innerlijke-werk',
+  'innerlijk-werk': '/innerlijke-werk',
+  'innerlijke-werk': '/innerlijke-werk',
   opstelling: '/opstelling',
-  transhealing: '/transhealing'
+  transhealing: '/transheling',
+  transheling: '/transheling'
 }
 
 const withSiteURL = (path: string) => `${serverUrl}${path}`

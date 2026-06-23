@@ -20,7 +20,10 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
     mimeTypes: ['image/*'],
-    adminThumbnail: ({ doc }) => doc.url as string,
+    adminThumbnail: ({ doc }) => {
+      const sizes = doc.sizes as any
+      return (sizes?.thumbnail?.url || doc.thumbnailURL || doc.url) as string
+    },
     imageSizes: [
       { name: 'thumbnail', width: 420, height: 280, position: 'centre' },
       { name: 'card', width: 900, height: 640, position: 'centre' },

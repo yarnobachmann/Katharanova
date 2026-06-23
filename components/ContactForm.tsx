@@ -40,9 +40,9 @@ export function ContactForm({
             <select name="voorkeursbehandeling" defaultValue="">
               <option value="" disabled>Maak een keuze...</option>
               <option>Weet ik nog niet</option>
-              <option>Transhealing</option>
+              <option>Transheling</option>
               <option>Opstelling</option>
-              <option>Innerlijk werk</option>
+              <option>Innerlijke werk</option>
               <option>Workshop</option>
               <option>Kennismakingsgesprek</option>
             </select>

@@ -18,7 +18,7 @@ export function Header({ settings, navigation }: { settings: SiteSettings; navig
 
   const treatmentItems = navigation.treatmentItems?.length
     ? navigation.treatmentItems
-    : navigation.navItems.filter((item) => ['/transhealing', '/opstelling', '/innerlijk-werk'].includes(item.href))
+    : navigation.navItems.filter((item) => ['/transheling', '/opstelling', '/innerlijke-werk'].includes(item.href))
   const practiceItems = navigation.navItems.filter((item) =>
     ['/over-mij', '/tarieven', '/contact'].includes(item.href)
   )

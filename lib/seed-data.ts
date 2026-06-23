@@ -46,9 +46,9 @@ export const navigation: Navigation = {
     { label: 'Contact', href: '/contact' }
   ],
   treatmentItems: [
-    { label: 'Transhealing', href: '/transhealing' },
+    { label: 'Transheling', href: '/transheling' },
     { label: 'Opstelling', href: '/opstelling' },
-    { label: 'Innerlijk werk', href: '/innerlijk-werk' }
+    { label: 'Innerlijke werk', href: '/innerlijke-werk' }
   ],
   ctaLabel: 'Plan een afspraak',
   ctaHref: '/contact'
@@ -135,13 +135,13 @@ export const aboutPage = {
 export const treatments: Treatment[] = [
   {
     eyebrow: 'Behandeling · energetisch',
-    title: 'Transhealing',
-    slug: 'transhealing',
-    navLabel: 'Transhealing',
+    title: 'Transheling',
+    slug: 'transheling',
+    navLabel: 'Transheling',
     summary: 'Energetisch en bewustzijnsgericht werk dat helpt om blokkades te verzachten en ruimte te maken voor herstel.',
     intro: 'Energetisch en bewustzijnsgericht werk dat helpt om blokkades te verzachten en ruimte te maken voor herstel.',
-    whatTitle: 'Wat is transhealing?',
-    whatBody: 'Transhealing is een zachte, krachtige vorm van energetisch werk. Door blokkades in je energiesysteem los te maken, krijgt je lichaam de ruimte om zichzelf te herstellen. Veel mensen ervaren tijdens en na een sessie meer rust, helderheid en ruimte in hun lijf.',
+    whatTitle: 'Wat is transheling?',
+    whatBody: 'Transheling is een zachte, krachtige vorm van energetisch werk. Door blokkades in je energiesysteem los te maken, krijgt je lichaam de ruimte om zichzelf te herstellen. Veel mensen ervaren tijdens en na een sessie meer rust, helderheid en ruimte in hun lijf.',
     forWhoTitle: 'Voor wie is het bedoeld?',
     forWho: ['Chronische klachten en vermoeidheid', 'Stress, spanning en onrust', 'Vastgezette emoties of trauma', 'Het gevoel vast te zitten in je lichaam'],
     sessionTitle: 'Wat kun je verwachten tijdens een sessie?',
@@ -187,13 +187,13 @@ export const treatments: Treatment[] = [
   },
   {
     eyebrow: 'Behandeling · persoonlijk',
-    title: 'Innerlijk werk',
-    slug: 'innerlijk-werk',
-    navLabel: 'Innerlijk werk',
+    title: 'Innerlijke werk',
+    slug: 'innerlijke-werk',
+    navLabel: 'Innerlijke werk',
     summary: 'Begeleiding bij beperkende overtuigingen, emoties en persoonlijke groei.',
     intro: 'Begeleiding bij beperkende overtuigingen, emoties en persoonlijke groei - gericht op heling, bewustwording en richting.',
     whatTitle: 'Wat is innerlijk werk?',
-    whatBody: 'Innerlijk werk is een verdiepend traject waarin we kijken naar de overtuigingen en emoties die je onbewust sturen. Stap voor stap maak je contact met wat er werkelijk speelt. We werken aan emotionele verwerking, bewustwording en zelfcompassie, zodat er ruimte ontstaat voor groei en vertrouwen.',
+    whatBody: 'Innerlijke werk is een verdiepend traject waarin we kijken naar de overtuigingen en emoties die je onbewust sturen. Stap voor stap maak je contact met wat er werkelijk speelt. We werken aan emotionele verwerking, bewustwording en zelfcompassie, zodat er ruimte ontstaat voor groei en vertrouwen.',
     forWhoTitle: 'Voor wie is het bedoeld?',
     forWho: ['Beperkende overtuigingen over jezelf', 'Emoties die om verwerking vragen', 'Behoefte aan bewustwording en richting', 'Verlangen naar meer zelfcompassie en groei'],
     sessionTitle: 'Wat kun je verwachten tijdens een sessie?',
@@ -241,8 +241,8 @@ export const blogPage = {
 export const blogCategories = [
   { title: 'Bewustwording', slug: 'bewustwording', order: 1 },
   { title: 'Opstelling', slug: 'opstelling', order: 2 },
-  { title: 'Transhealing', slug: 'transhealing', order: 3 },
-  { title: 'Innerlijk werk', slug: 'innerlijk-werk', order: 4 }
+  { title: 'Transheling', slug: 'transheling', order: 3 },
+  { title: 'Innerlijke werk', slug: 'innerlijke-werk', order: 4 }
 ]
 
 export const blogPosts: BlogPost[] = [
@@ -284,7 +284,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'luisteren-naar-je-lichaam',
-    category: 'Transhealing',
+    category: 'Transheling',
     tone: 'clay',
     image: photos.lichaam,
     publishedAt: '2026-05-09',
@@ -300,7 +300,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'grenzen-als-vorm-van-zorg',
-    category: 'Innerlijk werk',
+    category: 'Innerlijke werk',
     tone: 'cream',
     image: photos.grenzen,
     publishedAt: '2026-04-21',
@@ -333,7 +333,7 @@ export const blogPosts: BlogPost[] = [
 ]
 
 export const pricingItems: PricingItem[] = [
-  { title: '1-op-1 sessie', price: '€95', unit: 'per 75 min', tone: 'dark', description: 'Een persoonlijke sessie transhealing of innerlijk werk, volledig afgestemd op jou.', features: ['Transhealing of innerlijk werk', 'Online of op locatie', 'Inclusief nazorg'], ctaLabel: 'Plan een sessie', ctaHref: '/contact', featured: true, order: 1 },
+  { title: '1-op-1 sessie', price: '€95', unit: 'per 75 min', tone: 'dark', description: 'Een persoonlijke sessie transheling of innerlijke werk, volledig afgestemd op jou.', features: ['Transheling of innerlijke werk', 'Online of op locatie', 'Inclusief nazorg'], ctaLabel: 'Plan een sessie', ctaHref: '/contact', featured: true, order: 1 },
   { title: 'Opstelling', price: '€120', unit: 'per 90 min', tone: 'cream', description: 'Een individuele opstelling rond een thema of vraag die je bezighoudt.', features: ['Individueel of in een groep', 'Familie-, relatie- of levensthema', 'Inclusief voor- en nagesprek'], ctaLabel: 'Plan een opstelling', ctaHref: '/contact', featured: false, order: 2 },
   { title: 'Workshop', price: 'vanaf €45', unit: 'per dagdeel', tone: 'cream', description: 'Samen helen in een kleine groep, tijdens een dag of dagdeel.', features: ['Kleine groep', 'Wisselende thema’s', 'Online of op locatie'], ctaLabel: 'Bekijk workshops', ctaHref: '/workshops', featured: false, order: 3 }
 ]

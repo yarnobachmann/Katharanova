@@ -34,7 +34,7 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
             <p className="lead">{page.hero.intro}</p>
             <div className="hero-actions">
               <Button href="/contact" size="lg">Plan een afspraak</Button>
-              <Button href="/transhealing" variant="secondary" size="lg">Ontdek de behandelingen</Button>
+              <Button href="/transheling" variant="secondary" size="lg">Ontdek de behandelingen</Button>
             </div>
             <div className="hero-meta">
               {metaItems.map((item: any) => {
