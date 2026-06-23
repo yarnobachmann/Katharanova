@@ -145,3 +145,8 @@ a,
 .nav__link--active {
   color: #8a641c;
 }
+
+.payload__modal-container[data-empty-modal-layer='true'] {
+  pointer-events: none !important;
+  visibility: hidden !important;
+}

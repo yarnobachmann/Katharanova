@@ -52,10 +52,19 @@ async function run() {
   const payload = await getPayload({ config })
 
   const adminEmail = process.env.PAYLOAD_SEED_EMAIL || 'admin@katharanova.nl'
-  const adminPassword = process.env.PAYLOAD_SEED_PASSWORD || 'KatharaNova2026!'
+  const adminPassword = process.env.PAYLOAD_SEED_PASSWORD
+
+  if (!adminPassword) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('PAYLOAD_SEED_PASSWORD is required when seeding production.')
+    }
+    console.warn('Using development seed password. Set PAYLOAD_SEED_PASSWORD before seeding shared environments.')
+  }
+
+  const seedPassword = adminPassword || 'KatharaNova2026!'
   const users = await payload.find({ collection: 'users', where: { email: { equals: adminEmail } }, limit: 1 })
   if (!users.docs[0]) {
-    await payload.create({ collection: 'users', data: { email: adminEmail, password: adminPassword } })
+    await payload.create({ collection: 'users', data: { email: adminEmail, password: seedPassword } })
   }
 
   await upsertGlobal(payload, 'site-settings', withoutUploads(siteSettings, ['logoMark', 'logoFull']))
@@ -129,7 +138,7 @@ async function run() {
     else await payload.create({ collection: 'faqs', data })
   }
 
-  console.log(`Seed complete. Admin: ${adminEmail} / ${adminPassword}`)
+  console.log(`Seed complete. Admin: ${adminEmail}`)
   process.exit(0)
 }
 

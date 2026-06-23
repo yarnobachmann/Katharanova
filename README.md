@@ -9,10 +9,12 @@ Set these variables in the hosting platform:
 ```env
 DATABASE_URI=postgres://USER:PASSWORD@HOST:5432/kathara_nova?sslmode=require
 PAYLOAD_SECRET=replace-with-a-long-random-secret
-NEXT_PUBLIC_SERVER_URL=https://www.katharanova.nl
+NEXT_PUBLIC_SERVER_URL=https://katharanova.nl
 ```
 
 `DATABASE_URI` should point to an external managed PostgreSQL database. The previous `.local-postgres` folder was only a temporary local development database and should not be used for production.
+
+Only set `PAYLOAD_SEED_PASSWORD` when running `npm run seed`. In production this must be a long random password, because it is used for the seeded admin user if that user does not already exist.
 
 ## Commands
 

@@ -31,7 +31,9 @@ export const mediaUrl = (value: any, fallback = ''): string => {
 
 export const arrayLabels = (value: any, fallback: string[] = []): string[] => {
   if (!Array.isArray(value)) return fallback
-  const labels = value.map((item) => item?.label || item).filter(Boolean)
+  const labels = value
+    .map((item) => typeof item === 'string' ? item : item?.label)
+    .filter((label): label is string => typeof label === 'string' && label.trim().length > 0)
   return labels.length ? labels : fallback
 }
 
