@@ -13,8 +13,8 @@ const staticRoutes = [
 ]
 
 const treatmentRoute = (slug: string) => {
-  if (slug === 'innerlijk' || slug === 'innerlijk-werk') return '/innerlijke-werk'
-  if (slug === 'transhealing') return '/transheling'
+  if (slug === 'innerlijk' || slug === 'innerlijk-werk') return '/innerlijk-werk'
+  if (slug === 'transhealing') return '/transhealing'
   return `/${slug}`
 }
 
