@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import { BlogCategories } from '@/collections/BlogCategories'
 import { BlogPosts } from '@/collections/BlogPosts'
 import { FAQs } from '@/collections/FAQs'
+import { GalleryPhotos } from '@/collections/GalleryPhotos'
 import { Media } from '@/collections/Media'
 import { PricingItems } from '@/collections/PricingItems'
 import { Treatments } from '@/collections/Treatments'
@@ -37,7 +38,7 @@ export default buildConfig({
     },
     livePreview: {
       ...livePreview,
-      collections: ['treatments', 'workshops', 'blog-posts'],
+      collections: ['treatments', 'workshops', 'blog-posts', 'gallery-photos'],
       globals: ['homepage', 'gallery-page', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page']
     }
   },
@@ -64,6 +65,7 @@ export default buildConfig({
     Workshops,
     BlogCategories,
     BlogPosts,
+    GalleryPhotos,
     PricingItems,
     FAQs
   ],

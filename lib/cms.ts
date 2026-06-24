@@ -180,10 +180,22 @@ export async function getGalleryPage() {
   }
 
   return withPayload(async (payload) => {
-    const [galleryData, homepageData]: any[] = await Promise.all([
+    const [galleryData, homepageData, photoResult]: any[] = await Promise.all([
       payload.findGlobal({ slug: 'gallery-page' }),
-      payload.findGlobal({ slug: 'homepage' })
+      payload.findGlobal({ slug: 'homepage' }),
+      payload.find({
+        collection: 'gallery-photos',
+        sort: 'order',
+        depth: 2,
+        limit: 100,
+        where: { active: { equals: true } }
+      })
     ])
+    const collectionItems = photoResult.docs?.map((doc: any) => ({
+      image: mediaUrl(doc.image),
+      caption: doc.caption || doc.title,
+      order: doc.order
+    })).filter((item: any) => item.image) || []
     const legacy = {
       galleryEyebrow: homepageData?.galleryEyebrow || fallback.galleryEyebrow,
       galleryTitle: homepageData?.galleryTitle || fallback.galleryTitle,
@@ -197,7 +209,9 @@ export async function getGalleryPage() {
       galleryEyebrow: galleryData?.galleryEyebrow || legacy.galleryEyebrow,
       galleryTitle: galleryData?.galleryTitle || legacy.galleryTitle,
       galleryIntro: galleryData?.galleryIntro || legacy.galleryIntro,
-      galleryItems: normalizeGalleryItems(galleryData?.galleryItems, legacy.galleryItems)
+      galleryItems: collectionItems.length
+        ? collectionItems
+        : normalizeGalleryItems(galleryData?.galleryItems, legacy.galleryItems)
     }
   }, fallback)
 }

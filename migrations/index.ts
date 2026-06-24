@@ -3,6 +3,7 @@ import * as migration_20260622_095924_add_about_method_steps from './20260622_09
 import * as migration_20260622_103252_remove_pricing_unit from './20260622_103252_remove_pricing_unit';
 import * as migration_20260624_120000_add_homepage_gallery from './20260624_120000_add_homepage_gallery';
 import * as migration_20260624_140000_add_gallery_page from './20260624_140000_add_gallery_page';
+import * as migration_20260624_150000_add_gallery_photos from './20260624_150000_add_gallery_photos';
 
 export const migrations = [
   {
@@ -29,5 +30,10 @@ export const migrations = [
     up: migration_20260624_140000_add_gallery_page.up,
     down: migration_20260624_140000_add_gallery_page.down,
     name: '20260624_140000_add_gallery_page'
+  },
+  {
+    up: migration_20260624_150000_add_gallery_photos.up,
+    down: migration_20260624_150000_add_gallery_photos.down,
+    name: '20260624_150000_add_gallery_photos'
   },
 ];

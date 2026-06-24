@@ -47,6 +47,10 @@ export function getPreviewPath(args: {
     return slug ? `/workshops/${slug}` : '/workshops'
   }
 
+  if (collectionSlug === 'gallery-photos') {
+    return '/fotogallerij'
+  }
+
   return '/'
 }
 
