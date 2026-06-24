@@ -163,6 +163,45 @@ export async function getHomepage() {
   }, home)
 }
 
+const normalizeGalleryItems = (items: any[] = [], fallback: any[] = []) =>
+  items.length
+    ? sortByOrder(items).map((item: any) => ({
+      ...item,
+      image: mediaUrl(item.image)
+    })).filter((item: any) => item.image)
+    : fallback
+
+export async function getGalleryPage() {
+  const fallback = {
+    galleryEyebrow: home.galleryEyebrow,
+    galleryTitle: home.galleryTitle,
+    galleryIntro: home.galleryIntro,
+    galleryItems: home.galleryItems
+  }
+
+  return withPayload(async (payload) => {
+    const [galleryData, homepageData]: any[] = await Promise.all([
+      payload.findGlobal({ slug: 'gallery-page' }),
+      payload.findGlobal({ slug: 'homepage' })
+    ])
+    const legacy = {
+      galleryEyebrow: homepageData?.galleryEyebrow || fallback.galleryEyebrow,
+      galleryTitle: homepageData?.galleryTitle || fallback.galleryTitle,
+      galleryIntro: homepageData?.galleryIntro || fallback.galleryIntro,
+      galleryItems: normalizeGalleryItems(homepageData?.galleryItems, fallback.galleryItems)
+    }
+
+    return {
+      ...legacy,
+      ...(galleryData || {}),
+      galleryEyebrow: galleryData?.galleryEyebrow || legacy.galleryEyebrow,
+      galleryTitle: galleryData?.galleryTitle || legacy.galleryTitle,
+      galleryIntro: galleryData?.galleryIntro || legacy.galleryIntro,
+      galleryItems: normalizeGalleryItems(galleryData?.galleryItems, legacy.galleryItems)
+    }
+  }, fallback)
+}
+
 export async function getAboutPage() {
   return withPayload(async (payload) => {
     const data: any = await payload.findGlobal({ slug: 'about-page' })

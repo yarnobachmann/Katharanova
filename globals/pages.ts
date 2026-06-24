@@ -31,6 +31,22 @@ const ctaFields = [
   { name: 'secondaryHref', label: 'Secundaire knoplink', type: 'text' as const }
 ]
 
+const galleryFields = [
+  { name: 'galleryEyebrow', label: 'Label', type: 'text' as const },
+  { name: 'galleryTitle', label: 'Titel', type: 'text' as const },
+  { name: 'galleryIntro', label: 'Intro', type: 'textarea' as const },
+  {
+    name: 'galleryItems',
+    label: 'Foto\'s',
+    type: 'array' as const,
+    fields: [
+      { name: 'image', label: 'Afbeelding', type: 'upload' as const, relationTo: 'media' as const, required: true },
+      { name: 'caption', label: 'Bijschrift', type: 'text' as const },
+      { name: 'order', label: 'Volgorde', type: 'number' as const, defaultValue: 0 }
+    ]
+  }
+]
+
 const publicEditable = { read: () => true, update: admins }
 
 export const Homepage: GlobalConfig = {
@@ -92,25 +108,6 @@ export const Homepage: GlobalConfig = {
     },
     {
       type: 'collapsible',
-      label: 'Fotogallerij',
-      fields: [
-        { name: 'galleryEyebrow', label: 'Label', type: 'text' },
-        { name: 'galleryTitle', label: 'Titel', type: 'text' },
-        { name: 'galleryIntro', label: 'Intro', type: 'textarea' },
-        {
-          name: 'galleryItems',
-          label: 'Foto\'s',
-          type: 'array',
-          fields: [
-            { name: 'image', label: 'Afbeelding', type: 'upload', relationTo: 'media', required: true },
-            { name: 'caption', label: 'Bijschrift', type: 'text' },
-            { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
-          ]
-        }
-      ]
-    },
-    {
-      type: 'collapsible',
       label: 'Quote',
       fields: [
         { name: 'quote', label: 'Quote', type: 'textarea' }
@@ -131,6 +128,21 @@ export const Homepage: GlobalConfig = {
       fields: [
         { name: 'cta', label: 'CTA', type: 'group', fields: ctaFields }
       ]
+    }
+  ]
+}
+
+export const GalleryPage: GlobalConfig = {
+  slug: 'gallery-page',
+  label: 'Fotogallerij pagina',
+  admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('gallery-page') },
+  access: publicEditable,
+  fields: [
+    {
+      type: 'collapsible',
+      label: 'Fotogallerij',
+      admin: { initCollapsed: false },
+      fields: galleryFields
     }
   ]
 }

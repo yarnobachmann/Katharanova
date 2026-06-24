@@ -1,12 +1,12 @@
 import { GalleryPreview } from '@/components/pages/GalleryPreview'
 import { PageHero } from '@/components/ui/PageHero'
-import { getHomepage } from '@/lib/cms'
+import { getGalleryPage } from '@/lib/cms'
 import { createMetadata, pageTitle } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata() {
-  const page = await getHomepage()
+  const page = await getGalleryPage()
 
   return createMetadata({
     title: pageTitle(page.galleryTitle || 'Fotogallerij'),
@@ -17,7 +17,7 @@ export async function generateMetadata() {
 }
 
 export default async function FotogallerijPage() {
-  const page = await getHomepage()
+  const page = await getGalleryPage()
 
   return (
     <main>

@@ -101,6 +101,19 @@ export function normalizeHomepage(initial: any, data: any) {
   }
 }
 
+export function normalizeGalleryPage(initial: any, data: any) {
+  return {
+    ...initial,
+    ...data,
+    galleryItems: Array.isArray(data.galleryItems) && data.galleryItems.length
+      ? sortByOrder(data.galleryItems).map((item: any) => ({
+        ...item,
+        image: mediaUrl(item.image)
+      })).filter((item: any) => item.image)
+      : initial.galleryItems
+  }
+}
+
 export function normalizeAboutPage(initial: any, data: any) {
   return {
     ...initial,

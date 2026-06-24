@@ -13,7 +13,7 @@ import { Media } from '@/collections/Media'
 import { PricingItems } from '@/collections/PricingItems'
 import { Treatments } from '@/collections/Treatments'
 import { Workshops } from '@/collections/Workshops'
-import { AboutPage, BlogPage, ContactPage, Homepage, TarievenPage, WorkshopsPage } from '@/globals/pages'
+import { AboutPage, BlogPage, ContactPage, GalleryPage, Homepage, TarievenPage, WorkshopsPage } from '@/globals/pages'
 import { Navigation } from '@/globals/Navigation'
 import { SiteSettings } from '@/globals/SiteSettings'
 import { databaseUri, payloadSecret, serverUrl } from '@/lib/env'
@@ -38,7 +38,7 @@ export default buildConfig({
     livePreview: {
       ...livePreview,
       collections: ['treatments', 'workshops', 'blog-posts'],
-      globals: ['homepage', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page']
+      globals: ['homepage', 'gallery-page', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page']
     }
   },
   collections: [
@@ -67,7 +67,7 @@ export default buildConfig({
     PricingItems,
     FAQs
   ],
-  globals: [SiteSettings, Navigation, Homepage, AboutPage, WorkshopsPage, BlogPage, TarievenPage, ContactPage],
+  globals: [SiteSettings, Navigation, Homepage, GalleryPage, AboutPage, WorkshopsPage, BlogPage, TarievenPage, ContactPage],
   i18n: {
     supportedLanguages: { nl },
     fallbackLanguage: 'nl'
