@@ -81,6 +81,16 @@ export const home = {
   aboutTitle: 'Begeleiding met aandacht voor de diepere laag',
   aboutText: 'Bij Kathara Nova wordt niet alleen gekeken naar de klacht, maar naar wat eronder ligt. De begeleiding helpt je bewust worden van patronen, zodat er ruimte ontstaat voor rust, richting en verandering.',
   aboutImage: photos.aboutWarm,
+  galleryEyebrow: 'Fotogallerij',
+  galleryTitle: 'Sfeer van de praktijk',
+  galleryIntro: 'Een indruk van de rust, natuur en aandacht die de begeleiding dragen.',
+  galleryItems: [
+    { image: photos.aboutWarm, caption: 'Zachte aandacht', order: 1 },
+    { image: photos.heroLight, caption: 'Ruimte om te ademen', order: 2 },
+    { image: photos.opstelling, caption: 'Natuur als bedding', order: 3 },
+    { image: photos.contact, caption: 'Rust en helderheid', order: 4 },
+    { image: photos.rust, caption: 'In jouw tempo', order: 5 }
+  ],
   quote: 'Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
   workshopPreviewEyebrow: 'Workshops',
   workshopPreviewTitle: 'Samen helen in een kleine groep',
@@ -333,7 +343,7 @@ export const blogPosts: BlogPost[] = [
 ]
 
 export const pricingItems: PricingItem[] = [
-  { title: '1-op-1 sessie', price: '€95', unit: 'per 75 min', tone: 'dark', description: 'Een persoonlijke sessie transheling of innerlijke werk, volledig afgestemd op jou.', features: ['Transheling of innerlijke werk', 'Online of op locatie', 'Inclusief nazorg'], ctaLabel: 'Plan een sessie', ctaHref: '/contact', featured: true, order: 1 },
+  { title: '1-op-1 sessie', price: '€95', unit: 'per 75 min', tone: 'sand', description: 'Een persoonlijke sessie transheling of innerlijke werk, volledig afgestemd op jou.', features: ['Transheling of innerlijke werk', 'Online of op locatie', 'Inclusief nazorg'], ctaLabel: 'Plan een sessie', ctaHref: '/contact', featured: true, order: 1 },
   { title: 'Opstelling', price: '€120', unit: 'per 90 min', tone: 'cream', description: 'Een individuele opstelling rond een thema of vraag die je bezighoudt.', features: ['Individueel of in een groep', 'Familie-, relatie- of levensthema', 'Inclusief voor- en nagesprek'], ctaLabel: 'Plan een opstelling', ctaHref: '/contact', featured: false, order: 2 },
   { title: 'Workshop', price: 'vanaf €45', unit: 'per dagdeel', tone: 'cream', description: 'Samen helen in een kleine groep, tijdens een dag of dagdeel.', features: ['Kleine groep', 'Wisselende thema’s', 'Online of op locatie'], ctaLabel: 'Bekijk workshops', ctaHref: '/workshops', featured: false, order: 3 }
 ]

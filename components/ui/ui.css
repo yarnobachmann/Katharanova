@@ -29,10 +29,17 @@
 .btn-secondary:hover { background: var(--kn-cream-deep); border-color: var(--accent); }
 .btn-ghost { background: transparent; color: var(--text-gold); }
 .btn-ghost:hover { color: var(--accent-clay); }
-.btn-dark { background: var(--kn-charcoal); color: var(--kn-gold-soft); }
-.btn-dark:hover { background: var(--kn-charcoal-80); }
-.btn-onDark { background: transparent; color: var(--kn-cream); border-color: var(--border-on-dark); }
-.btn-onDark:hover { background: rgba(231, 193, 106, 0.1); border-color: var(--accent-soft); }
+.btn-dark,
+.btn-onDark {
+  background: var(--surface-card);
+  color: var(--kn-brown);
+  border-color: var(--border-gold);
+}
+.btn-dark:hover,
+.btn-onDark:hover {
+  background: var(--kn-cream-deep);
+  border-color: var(--accent);
+}
 
 .badge { display: inline-flex; align-items: center; width: fit-content; border-radius: var(--radius-pill); padding: 0.18rem 0.68rem; font-size: var(--text-xs); font-weight: 700; line-height: 1.2; }
 .badge-gold { background: rgba(201,148,46,0.14); color: var(--text-gold); border: 1px solid var(--border-gold); }
@@ -47,7 +54,11 @@
 .card-sage { background: var(--surface-sage); border: 1px solid rgba(140,154,120,0.25); }
 .card-clay { background: var(--surface-clay); border: 1px solid rgba(167,99,58,0.2); }
 .card-sand { background: var(--surface-card-sand); border: 1px solid var(--border-sand); }
-.card-dark { background: var(--gradient-dark); color: var(--text-on-dark); border: 1px solid var(--border-on-dark); }
+.card-dark {
+  background: linear-gradient(180deg, #fffaf0 0%, #efe6d4 100%);
+  color: var(--text-body);
+  border: 1px solid rgba(201,148,46,0.28);
+}
 .card-outline { background: transparent; border: 1px solid var(--border-gold); }
 
 .section-heading { display: flex; flex-direction: column; gap: 0.85rem; max-width: 620px; }
@@ -56,14 +67,14 @@
 .section-heading h1 { font-size: var(--text-h1); margin: 0; }
 .section-heading h2 { font-size: var(--text-h2); margin: 0; }
 .section-heading p { margin: 0; }
-.section-heading-light h2 { color: var(--text-on-dark); }
-.section-heading-light p { color: var(--text-on-dark-muted); }
-.section-heading-light .eyebrow { color: var(--text-gold-on-dark); }
+.section-heading-light h2 { color: var(--text-strong); }
+.section-heading-light p { color: var(--text-muted); }
+.section-heading-light .eyebrow { color: var(--text-gold); }
 
 .logo { display: inline-flex; align-items: center; gap: 0.7rem; }
 .logo-mark { width: 44px; height: auto; }
 .logo-word { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kn-brown); }
-.logo-word[data-light="true"] { color: var(--kn-cream); }
+.logo-word[data-light="true"] { color: var(--kn-brown); }
 
 .image-frame { position: relative; width: 100%; overflow: hidden; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); background: radial-gradient(120% 120% at 20% 10%, #eadbc0 0%, #d8c3a5 60%, #c9b493 100%); }
 .image-frame img { object-fit: cover; transition: transform 900ms var(--ease-out); }
@@ -71,11 +82,11 @@
 .image-frame-organic { border-radius: var(--radius-blob); }
 .image-frame-sage { background: radial-gradient(120% 120% at 25% 15%, #dde2d2 0%, #c5cdb4 70%); }
 .image-frame-clay { background: radial-gradient(120% 120% at 25% 15%, #e7cbb6 0%, #cfa888 70%); }
-.image-frame-dark { background: radial-gradient(120% 120% at 30% 10%, #2c2620 0%, #17130f 75%); }
+.image-frame-dark { background: radial-gradient(120% 120% at 25% 15%, #eadbc0 0%, #d8c3a5 70%); }
 .image-warmth { position: absolute; inset: 0; background: linear-gradient(155deg, rgba(201,148,46,0.1) 0%, rgba(23,19,15,0.04) 45%, rgba(42,33,26,0.3) 100%); pointer-events: none; }
 
 .page-hero { position: relative; overflow: hidden; background: radial-gradient(circle at 88% 22%, rgba(231,193,106,0.16), transparent 28%), var(--surface-page-alt); padding-block: clamp(3rem, 7vw, 5.5rem); }
-.page-hero-dark { background: var(--gradient-dark); }
+.page-hero-dark { background: radial-gradient(circle at 88% 22%, rgba(231,193,106,0.16), transparent 28%), var(--surface-page-alt); }
 .page-hero-mark {
   position: absolute;
   right: clamp(-90px, -3vw, -28px);

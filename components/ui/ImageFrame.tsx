@@ -11,7 +11,7 @@ export function ImageFrame({
   src?: string
   alt: string
   ratio?: string
-  tone?: 'sand' | 'sage' | 'clay' | 'dark' | 'cream'
+  tone?: 'sand' | 'sage' | 'clay' | 'cream'
   organic?: boolean
   priority?: boolean
 }) {

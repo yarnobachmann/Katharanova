@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
 
-const toneOptions = ['cream', 'sage', 'clay', 'sand', 'dark']
+const toneOptions = ['cream', 'sage', 'clay', 'sand']
 const iconOptions = [
   { label: 'Sparkles', value: 'sparkles' },
   { label: 'Opstelling', value: 'git-fork' },

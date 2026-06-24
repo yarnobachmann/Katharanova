@@ -38,7 +38,7 @@ export function BlogPostPreview({ post: initialPost, related }: { post: BlogPost
             <RichTextRenderer content={post.content} />
           </article>
           <aside className="article-aside">
-            <Card tone="dark" className="side-cta article-cta">
+            <Card tone="sand" className="side-cta article-cta">
               <h3>Kathara Nova</h3>
               <p>Herken je iets in deze woorden? Je hoeft nog niet precies te weten wat je nodig hebt. Stel vrijblijvend je vraag - ik denk graag met je mee.</p>
               <Button href="/contact">Plan een afspraak</Button>

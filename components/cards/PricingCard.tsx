@@ -6,7 +6,6 @@ import { Card } from '@/components/ui/Card'
 import type { PricingItem } from '@/lib/types'
 
 export function PricingCard({ item }: { item: PricingItem }) {
-  const dark = item.tone === 'dark'
   return (
     <Card tone={item.tone} className={`pricing-card ${item.featured ? 'pricing-featured' : ''}`}>
       {item.featured ? <span className="pricing-badge"><Badge tone="solid">Meest gekozen</Badge></span> : null}
@@ -18,7 +17,7 @@ export function PricingCard({ item }: { item: PricingItem }) {
       <ul>
         {item.features.map((feature) => <li key={feature}><Check size={18} />{feature}</li>)}
       </ul>
-      <Button href={item.ctaHref} variant={dark ? 'primary' : 'secondary'} fullWidth>{item.ctaLabel}</Button>
+      <Button href={item.ctaHref} variant={item.featured ? 'primary' : 'secondary'} fullWidth>{item.ctaLabel}</Button>
     </Card>
   )
 }

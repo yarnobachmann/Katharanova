@@ -13,10 +13,10 @@
 .effect-grid div { padding: 12px 16px; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--surface-card); font-size: var(--text-sm); }
 .effect-grid svg { color: var(--accent); flex: none; }
 .side-cta { display: flex; flex-direction: column; gap: 14px; }
-.side-cta > span { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(231,193,106,0.14); color: var(--kn-gold-soft); display: inline-flex; align-items: center; justify-content: center; }
-.side-cta h3 { margin: 0; color: var(--text-on-dark); }
-.side-cta p { margin: 0; color: var(--text-on-dark-muted); line-height: 1.7; }
-.side-cta.card-dark p { color: rgba(251, 247, 239, 0.78); }
+.side-cta > span { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(201,148,46,0.14); color: var(--accent-hover); display: inline-flex; align-items: center; justify-content: center; }
+.side-cta h3 { margin: 0; color: var(--text-strong); }
+.side-cta p { margin: 0; color: var(--text-muted); line-height: 1.7; }
+.side-cta.card-dark p { color: var(--text-muted); }
 .about-main { align-items: start; }
 .about-portrait { display: flex; flex-direction: column; gap: 20px; }
 .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
@@ -48,7 +48,7 @@
 .article-aside { position: sticky; top: 112px; }
 .article-cta { padding: clamp(1.5rem, 2.5vw, 2rem); }
 .article-cta p,
-.card-dark.article-cta p { color: rgba(251, 247, 239, 0.82); }
+.card-dark.article-cta p { color: var(--text-muted); }
 .article-cta .btn { align-self: flex-start; }
 .workshop-detail .article-body { padding-block: 0; }
 .workshop-detail-card { display: flex; flex-direction: column; gap: 18px; }

@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react'
 
 type Props = {
   href?: string
-  variant?: 'primary' | 'secondary' | 'ghost' | 'dark' | 'onDark'
+  variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   fullWidth?: boolean
   iconRight?: React.ReactNode

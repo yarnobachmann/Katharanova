@@ -52,8 +52,7 @@ export const BlogPosts: CollectionConfig = {
         { label: 'Creme', value: 'cream' },
         { label: 'Salie', value: 'sage' },
         { label: 'Klei', value: 'clay' },
-        { label: 'Zand', value: 'sand' },
-        { label: 'Donker', value: 'dark' }
+        { label: 'Zand', value: 'sand' }
       ],
       defaultValue: 'cream'
     },

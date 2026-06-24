@@ -34,8 +34,6 @@
   --text-strong: var(--kn-brown);
   --text-body: var(--kn-brown);
   --text-muted: var(--kn-taupe);
-  --text-on-dark: var(--kn-cream);
-  --text-on-dark-muted: #c8bba8;
   --text-gold: var(--kn-gold-deep);
   --text-gold-on-dark: var(--kn-gold-soft);
   --accent: var(--kn-gold);
@@ -108,7 +106,6 @@
   --dur-base: 240ms;
   --dur-slow: 420ms;
   --gradient-gold: linear-gradient(135deg, #e7c16a 0%, #c9942e 52%, #a87a22 100%);
-  --gradient-dark: linear-gradient(160deg, #2c2620 0%, #17130f 100%);
   --gradient-cream: linear-gradient(180deg, #fbf7ef 0%, #f7f1e6 100%);
 }
 

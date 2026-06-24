@@ -1,4 +1,4 @@
-export type Tone = 'cream' | 'sage' | 'clay' | 'sand' | 'dark'
+export type Tone = 'cream' | 'sage' | 'clay' | 'sand'
 
 export type MediaLike = {
   url?: string

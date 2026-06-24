@@ -152,7 +152,13 @@ export async function getHomepage() {
       cta: mergeGroup(home.cta, data.cta),
       recognitionItems: arrayLabels(data.recognitionItems).length ? arrayLabels(data.recognitionItems) : home.recognitionItems,
       heroMetaItems: data.heroMetaItems?.length ? sortByOrder(data.heroMetaItems) : home.heroMetaItems,
-      aboutImage: mediaUrl(data.aboutImage, home.aboutImage)
+      aboutImage: mediaUrl(data.aboutImage, home.aboutImage),
+      galleryItems: data.galleryItems?.length
+        ? sortByOrder(data.galleryItems).map((item: any) => ({
+          ...item,
+          image: mediaUrl(item.image)
+        })).filter((item: any) => item.image)
+        : home.galleryItems
     }
   }, home)
 }

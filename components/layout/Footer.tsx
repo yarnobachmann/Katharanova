@@ -12,7 +12,7 @@ export function Footer({ settings, navigation }: { settings: SiteSettings; navig
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <Logo mark={settings.logoMark} full={settings.logoFull} light />
+          <Logo mark={settings.logoMark} full={settings.logoFull} />
           <p>{settings.footerText}</p>
           <div className="footer-socials">
             {settings.instagram ? <Link href={settings.instagram} aria-label="Instagram"><Instagram size={18} /></Link> : null}

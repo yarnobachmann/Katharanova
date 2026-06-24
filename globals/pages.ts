@@ -92,6 +92,25 @@ export const Homepage: GlobalConfig = {
     },
     {
       type: 'collapsible',
+      label: 'Fotogallerij',
+      fields: [
+        { name: 'galleryEyebrow', label: 'Label', type: 'text' },
+        { name: 'galleryTitle', label: 'Titel', type: 'text' },
+        { name: 'galleryIntro', label: 'Intro', type: 'textarea' },
+        {
+          name: 'galleryItems',
+          label: 'Foto\'s',
+          type: 'array',
+          fields: [
+            { name: 'image', label: 'Afbeelding', type: 'upload', relationTo: 'media', required: true },
+            { name: 'caption', label: 'Bijschrift', type: 'text' },
+            { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
+          ]
+        }
+      ]
+    },
+    {
+      type: 'collapsible',
       label: 'Quote',
       fields: [
         { name: 'quote', label: 'Quote', type: 'textarea' }

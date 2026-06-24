@@ -91,7 +91,13 @@ export function normalizeHomepage(initial: any, data: any) {
     cta: normalizeGroup(initial.cta, data.cta),
     recognitionItems: arrayLabels(data.recognitionItems, initial.recognitionItems),
     heroMetaItems: Array.isArray(data.heroMetaItems) && data.heroMetaItems.length ? sortByOrder(data.heroMetaItems) : initial.heroMetaItems,
-    aboutImage: mediaUrl(data.aboutImage, initial.aboutImage)
+    aboutImage: mediaUrl(data.aboutImage, initial.aboutImage),
+    galleryItems: Array.isArray(data.galleryItems) && data.galleryItems.length
+      ? sortByOrder(data.galleryItems).map((item: any) => ({
+        ...item,
+        image: mediaUrl(item.image)
+      })).filter((item: any) => item.image)
+      : initial.galleryItems
   }
 }
 

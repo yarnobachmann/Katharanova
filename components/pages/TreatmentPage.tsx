@@ -41,12 +41,12 @@ export function TreatmentPageTemplate({ treatment: initialTreatment }: { treatme
           </Reveal>
           <aside className="sticky side-stack">
             <ImageFrame src={treatment.image} alt={treatment.title} ratio="4 / 3" tone={treatment.tone === 'cream' ? 'sand' : treatment.tone} />
-            <Card tone="dark" className="side-cta">
+            <Card tone="sand" className="side-cta">
               <span><Icon size={24} /></span>
               <h3>{treatment.ctaTitle}</h3>
               <p>{treatment.ctaText}</p>
               <Button href="/contact" fullWidth>Plan een afspraak</Button>
-              <Button href="/tarieven" variant="onDark" fullWidth>Bekijk tarieven</Button>
+              <Button href="/tarieven" variant="secondary" fullWidth>Bekijk tarieven</Button>
             </Card>
           </aside>
         </div>

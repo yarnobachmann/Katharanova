@@ -8,7 +8,7 @@ export function Card({
   children
 }: {
   as?: ElementType
-  tone?: 'cream' | 'sage' | 'clay' | 'sand' | 'dark' | 'outline'
+  tone?: 'cream' | 'sage' | 'clay' | 'sand' | 'outline'
   interactive?: boolean
   className?: string
   children: React.ReactNode
