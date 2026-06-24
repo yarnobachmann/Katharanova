@@ -173,6 +173,12 @@ const normalizeGalleryItems = (items: any[] = [], fallback: any[] = []) =>
 
 export async function getGalleryPage() {
   const fallback = {
+    hero: {
+      eyebrow: home.galleryEyebrow,
+      title: home.galleryTitle,
+      intro: home.galleryIntro,
+      image: home.galleryItems[0]?.image
+    },
     galleryEyebrow: home.galleryEyebrow,
     galleryTitle: home.galleryTitle,
     galleryIntro: home.galleryIntro,
@@ -197,6 +203,12 @@ export async function getGalleryPage() {
       order: doc.order
     })).filter((item: any) => item.image) || []
     const legacy = {
+      hero: {
+        eyebrow: homepageData?.galleryEyebrow || fallback.hero.eyebrow,
+        title: homepageData?.galleryTitle || fallback.hero.title,
+        intro: homepageData?.galleryIntro || fallback.hero.intro,
+        image: collectionItems[0]?.image || fallback.hero.image
+      },
       galleryEyebrow: homepageData?.galleryEyebrow || fallback.galleryEyebrow,
       galleryTitle: homepageData?.galleryTitle || fallback.galleryTitle,
       galleryIntro: homepageData?.galleryIntro || fallback.galleryIntro,
@@ -206,9 +218,10 @@ export async function getGalleryPage() {
     return {
       ...legacy,
       ...(galleryData || {}),
-      galleryEyebrow: galleryData?.galleryEyebrow || legacy.galleryEyebrow,
-      galleryTitle: galleryData?.galleryTitle || legacy.galleryTitle,
-      galleryIntro: galleryData?.galleryIntro || legacy.galleryIntro,
+      hero: mergeHero(legacy.hero, galleryData?.hero),
+      galleryEyebrow: galleryData?.hero?.eyebrow || galleryData?.galleryEyebrow || legacy.galleryEyebrow,
+      galleryTitle: galleryData?.hero?.title || galleryData?.galleryTitle || legacy.galleryTitle,
+      galleryIntro: galleryData?.hero?.intro || galleryData?.galleryIntro || legacy.galleryIntro,
       galleryItems: collectionItems.length
         ? collectionItems
         : normalizeGalleryItems(galleryData?.galleryItems, legacy.galleryItems)

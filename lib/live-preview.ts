@@ -105,6 +105,7 @@ export function normalizeGalleryPage(initial: any, data: any) {
   return {
     ...initial,
     ...data,
+    hero: normalizeHero(initial.hero, data.hero),
     galleryItems: Array.isArray(data.galleryItems) && data.galleryItems.length
       ? sortByOrder(data.galleryItems).map((item: any) => ({
         ...item,

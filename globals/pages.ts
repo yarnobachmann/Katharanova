@@ -31,22 +31,6 @@ const ctaFields = [
   { name: 'secondaryHref', label: 'Secundaire knoplink', type: 'text' as const }
 ]
 
-const galleryFields = [
-  { name: 'galleryEyebrow', label: 'Label', type: 'text' as const },
-  { name: 'galleryTitle', label: 'Titel', type: 'text' as const },
-  { name: 'galleryIntro', label: 'Intro', type: 'textarea' as const },
-  {
-    name: 'galleryItems',
-    label: 'Foto\'s',
-    type: 'array' as const,
-    fields: [
-      { name: 'image', label: 'Afbeelding', type: 'upload' as const, relationTo: 'media' as const, required: true },
-      { name: 'caption', label: 'Bijschrift', type: 'text' as const },
-      { name: 'order', label: 'Volgorde', type: 'number' as const, defaultValue: 0 }
-    ]
-  }
-]
-
 const publicEditable = { read: () => true, update: admins }
 
 export const Homepage: GlobalConfig = {
@@ -140,9 +124,9 @@ export const GalleryPage: GlobalConfig = {
   fields: [
     {
       type: 'collapsible',
-      label: 'Fotogallerij',
+      label: 'Hero',
       admin: { initCollapsed: false },
-      fields: galleryFields
+      fields: [{ name: 'hero', label: 'Hero tekst en afbeelding', type: 'group', fields: heroFields }]
     }
   ]
 }
