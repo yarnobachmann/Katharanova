@@ -6,7 +6,11 @@ import type { Navigation, SiteSettings } from '@/lib/types'
 
 export function Footer({ settings, navigation }: { settings: SiteSettings; navigation: Navigation }) {
   const treatments = [...(navigation.treatmentItems || []), ...navigation.navItems.filter((item) => item.href === '/workshops')]
-  const practice = navigation.navItems.filter((item) => ['/over-mij', '/tarieven', '/contact', '/blog'].includes(item.href))
+  const practice = withRequiredItem(
+    navigation.navItems.filter((item) => ['/over-mij', '/fotogallerij', '/tarieven', '/contact', '/blog'].includes(item.href)),
+    { label: 'Fotogallerij', href: '/fotogallerij' },
+    1
+  )
 
   return (
     <footer className="site-footer">
@@ -35,6 +39,14 @@ export function Footer({ settings, navigation }: { settings: SiteSettings; navig
       </div>
     </footer>
   )
+}
+
+function withRequiredItem(items: { label: string; href: string }[], item: { label: string; href: string }, index: number) {
+  if (items.some((navItem) => navItem.href === item.href)) return items
+
+  const nextItems = [...items]
+  nextItems.splice(index, 0, item)
+  return nextItems
 }
 
 function FooterCol({ title, items }: { title: string; items: { label: string; href: string }[] }) {

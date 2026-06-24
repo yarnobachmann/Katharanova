@@ -40,6 +40,7 @@ export const navigation: Navigation = {
   navItems: [
     { label: 'Home', href: '/' },
     { label: 'Over mij', href: '/over-mij' },
+    { label: 'Fotogallerij', href: '/fotogallerij' },
     { label: 'Workshops', href: '/workshops' },
     { label: 'Blog', href: '/blog' },
     { label: 'Tarieven', href: '/tarieven' },

@@ -86,28 +86,6 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
         </div>
       </section>
 
-      {page.galleryItems?.length ? (
-        <section className="gallery-section section-tight">
-          <div className="container">
-            <SectionHeading
-              align="left"
-              eyebrow={page.galleryEyebrow || 'Fotogallerij'}
-              title={page.galleryTitle || 'Sfeer van de praktijk'}
-              intro={page.galleryIntro}
-              divider
-            />
-            <Reveal stagger variant="cards" className="photo-gallery">
-              {page.galleryItems.map((item: any, index: number) => (
-                <figure className="gallery-item" key={`${item.image}-${index}`}>
-                  <ImageFrame src={item.image} alt={item.caption || page.galleryTitle || 'Kathara Nova sfeerbeeld'} ratio={index === 0 ? '4 / 5' : index === 1 ? '1 / 1' : '4 / 3'} tone={index % 3 === 0 ? 'clay' : index % 3 === 1 ? 'sand' : 'sage'} />
-                  {item.caption ? <figcaption>{item.caption}</figcaption> : null}
-                </figure>
-              ))}
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
-
       <section className="quote-band">
         <img src="/assets/logo-phoenix-mark.png" alt="" aria-hidden="true" />
         <div className="container-text">

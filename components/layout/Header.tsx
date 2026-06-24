@@ -19,8 +19,12 @@ export function Header({ settings, navigation }: { settings: SiteSettings; navig
   const treatmentItems = navigation.treatmentItems?.length
     ? navigation.treatmentItems
     : navigation.navItems.filter((item) => ['/transheling', '/opstelling', '/innerlijke-werk'].includes(item.href))
-  const practiceItems = navigation.navItems.filter((item) =>
-    ['/over-mij', '/tarieven', '/contact'].includes(item.href)
+  const practiceItems = withRequiredItem(
+    navigation.navItems.filter((item) =>
+      ['/over-mij', '/fotogallerij', '/tarieven', '/contact'].includes(item.href)
+    ),
+    { label: 'Fotogallerij', href: '/fotogallerij' },
+    1
   )
   const primaryItems = navigation.navItems.filter((item) =>
     ['/', '/workshops', '/blog'].includes(item.href)
@@ -101,6 +105,14 @@ export function Header({ settings, navigation }: { settings: SiteSettings; navig
       </div>
     </header>
   )
+}
+
+function withRequiredItem(items: { label: string; href: string }[], item: { label: string; href: string }, index: number) {
+  if (items.some((navItem) => navItem.href === item.href)) return items
+
+  const nextItems = [...items]
+  nextItems.splice(index, 0, item)
+  return nextItems
 }
 
 function MobileDropdown({

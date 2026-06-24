@@ -6,6 +6,7 @@ import { serverUrl } from '@/lib/env'
 const staticRoutes = [
   '/',
   '/over-mij',
+  '/fotogallerij',
   '/workshops',
   '/blog',
   '/tarieven',
