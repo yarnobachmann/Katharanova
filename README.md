@@ -10,9 +10,19 @@ Set these variables in the hosting platform:
 DATABASE_URI=postgres://USER:PASSWORD@HOST:5432/kathara_nova?sslmode=require
 PAYLOAD_SECRET=replace-with-a-long-random-secret
 NEXT_PUBLIC_SERVER_URL=https://katharanova.nl
+CONTACT_TO_EMAIL=katharanova@gmail.com
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=mailbox@example.com
+SMTP_PASS=replace-with-smtp-password
+SMTP_FROM_ADDRESS=mailbox@example.com
+SMTP_FROM_NAME=Kathara Nova
 ```
 
 `DATABASE_URI` should point to an external managed PostgreSQL database. The previous `.local-postgres` folder was only a temporary local development database and should not be used for production.
+
+The contact form and Payload admin forgot-password flow both use the SMTP variables. `SMTP_FROM_ADDRESS` should usually be the same mailbox/domain as `SMTP_USER`; visitor messages use the submitted email as `Reply-To` for reliable delivery.
 
 Only set `PAYLOAD_SEED_PASSWORD` when running `npm run seed`. In production this must be a long random password, because it is used for the seeded admin user if that user does not already exist.
 

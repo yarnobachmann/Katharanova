@@ -17,6 +17,7 @@ import { Workshops } from '@/collections/Workshops'
 import { AboutPage, BlogPage, ContactPage, GalleryPage, Homepage, TarievenPage, WorkshopsPage } from '@/globals/pages'
 import { Navigation } from '@/globals/Navigation'
 import { SiteSettings } from '@/globals/SiteSettings'
+import { smtpEmailAdapter } from '@/lib/email/smtp'
 import { databaseUri, payloadSecret, serverUrl } from '@/lib/env'
 import { livePreview } from '@/lib/payload/preview'
 
@@ -77,6 +78,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   cors: [serverUrl],
   csrf: [serverUrl],
+  email: smtpEmailAdapter(),
   secret: payloadSecret,
   db: postgresAdapter({
     pool: {
