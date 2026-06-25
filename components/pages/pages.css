@@ -26,10 +26,11 @@
 .method-list div { display: flex; gap: 16px; align-items: flex-start; }
 .method-list span { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--gradient-gold); display: inline-flex; align-items: center; justify-content: center; color: var(--kn-charcoal); font-family: var(--font-display); font-weight: 700; }
 .contact-card-list { display: flex; flex-direction: column; gap: 18px; }
-.contact-card-list > div { display: flex; gap: 14px; align-items: center; padding: 16px 18px; background: var(--surface-card); border: 1px solid var(--border-soft); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); }
-.contact-card-list svg { width: 44px; height: 44px; padding: 12px; border-radius: var(--radius-sm); background: rgba(201,148,46,0.12); color: var(--accent-hover); }
+.contact-card-list > div { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--surface-card); border: 1px solid var(--border-soft); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); }
+.contact-card-list > div > span { min-width: 0; padding-top: 1px; }
+.contact-card-list svg { flex: 0 0 44px; width: 44px; height: 44px; padding: 12px; border-radius: var(--radius-sm); background: rgba(201,148,46,0.12); color: var(--accent-hover); }
 .contact-card-list small { display: block; color: var(--text-muted); font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; }
-.contact-card-list strong { color: var(--text-strong); }
+.contact-card-list strong { display: block; color: var(--text-strong); line-height: 1.45; overflow-wrap: anywhere; }
 .blog-filters { display: flex; gap: 10px; flex-wrap: wrap; }
 .blog-filters a { padding: 9px 18px; border-radius: var(--radius-pill); background: var(--surface-card); border: 1px solid var(--border-sand); color: var(--text-body); font-size: var(--text-sm); font-weight: 700; white-space: nowrap; }
 .blog-filters a.active { background: var(--kn-charcoal); border-color: var(--kn-charcoal); color: var(--kn-cream); }
@@ -87,8 +88,8 @@
   .method-list div { gap: 12px; }
   .stat-card { padding: 1rem; }
   .contact-card-list { gap: 12px; }
-  .contact-card-list > div { padding: 14px; align-items: flex-start; }
-  .contact-card-list svg { width: 40px; height: 40px; padding: 10px; }
+  .contact-card-list > div { padding: 14px; }
+  .contact-card-list svg { flex-basis: 40px; width: 40px; height: 40px; padding: 10px; }
   .blog-filters {
     display: flex;
     gap: 8px;
@@ -119,5 +120,4 @@
   .blog-filters a { font-size: 0.9rem; }
   .list-checks div,
   .effect-grid div { gap: 10px; }
-  .contact-card-list strong { overflow-wrap: anywhere; }
 }
