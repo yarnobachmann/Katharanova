@@ -1,9 +1,14 @@
 export type Tone = 'cream' | 'sage' | 'clay' | 'sand'
 
 export type MediaLike = {
+  src?: string
   url?: string
   alt?: string
+  focalX?: number
+  focalY?: number
 }
+
+export type MediaSource = string | MediaLike
 
 export type NavItem = { label: string; href: string }
 
@@ -35,7 +40,7 @@ export type Hero = {
   eyebrow: string
   title: string
   intro: string
-  image?: string
+  image?: MediaSource
 }
 
 export type Treatment = {
@@ -45,7 +50,7 @@ export type Treatment = {
   eyebrow: string
   summary: string
   intro: string
-  image: string
+  image: MediaSource
   icon: string
   tone: Tone
   order: number
@@ -71,7 +76,7 @@ export type Workshop = {
   spotsLabel: string
   price: string
   excerpt: string
-  image: string
+  image: MediaSource
   tone: Tone
   active: boolean
   featured: boolean
@@ -87,7 +92,7 @@ export type BlogPost = {
   excerpt: string
   publishedAt: string
   readTime: string
-  image: string
+  image: MediaSource
   tone: Tone
   featured: boolean
   content: RichBlock[]

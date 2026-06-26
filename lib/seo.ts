@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 
 import { serverUrl } from './env'
+import type { MediaSource } from './types'
 
 type MetadataInput = {
   description?: string
-  image?: string
+  image?: MediaSource
   path?: string
   title?: string
 }
@@ -18,6 +19,9 @@ const absoluteUrl = (path = '/') => {
   return `${serverUrl}${path.startsWith('/') ? path : `/${path}`}`
 }
 
+const mediaSourceUrl = (image: MediaSource) =>
+  typeof image === 'string' ? image : image.src || image.url || '/assets/logo-phoenix-mark.png'
+
 export function createMetadata({
   description = defaultDescription,
   image = '/assets/logo-phoenix-mark.png',
@@ -25,7 +29,7 @@ export function createMetadata({
   title = defaultTitle
 }: MetadataInput = {}): Metadata {
   const canonical = absoluteUrl(path)
-  const imageUrl = absoluteUrl(image)
+  const imageUrl = absoluteUrl(mediaSourceUrl(image))
 
   return {
     metadataBase: new URL(serverUrl),
@@ -55,4 +59,3 @@ export function createMetadata({
 export function pageTitle(title: string) {
   return title.includes(siteName) ? title : `${title} | ${siteName}`
 }
-

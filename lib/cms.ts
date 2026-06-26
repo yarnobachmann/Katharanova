@@ -41,10 +41,15 @@ const toLocalMediaPath = (url: string): string => {
   return url
 }
 
-const mediaUrl = (value: any, fallback = ''): string => {
+const mediaUrl = (value: any, fallback: any = '', preserveFocus = true): any => {
   if (!value) return fallback
   if (typeof value === 'string') return value
+  const focalX = typeof value.focalX === 'number' ? value.focalX : undefined
+  const focalY = typeof value.focalY === 'number' ? value.focalY : undefined
   const url =
+    preserveFocus && (typeof focalX === 'number' || typeof focalY === 'number') && value.url
+      ? value.url
+      :
     value.sizes?.large?.url ||
     value.sizes?.card?.url ||
     value.sizes?.thumbnail?.url ||
@@ -52,7 +57,15 @@ const mediaUrl = (value: any, fallback = ''): string => {
     value.url ||
     fallback
 
-  return typeof url === 'string' ? toLocalMediaPath(url) : fallback
+  if (typeof url !== 'string') return fallback
+
+  const src = toLocalMediaPath(url)
+
+  if (preserveFocus && (typeof focalX === 'number' || typeof focalY === 'number')) {
+    return { src, focalX, focalY, alt: value.alt }
+  }
+
+  return src
 }
 
 const arrayLabels = (value: any): string[] =>
@@ -120,8 +133,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     return {
       ...siteSettings,
       ...data,
-      logoMark: mediaUrl(data.logoMark, siteSettings.logoMark),
-      logoFull: mediaUrl(data.logoFull, siteSettings.logoFull)
+      logoMark: mediaUrl(data.logoMark, siteSettings.logoMark, false),
+      logoFull: mediaUrl(data.logoFull, siteSettings.logoFull, false)
     }
   }, siteSettings)
 }

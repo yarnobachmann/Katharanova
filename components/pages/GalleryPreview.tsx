@@ -8,6 +8,7 @@ import { ImageFrame } from '@/components/ui/ImageFrame'
 import { PageHero } from '@/components/ui/PageHero'
 import { usePayloadLivePreview } from '@/components/live-preview/usePayloadLivePreview'
 import { normalizeGalleryPage } from '@/lib/live-preview'
+import { imageObjectPosition, imageSrc } from '@/components/ui/ImageFrame'
 
 export function GalleryPreview({ page: initialPage }: { page: any }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -41,7 +42,7 @@ export function GalleryPreview({ page: initialPage }: { page: any }) {
           <div className="container">
             <Reveal stagger variant="cards" className="photo-gallery">
               {galleryItems.map((item: any, index: number) => (
-                <figure className="gallery-item" key={`${item.image}-${index}`}>
+                <figure className="gallery-item" key={`${imageSrc(item.image)}-${index}`}>
                   <button type="button" className="gallery-image-button" onClick={() => setActiveIndex(index)}>
                     <ImageFrame
                       src={item.image}
@@ -63,7 +64,11 @@ export function GalleryPreview({ page: initialPage }: { page: any }) {
             <X size={24} />
           </button>
           <figure className="gallery-lightbox-inner" onClick={(event) => event.stopPropagation()}>
-            <img src={activeItem.image} alt={activeItem.caption || page.hero.title || 'Kathara Nova sfeerbeeld'} />
+            <img
+              src={imageSrc(activeItem.image)}
+              alt={activeItem.caption || page.hero.title || 'Kathara Nova sfeerbeeld'}
+              style={imageObjectPosition(activeItem.image) ? { objectPosition: imageObjectPosition(activeItem.image) } : undefined}
+            />
             {activeItem.caption ? <figcaption>{activeItem.caption}</figcaption> : null}
           </figure>
         </div>

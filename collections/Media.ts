@@ -19,6 +19,7 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media',
+    focalPoint: true,
     mimeTypes: ['image/*'],
     adminThumbnail: ({ doc }) => {
       const sizes = doc.sizes as any

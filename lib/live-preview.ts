@@ -21,10 +21,15 @@ const toLocalMediaPath = (url: string): string => {
   return url
 }
 
-export const mediaUrl = (value: any, fallback = ''): string => {
+export const mediaUrl = (value: any, fallback: any = '', preserveFocus = true): any => {
   if (!value) return fallback
   if (typeof value === 'string') return value.startsWith('/') || value.startsWith('http') ? toLocalMediaPath(value) : fallback
+  const focalX = typeof value.focalX === 'number' ? value.focalX : undefined
+  const focalY = typeof value.focalY === 'number' ? value.focalY : undefined
   const url =
+    preserveFocus && (typeof focalX === 'number' || typeof focalY === 'number') && value.url
+      ? value.url
+      :
     value.sizes?.large?.url ||
     value.sizes?.card?.url ||
     value.sizes?.thumbnail?.url ||
@@ -32,7 +37,15 @@ export const mediaUrl = (value: any, fallback = ''): string => {
     value.url ||
     fallback
 
-  return typeof url === 'string' ? toLocalMediaPath(url) : fallback
+  if (typeof url !== 'string') return fallback
+
+  const src = toLocalMediaPath(url)
+
+  if (preserveFocus && (typeof focalX === 'number' || typeof focalY === 'number')) {
+    return { src, focalX, focalY, alt: value.alt }
+  }
+
+  return src
 }
 
 export const arrayLabels = (value: any, fallback: string[] = []): string[] => {
