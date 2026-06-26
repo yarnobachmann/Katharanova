@@ -16,13 +16,7 @@ export function slugField(options: SlugFieldOptions = {}): TextField {
     unique: true,
     index: true,
     admin: {
-      description: options.description ?? 'Gebruik kleine letters en streepjes. Spaties worden automatisch streepjes.',
-      components: {
-        Field: {
-          path: '@/components/payload/SlugTextField',
-          exportName: 'SlugTextField'
-        }
-      }
+      description: options.description ?? 'Gebruik kleine letters en streepjes. Spaties worden automatisch streepjes.'
     },
     hooks: {
       beforeValidate: [
