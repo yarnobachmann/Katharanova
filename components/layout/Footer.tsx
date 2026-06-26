@@ -35,7 +35,10 @@ export function Footer({ settings, navigation }: { settings: SiteSettings; navig
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} {settings.copyright}</span>
-        <span>KvK 00000000 · Algemene voorwaarden · Privacy</span>
+        <div className="footer-legal-links">
+          {settings.kvkText ? <span>{settings.kvkText}</span> : null}
+          {(settings.footerLinks || []).map((item) => <Link key={`${item.label}-${item.href}`} href={item.href}>{item.label}</Link>)}
+        </div>
       </div>
     </footer>
   )

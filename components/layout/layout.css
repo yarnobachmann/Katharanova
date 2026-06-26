@@ -107,6 +107,10 @@
 .footer-col a { color: #4b4037; font-size: var(--text-sm); }
 .footer-col a:hover { color: var(--text-gold); }
 .footer-bottom { margin-top: var(--space-8); padding-block: var(--space-5) var(--space-6); border-top: 1px solid rgba(111,98,87,0.2); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; color: #5f5145; font-size: var(--text-xs); }
+.footer-legal-links { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.footer-legal-links > * + *::before { content: "·"; margin-right: 10px; color: rgba(95,81,69,0.7); }
+.footer-legal-links a { color: #4b4037; text-decoration: none; }
+.footer-legal-links a:hover { color: var(--text-gold); }
 @media (max-width: 1040px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) {
   .header-inner { padding-block: 10px; }

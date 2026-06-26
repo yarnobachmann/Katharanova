@@ -33,7 +33,12 @@ export const siteSettings: SiteSettings = {
   location: 'Op afspraak · Nederland',
   appointmentUrl: '/contact',
   footerText: 'Een warme praktijk voor holistische therapie, heling en bewustwording. Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
-  copyright: 'Kathara Nova · Heling & Bewustwording'
+  copyright: 'Kathara Nova - Heling & Bewustwording',
+  kvkText: 'KvK 00000000',
+  footerLinks: [
+    { label: 'Algemene voorwaarden', href: '/algemene-voorwaarden' },
+    { label: 'Privacy', href: '/privacy' }
+  ]
 }
 
 export const navigation: Navigation = {

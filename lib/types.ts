@@ -21,6 +21,8 @@ export type SiteSettings = {
   linkedin?: string
   footerText: string
   copyright: string
+  kvkText?: string
+  footerLinks?: NavItem[]
 }
 
 export type Navigation = {
