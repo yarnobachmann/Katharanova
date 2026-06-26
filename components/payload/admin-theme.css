@@ -139,6 +139,31 @@ body {
   fill: #2a211a;
 }
 
+.admin-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #2a211a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.admin-brand-logo img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.admin-brand-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
 a,
 .btn--style-secondary,
 .nav__link:hover,

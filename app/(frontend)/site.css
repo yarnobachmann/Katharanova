@@ -143,7 +143,11 @@
 .quote-band span { color: var(--accent); font-size: 28px; }
 .quote-band p { margin: 18px 0 0; color: var(--text-strong); font-family: var(--font-display); font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-style: italic; line-height: 1.3; }
 .quote-divider { max-width: 220px; height: 1px; margin: 28px auto 0; background: linear-gradient(90deg, transparent, var(--border-gold), transparent); }
-.workshop-preview { background: var(--surface-sage); }
+.workshop-preview {
+  background:
+    radial-gradient(900px 420px at 82% 8%, rgba(201,148,46,0.16), transparent 58%),
+    linear-gradient(180deg, #efe6d4 0%, #f7f1e6 100%);
+}
 .section-after-dark { border-top: 1px solid rgba(201,148,46,0.2); }
 .section-split { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: var(--space-7); }
 .mini-workshop { display: flex; flex-direction: column; gap: 16px; min-height: 100%; }

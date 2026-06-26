@@ -30,6 +30,16 @@ export default buildConfig({
     user: 'users',
     theme: 'light',
     components: {
+      graphics: {
+        Icon: {
+          path: '@/components/payload/AdminIcon',
+          exportName: 'AdminIcon'
+        },
+        Logo: {
+          path: '@/components/payload/AdminLogo',
+          exportName: 'AdminLogo'
+        }
+      },
       providers: [
         {
           path: '@/components/payload/AdminTheme',

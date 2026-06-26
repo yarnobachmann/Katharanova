@@ -9,7 +9,7 @@ export const FAQs: CollectionConfig = {
     plural: 'Veelgestelde vragen'
   },
   admin: {
-    group: 'Pagina content',
+    group: 'Website content',
     useAsTitle: 'question',
     defaultColumns: ['question', 'pageContext', 'order'],
     description: 'Deze vragen worden onder "Goed om te weten" op de Tarieven pagina getoond. Voeg hier nieuwe FAQ-items toe.'

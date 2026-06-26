@@ -9,7 +9,7 @@ export const GalleryPhotos: CollectionConfig = {
     plural: 'Foto\'s'
   },
   admin: {
-    group: 'Pagina content',
+    group: 'Website content',
     useAsTitle: 'title',
     defaultColumns: ['title', 'image', 'active', 'order']
   },

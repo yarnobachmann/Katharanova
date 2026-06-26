@@ -84,7 +84,9 @@ const mergeGroup = <T extends Record<string, any>>(fallback: T, value: any): T =
 const mergeHero = <T extends Record<string, any>>(fallback: T, value: any): T => ({
   ...fallback,
   ...(value || {}),
-  image: mediaUrl(value?.image, fallback.image)
+  image: value && Object.prototype.hasOwnProperty.call(value, 'image')
+    ? mediaUrl(value.image, '')
+    : fallback.image
 })
 
 const richTextToPlain = (value: any, fallback = ''): string => {

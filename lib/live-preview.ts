@@ -80,7 +80,9 @@ export const normalizeGroup = <T extends Record<string, any>>(fallback: T, value
 export const normalizeHero = <T extends Record<string, any>>(fallback: T, value: any): T => ({
   ...fallback,
   ...(value || {}),
-  image: mediaUrl(value?.image, fallback.image)
+  image: value && Object.prototype.hasOwnProperty.call(value, 'image')
+    ? mediaUrl(value.image, '')
+    : fallback.image
 })
 
 export function normalizeHomepage(initial: any, data: any) {
