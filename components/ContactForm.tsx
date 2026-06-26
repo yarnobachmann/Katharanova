@@ -82,7 +82,7 @@ export function ContactForm({
           onInput={cleanPhoneInput}
         />
         <label className="field">
-          <span>Waarmee kan ik je helpen? <small>Optioneel</small></span>
+          <span>Waarmee kan ik je helpen?</span>
           <span className="select-wrap">
             <select name="redenVoorContact" defaultValue="">
               <option value="" disabled>Maak een keuze...</option>
@@ -98,7 +98,7 @@ export function ContactForm({
         </label>
       </div>
       <label className="field">
-        <span>Bericht <small>Verplicht</small></span>
+        <span>Bericht <small aria-hidden="true">*</small></span>
         <textarea name="bericht" rows={5} required maxLength={2000} placeholder="Vertel kort waar je tegenaan loopt..." />
       </label>
       {error ? <p className="form-error" role="alert">{error}</p> : null}
@@ -113,7 +113,7 @@ export function ContactForm({
 function Field({ label, hint, required, ...props }: { label: string; hint?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="field">
-      <span>{label} <small>{required ? 'Verplicht' : 'Optioneel'}</small></span>
+      <span>{label}{required ? <small aria-hidden="true">*</small> : null}</span>
       <input required={required} {...props} />
       {hint ? <small>{hint}</small> : null}
     </label>
