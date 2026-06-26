@@ -3,6 +3,7 @@
 import * as Icons from 'lucide-react'
 
 import { Reveal } from '@/components/Reveal'
+import { RichTextRenderer } from '@/components/cms/RichTextRenderer'
 import { usePayloadLivePreview } from '@/components/live-preview/usePayloadLivePreview'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -24,7 +25,7 @@ export function TreatmentPageTemplate({ treatment: initialTreatment }: { treatme
       <section className="section">
         <div className="container grid-2 treatment-layout">
           <Reveal className="prose-stack" stagger variant="section">
-            <ProseBlock title={treatment.whatTitle}><p>{treatment.whatBody}</p></ProseBlock>
+            <ProseBlock title={treatment.whatTitle}><RichTextRenderer content={treatment.whatBody} /></ProseBlock>
             <ListBlock title={treatment.forWhoTitle || 'Voor wie is het bedoeld?'} items={treatment.forWho} />
             <div>
               <h2>{treatment.sessionTitle || 'Wat kun je verwachten tijdens een sessie?'}</h2>

@@ -104,17 +104,7 @@ const mergeHero = <T extends Record<string, any>>(fallback: T, value: any): T =>
     : fallback.image
 })
 
-const richTextToPlain = (value: any, fallback = ''): string => {
-  if (typeof value === 'string') return value
-  const parts: string[] = []
-  const walk = (node: any) => {
-    if (!node) return
-    if (typeof node.text === 'string') parts.push(node.text)
-    if (Array.isArray(node.children)) node.children.forEach(walk)
-  }
-  walk(value?.root || value)
-  return parts.join(' ').trim() || fallback
-}
+const richText = (value: any, fallback: any = ''): any => value || fallback
 
 async function withPayload<T>(query: (payload: Awaited<ReturnType<typeof getPayloadClient>>) => Promise<T>, fallback: T): Promise<T> {
   noStore()
@@ -256,9 +246,9 @@ export async function getAboutPage() {
       cta: mergeGroup(aboutPage.cta, data.cta),
       portrait: mediaUrl(data.portrait, aboutPage.portrait),
       stats: data.stats?.length ? data.stats : aboutPage.stats,
-      intro: richTextToPlain(data.intro, aboutPage.intro),
-      vision: richTextToPlain(data.vision, aboutPage.vision),
-      workingMethod: richTextToPlain(data.workingMethod, aboutPage.workingMethod),
+      intro: richText(data.intro, aboutPage.intro),
+      vision: richText(data.vision, aboutPage.vision),
+      workingMethod: richText(data.workingMethod, aboutPage.workingMethod),
       methodSteps: data.methodSteps?.length ? sortByOrder(data.methodSteps) : methodStepsFallback,
       forWho: arrayLabels(data.forWho).length ? arrayLabels(data.forWho) : aboutPage.forWho
     }
@@ -271,7 +261,7 @@ export async function getTreatments(): Promise<Treatment[]> {
     return result.docs.map((doc: any) => ({
       ...doc,
       image: mediaUrl(doc.mainImage, treatments.find((t) => t.slug === doc.slug)?.image),
-      whatBody: richTextToPlain(doc.whatBody),
+      whatBody: richText(doc.whatBody),
       forWho: arrayLabels(doc.forWho),
       outcomes: arrayLabels(doc.outcomes),
       sessionSteps: doc.sessionSteps || []
@@ -289,7 +279,7 @@ export async function getWorkshops(): Promise<Workshop[]> {
     return result.docs.map((doc: any) => ({
       ...doc,
       image: mediaUrl(doc.image),
-      content: richTextToPlain(doc.content, doc.excerpt)
+      content: richText(doc.content, doc.excerpt)
     }))
   }, workshops)
 }
@@ -331,7 +321,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       category: categoryLabels(doc.categories, doc.category)[0] || doc.category,
       categories: categoryLabels(doc.categories, doc.category),
       image: mediaUrl(doc.image),
-      content: [{ type: 'p', text: richTextToPlain(doc.content) }]
+      content: richText(doc.content)
     }))
   }, blogPosts)
 }
@@ -388,7 +378,7 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
       ...fallback,
       ...data,
       hero: mergeHero(fallback.hero, data.hero),
-      content: richTextToPlain(data.content, typeof fallback.content === 'string' ? fallback.content : '')
+      content: richText(data.content, fallback.content)
     }
   }, fallback)
 }

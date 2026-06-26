@@ -72,18 +72,7 @@ export const categoryLabels = (value: any, fallback?: string): string[] => {
   return labels.length ? labels : fallback ? [fallback] : []
 }
 
-export const richTextToPlain = (value: any, fallback = ''): string => {
-  if (!value) return fallback
-  if (typeof value === 'string') return value
-  const parts: string[] = []
-  const walk = (node: any) => {
-    if (!node) return
-    if (typeof node.text === 'string') parts.push(node.text)
-    if (Array.isArray(node.children)) node.children.forEach(walk)
-  }
-  walk(value?.root || value)
-  return parts.join(' ').trim() || fallback
-}
+export const richText = (value: any, fallback: any = ''): any => value || fallback
 
 export const normalizeGroup = <T extends Record<string, any>>(fallback: T, value: any): T => ({
   ...fallback,
@@ -138,9 +127,9 @@ export function normalizeAboutPage(initial: any, data: any) {
     cta: normalizeGroup(initial.cta, data.cta),
     portrait: mediaUrl(data.portrait, initial.portrait),
     stats: Array.isArray(data.stats) && data.stats.length ? data.stats : initial.stats || [],
-    intro: richTextToPlain(data.intro, initial.intro),
-    vision: richTextToPlain(data.vision, initial.vision),
-    workingMethod: richTextToPlain(data.workingMethod, initial.workingMethod),
+    intro: richText(data.intro, initial.intro),
+    vision: richText(data.vision, initial.vision),
+    workingMethod: richText(data.workingMethod, initial.workingMethod),
     methodSteps: Array.isArray(data.methodSteps) && data.methodSteps.length ? sortByOrder(data.methodSteps) : initial.methodSteps || methodStepsFallback,
     forWho: arrayLabels(data.forWho, initial.forWho)
   }
@@ -160,7 +149,7 @@ export function normalizeLegalPage(initial: any, data: any) {
     ...initial,
     ...data,
     hero: normalizeHero(initial.hero, data.hero),
-    content: richTextToPlain(data.content, typeof initial.content === 'string' ? initial.content : '')
+    content: richText(data.content, initial.content)
   }
 }
 
@@ -184,7 +173,7 @@ export function normalizeTreatment(initial: Treatment, data: any): Treatment {
     ...initial,
     ...data,
     image: mediaUrl(data.mainImage, initial.image),
-    whatBody: richTextToPlain(data.whatBody, initial.whatBody),
+    whatBody: richText(data.whatBody, initial.whatBody),
     forWho: arrayLabels(data.forWho, initial.forWho),
     outcomes: arrayLabels(data.outcomes, initial.outcomes),
     sessionSteps: Array.isArray(data.sessionSteps) ? data.sessionSteps : initial.sessionSteps
@@ -198,7 +187,7 @@ export function normalizeBlogPost(initial: BlogPost, data: any): BlogPost {
     category: categoryLabels(data.categories, data.category || initial.category)[0] || initial.category,
     categories: categoryLabels(data.categories, data.category || initial.category),
     image: mediaUrl(data.image, initial.image),
-    content: [{ type: 'p', text: richTextToPlain(data.content, initial.content.map((block) => block.text).join('\n\n')) }]
+    content: richText(data.content, initial.content)
   }
 }
 
@@ -208,7 +197,7 @@ export function normalizeWorkshopList(initial: Workshop[], data: any): Workshop[
     image: mediaUrl(data.image),
     active: data.active ?? true,
     featured: data.featured ?? false,
-    content: richTextToPlain(data.content, data.excerpt)
+    content: richText(data.content, data.excerpt)
   } as Workshop
   const index = initial.findIndex((workshop) => workshop.slug === edited.slug || (data.id && (workshop as any).id === data.id))
 
@@ -226,6 +215,6 @@ export function normalizeWorkshop(initial: Workshop, data: any): Workshop {
     image: mediaUrl(data.image, initial.image),
     active: data.active ?? initial.active,
     featured: data.featured ?? initial.featured,
-    content: richTextToPlain(data.content, data.excerpt || initial.content || initial.excerpt)
+    content: richText(data.content, data.excerpt || initial.content || initial.excerpt)
   }
 }

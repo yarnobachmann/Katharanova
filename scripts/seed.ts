@@ -120,7 +120,7 @@ async function run() {
       _status: 'published',
       categories,
       image: undefined,
-      content: textToLexical(post.content.map((block) => block.text).join('\n\n'))
+      content: textToLexical(post.content.map((block: { text: string }) => block.text).join('\n\n'))
     })
   }
 

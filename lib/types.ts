@@ -55,7 +55,7 @@ export type Treatment = {
   tone: Tone
   order: number
   whatTitle: string
-  whatBody: string
+  whatBody: RichContent
   forWhoTitle?: string
   forWho: string[]
   sessionTitle?: string
@@ -80,7 +80,7 @@ export type Workshop = {
   tone: Tone
   active: boolean
   featured: boolean
-  content?: RichBlock[] | string
+  content?: RichContent
   seo?: { metaTitle?: string; metaDescription?: string }
 }
 
@@ -95,14 +95,11 @@ export type BlogPost = {
   image: MediaSource
   tone: Tone
   featured: boolean
-  content: RichBlock[]
+  content: RichContent
   seo?: { metaTitle?: string; metaDescription?: string }
 }
 
-export type RichBlock = {
-  type: 'lead' | 'p' | 'h' | 'quote'
-  text: string
-}
+export type RichContent = any
 
 export type PricingItem = {
   title: string
@@ -123,5 +120,5 @@ export type HeroMetaItem = { icon: string; label: string; order?: number }
 
 export type LegalPage = {
   hero: Hero
-  content: RichBlock[] | string
+  content: RichContent
 }
