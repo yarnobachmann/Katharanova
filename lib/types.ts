@@ -22,7 +22,6 @@ export type SiteSettings = {
   footerText: string
   copyright: string
   kvkText?: string
-  footerLinks?: NavItem[]
 }
 
 export type Navigation = {
@@ -116,3 +115,8 @@ export type PricingItem = {
 export type FAQ = { question: string; answer: string; pageContext: string; order: number }
 
 export type HeroMetaItem = { icon: string; label: string; order?: number }
+
+export type LegalPage = {
+  hero: Hero
+  content: RichBlock[] | string
+}

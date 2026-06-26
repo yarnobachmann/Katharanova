@@ -15,7 +15,12 @@ const contactReasons = new Set([
 
 const rateLimitWindowMs = 10 * 60 * 1000
 const rateLimitMax = 5
+const emailRateLimitMax = 3
+const duplicateWindowMs = 30 * 60 * 1000
+const minimumSubmitTimeMs = 2500
+const maximumSubmitTimeMs = 2 * 60 * 60 * 1000
 const rateLimits = new Map<string, { count: number; resetAt: number }>()
+const duplicateSubmissions = new Map<string, number>()
 
 const escapeHtml = (value: string) =>
   value
@@ -28,6 +33,7 @@ const escapeHtml = (value: string) =>
 const clean = (value: unknown) => typeof value === 'string' ? value.trim() : ''
 const limit = (value: string, max: number) => value.slice(0, max)
 const safeHeader = (value: string) => value.replace(/[\r\n"]/g, ' ').trim()
+const normalizeSpamKey = (value: string) => value.toLowerCase().replace(/\s+/g, ' ').trim()
 const makeSubmissionRef = () => {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14)
   const suffix = Math.random().toString(36).slice(2, 8).toUpperCase()
@@ -47,7 +53,7 @@ const getClientKey = (request: Request) =>
   request.headers.get('x-real-ip') ||
   'unknown'
 
-const isRateLimited = (key: string) => {
+const isRateLimited = (key: string, max = rateLimitMax) => {
   const now = Date.now()
   const current = rateLimits.get(key)
 
@@ -57,11 +63,66 @@ const isRateLimited = (key: string) => {
   }
 
   current.count += 1
-  return current.count > rateLimitMax
+  return current.count > max
+}
+
+const isEmailRateLimited = (email: string) => {
+  if (!email) return false
+  return isRateLimited(`email:${email}`, emailRateLimitMax)
+}
+
+const cleanupDuplicateSubmissions = (now: number) => {
+  duplicateSubmissions.forEach((createdAt, key) => {
+    if (now - createdAt > duplicateWindowMs) duplicateSubmissions.delete(key)
+  })
+}
+
+const isDuplicateSubmission = (email: string, message: string) => {
+  const now = Date.now()
+  cleanupDuplicateSubmissions(now)
+
+  const key = `${email}:${normalizeSpamKey(message).slice(0, 500)}`
+  if (duplicateSubmissions.has(key)) return true
+
+  duplicateSubmissions.set(key, now)
+  return false
+}
+
+const isSuspiciousMessage = (message: string) => {
+  const linkCount = (message.match(/https?:\/\/|www\./gi) || []).length
+  if (linkCount > 1) return true
+
+  const normalized = normalizeSpamKey(message)
+  const blockedPatterns = [
+    /\bcasino\b/,
+    /\bcrypto\b/,
+    /\bforex\b/,
+    /\bloan\b/,
+    /\bseo\b/,
+    /\bbacklink\b/,
+    /\bviagra\b/,
+    /\btelegram\b/,
+    /\bwhatsapp marketing\b/
+  ]
+
+  return blockedPatterns.some((pattern) => pattern.test(normalized))
+}
+
+const hasValidSubmitTiming = (value: string) => {
+  const startedAt = Number(value)
+  if (!Number.isFinite(startedAt)) return false
+
+  const elapsed = Date.now() - startedAt
+  return elapsed >= minimumSubmitTimeMs && elapsed <= maximumSubmitTimeMs
 }
 
 export async function POST(request: Request) {
   try {
+    const contentLength = Number(request.headers.get('content-length') || 0)
+    if (contentLength > 12000) {
+      return NextResponse.json({ error: 'Je bericht is te groot. Maak het iets korter en probeer opnieuw.' }, { status: 413 })
+    }
+
     if (isRateLimited(getClientKey(request))) {
       return NextResponse.json({ error: 'Je hebt te vaak geprobeerd te versturen. Wacht even en probeer het opnieuw.' }, { status: 429 })
     }
@@ -73,8 +134,14 @@ export async function POST(request: Request) {
     const contactReason = limit(clean(data.redenVoorContact || data.voorkeursbehandeling), 80)
     const message = limit(clean(data.bericht), 2000)
     const website = clean(data.website)
+    const company = clean(data.company)
+    const formStartedAt = clean(data.formStartedAt)
 
-    if (website) {
+    if (website || company) {
+      return NextResponse.json({ ok: true })
+    }
+
+    if (!hasValidSubmitTiming(formStartedAt)) {
       return NextResponse.json({ ok: true })
     }
 
@@ -86,12 +153,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Vul een geldig e-mailadres in.' }, { status: 400 })
     }
 
+    if (isEmailRateLimited(email)) {
+      return NextResponse.json({ error: 'Dit e-mailadres heeft te vaak geprobeerd te versturen. Wacht even en probeer het opnieuw.' }, { status: 429 })
+    }
+
     if (!isValidPhone(phone)) {
       return NextResponse.json({ error: 'Vul een geldig telefoonnummer in of laat dit veld leeg.' }, { status: 400 })
     }
 
     if (contactReason && !contactReasons.has(contactReason)) {
       return NextResponse.json({ error: 'Kies een geldige reden voor contact.' }, { status: 400 })
+    }
+
+    if (isSuspiciousMessage(message) || isDuplicateSubmission(email, message)) {
+      return NextResponse.json({ ok: true })
     }
 
     const escapedName = escapeHtml(name)

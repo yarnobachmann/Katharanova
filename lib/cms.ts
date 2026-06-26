@@ -9,14 +9,16 @@ import {
   faqs,
   home,
   navigation,
+  privacyPage,
   pricingItems,
   siteSettings,
   tarievenPage,
   treatments,
+  termsPage,
   workshops,
   workshopsPage
 } from './seed-data'
-import type { BlogPost, FAQ, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
+import type { BlogPost, FAQ, LegalPage, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
 
 const toLocalMediaPath = (url: string): string => {
   try {
@@ -362,4 +364,18 @@ export async function getContactPage() {
       contactCards: data.contactCards?.length ? sortByOrder(data.contactCards) : contactPage.contactCards
     }
   }, contactPage)
+}
+
+export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise<LegalPage> {
+  const fallback = slug === 'terms-page' ? termsPage : privacyPage
+
+  return withPayload(async (payload) => {
+    const data: any = await payload.findGlobal({ slug })
+    return {
+      ...fallback,
+      ...data,
+      hero: mergeHero(fallback.hero, data.hero),
+      content: richTextToPlain(data.content, typeof fallback.content === 'string' ? fallback.content : '')
+    }
+  }, fallback)
 }

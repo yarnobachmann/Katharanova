@@ -1,4 +1,4 @@
-import type { BlogPost, FAQ, Hero, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
+import type { BlogPost, FAQ, Hero, LegalPage, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
 
 const ux = (id: string, w = 1300, h = 1000) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`
@@ -34,11 +34,7 @@ export const siteSettings: SiteSettings = {
   appointmentUrl: '/contact',
   footerText: 'Een warme praktijk voor holistische therapie, heling en bewustwording. Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
   copyright: 'Kathara Nova - Heling & Bewustwording',
-  kvkText: 'KvK 00000000',
-  footerLinks: [
-    { label: 'Algemene voorwaarden', href: '/algemene-voorwaarden' },
-    { label: 'Privacy', href: '/privacy' }
-  ]
+  kvkText: 'KvK 00000000'
 }
 
 export const navigation: Navigation = {
@@ -381,4 +377,22 @@ export const contactPage = {
     { icon: 'map-pin', label: 'Praktijk', value: siteSettings.location, order: 3 },
     { icon: 'clock', label: 'Openingstijden', value: 'Ma-vr · 9.00-18.00' }
   ]
+}
+
+export const termsPage: LegalPage = {
+  hero: {
+    eyebrow: 'Voorwaarden',
+    title: 'Algemene voorwaarden',
+    intro: 'Hier vind je de voorwaarden die gelden voor afspraken, sessies en workshops bij Kathara Nova.'
+  },
+  content: 'Deze pagina is voorbereid zodat je de algemene voorwaarden in de admin kunt invullen.\n\nVervang deze tekst door de definitieve voorwaarden voor afspraken, betaling, annulering en aansprakelijkheid.'
+}
+
+export const privacyPage: LegalPage = {
+  hero: {
+    eyebrow: 'Privacy',
+    title: 'Privacyverklaring',
+    intro: 'Hier lees je hoe Kathara Nova omgaat met persoonsgegevens en vertrouwelijke informatie.'
+  },
+  content: 'Deze pagina is voorbereid zodat je de privacyverklaring in de admin kunt invullen.\n\nVervang deze tekst door de definitieve uitleg over welke gegevens worden verwerkt, waarom dat gebeurt en hoe lang gegevens worden bewaard.'
 }

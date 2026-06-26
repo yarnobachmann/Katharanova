@@ -9,7 +9,9 @@ const globalRoutes: Record<string, string> = {
   'workshops-page': '/workshops',
   'blog-page': '/blog',
   'tarieven-page': '/tarieven',
-  'contact-page': '/contact'
+  'contact-page': '/contact',
+  'terms-page': '/algemene-voorwaarden',
+  'privacy-page': '/privacy'
 }
 
 const treatmentRoutes: Record<string, string> = {

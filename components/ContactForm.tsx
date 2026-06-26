@@ -1,7 +1,7 @@
 'use client'
 
 import { Check, ChevronDown } from 'lucide-react'
-import { useState, useTransition } from 'react'
+import { useMemo, useState, useTransition } from 'react'
 
 import { Button } from './ui/Button'
 
@@ -19,6 +19,7 @@ export function ContactForm({
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
   const [isPending, startTransition] = useTransition()
+  const formStartedAt = useMemo(() => Date.now().toString(), [])
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -65,6 +66,8 @@ export function ContactForm({
     <form className="contact-form" onSubmit={submit}>
       {intro ? <p className="form-intro">{intro}</p> : null}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="form-honeypot" aria-hidden="true" />
+      <input type="text" name="company" tabIndex={-1} autoComplete="off" className="form-honeypot" aria-hidden="true" />
+      <input type="hidden" name="formStartedAt" value={formStartedAt} />
       <div className="form-grid">
         <Field label="Naam" name="naam" required placeholder="Je naam" />
         <Field label="E-mailadres" name="email" type="email" required placeholder="naam@voorbeeld.nl" />
@@ -106,6 +109,7 @@ export function ContactForm({
         <Button type="submit" size="lg" disabled={isPending}>{isPending ? 'Versturen...' : 'Verstuur bericht'}</Button>
         <small>{availabilityText || 'Je gegevens worden vertrouwelijk behandeld.'}</small>
       </div>
+      <p className="form-note">Dit formulier gebruikt spambeveiliging. Verstuur je bericht daarom niet meerdere keren achter elkaar.</p>
     </form>
   )
 }

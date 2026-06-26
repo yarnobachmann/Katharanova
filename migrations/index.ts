@@ -6,6 +6,7 @@ import * as migration_20260624_140000_add_gallery_page from './20260624_140000_a
 import * as migration_20260624_150000_add_gallery_photos from './20260624_150000_add_gallery_photos';
 import * as migration_20260624_160000_add_gallery_page_hero from './20260624_160000_add_gallery_page_hero';
 import * as migration_20260626_070000_add_footer_legal_settings from './20260626_070000_add_footer_legal_settings';
+import * as migration_20260626_073000_add_legal_pages from './20260626_073000_add_legal_pages';
 
 export const migrations = [
   {
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20260626_070000_add_footer_legal_settings.up,
     down: migration_20260626_070000_add_footer_legal_settings.down,
     name: '20260626_070000_add_footer_legal_settings'
+  },
+  {
+    up: migration_20260626_073000_add_legal_pages.up,
+    down: migration_20260626_073000_add_legal_pages.down,
+    name: '20260626_073000_add_legal_pages'
   },
 ];

@@ -21,21 +21,6 @@ export const SiteSettings: GlobalConfig = {
     { name: 'linkedin', label: 'LinkedIn link', type: 'text' },
     { name: 'footerText', label: 'Footer tekst', type: 'textarea', defaultValue: 'Een warme praktijk voor holistische therapie, heling en bewustwording. Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.' },
     { name: 'copyright', label: 'Copyright tekst', type: 'text', defaultValue: 'Kathara Nova - Heling & Bewustwording' },
-    { name: 'kvkText', label: 'KvK tekst', type: 'text', defaultValue: 'KvK 00000000' },
-    {
-      name: 'footerLinks',
-      label: 'Footer links onderaan',
-      type: 'array',
-      labels: { singular: 'Footer link', plural: 'Footer links' },
-      admin: { description: 'Bijvoorbeeld Algemene voorwaarden en Privacy. Vul een interne URL zoals /privacy of een volledige https:// link in.' },
-      fields: [
-        { name: 'label', label: 'Label', type: 'text', required: true },
-        { name: 'href', label: 'Link', type: 'text', required: true }
-      ],
-      defaultValue: [
-        { label: 'Algemene voorwaarden', href: '/algemene-voorwaarden' },
-        { label: 'Privacy', href: '/privacy' }
-      ]
-    }
+    { name: 'kvkText', label: 'KvK tekst', type: 'text', defaultValue: 'KvK 00000000' }
   ]
 }

@@ -320,3 +320,34 @@ export const ContactPage: GlobalConfig = {
     }
   ]
 }
+
+const legalPageFields = [
+  {
+    type: 'collapsible' as const,
+    label: 'Hero',
+    admin: { initCollapsed: false },
+    fields: [{ name: 'hero', label: 'Hero tekst', type: 'group' as const, fields: heroFields.filter((field) => field.name !== 'image') }]
+  },
+  {
+    type: 'collapsible' as const,
+    label: 'Inhoud',
+    admin: { initCollapsed: false },
+    fields: [{ name: 'content', label: 'Tekst', type: 'richText' as const, required: true }]
+  }
+]
+
+export const TermsPage: GlobalConfig = {
+  slug: 'terms-page',
+  label: 'Algemene voorwaarden pagina',
+  admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('terms-page') },
+  access: publicEditable,
+  fields: legalPageFields
+}
+
+export const PrivacyPage: GlobalConfig = {
+  slug: 'privacy-page',
+  label: 'Privacy pagina',
+  admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('privacy-page') },
+  access: publicEditable,
+  fields: legalPageFields
+}

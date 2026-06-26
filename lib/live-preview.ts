@@ -142,6 +142,15 @@ export function normalizeSimplePage(initial: any, data: any) {
   }
 }
 
+export function normalizeLegalPage(initial: any, data: any) {
+  return {
+    ...initial,
+    ...data,
+    hero: normalizeHero(initial.hero, data.hero),
+    content: richTextToPlain(data.content, typeof initial.content === 'string' ? initial.content : '')
+  }
+}
+
 export function normalizeContactPage(initial: any, data: any) {
   return {
     ...normalizeSimplePage(initial, data),

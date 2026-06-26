@@ -103,6 +103,7 @@
 .form-honeypot { position: absolute; left: -100vw; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .form-intro { margin: 0; color: var(--text-muted); line-height: 1.65; }
 .form-error { margin: 0; color: var(--error); font-weight: 700; }
+.form-note { margin: -6px 0 0; color: var(--text-muted); font-size: var(--text-xs); line-height: 1.55; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field > span:first-child { display: inline-flex; align-items: baseline; gap: 4px; color: var(--text-strong); font-size: var(--text-sm); font-weight: 700; }

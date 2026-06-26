@@ -10,7 +10,9 @@ const staticRoutes = [
   '/workshops',
   '/blog',
   '/tarieven',
-  '/contact'
+  '/contact',
+  '/algemene-voorwaarden',
+  '/privacy'
 ]
 
 const treatmentRoute = (slug: string) => {
