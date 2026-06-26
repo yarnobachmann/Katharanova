@@ -28,6 +28,11 @@ const escapeHtml = (value: string) =>
 const clean = (value: unknown) => typeof value === 'string' ? value.trim() : ''
 const limit = (value: string, max: number) => value.slice(0, max)
 const safeHeader = (value: string) => value.replace(/[\r\n"]/g, ' ').trim()
+const makeSubmissionRef = () => {
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14)
+  const suffix = Math.random().toString(36).slice(2, 8).toUpperCase()
+  return `${timestamp}-${suffix}`
+}
 
 const isValidPhone = (value: string) => {
   if (!value) return true
@@ -95,13 +100,19 @@ export async function POST(request: Request) {
     const escapedContactReason = escapeHtml(contactReason)
     const escapedMessage = escapeHtml(message).replaceAll('\n', '<br />')
     const senderName = safeHeader(name)
+    const submissionRef = makeSubmissionRef()
 
     await sendEmail({
       from: { name: defaultFromName, address: defaultFromAddress },
       replyTo: { name: senderName, address: email },
       to: contactRecipient,
-      subject: `Nieuw contactformulier bericht van ${senderName}`,
+      subject: `Nieuw contactformulier bericht van ${senderName} - ${submissionRef}`,
+      headers: {
+        'X-Entity-Ref-ID': `contact-form-${submissionRef}`,
+        'X-Kathara-Nova-Contact-Ref': submissionRef
+      },
       text: [
+        `Referentie: ${submissionRef}`,
         `Naam: ${name}`,
         `E-mailadres: ${email}`,
         phone ? `Telefoon: ${phone}` : null,
@@ -118,6 +129,7 @@ export async function POST(request: Request) {
                 <div style="background:#2a211a;padding:28px 30px;color:#fbf7ef;">
                   <div style="color:#e7c16a;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:700;">Kathara Nova</div>
                   <h1 style="margin:8px 0 0;font-size:30px;line-height:1.15;font-weight:700;">Nieuw contactformulier bericht</h1>
+                  <p style="margin:10px 0 0;color:#e8dac2;font-family:Arial,sans-serif;font-size:13px;">Referentie ${submissionRef}</p>
                 </div>
                 <div style="padding:28px 30px 10px;">
                   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">
