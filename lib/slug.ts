@@ -9,3 +9,15 @@ export function normalizeSlug(value: unknown): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
+
+export function normalizeSlugInput(value: unknown): string {
+  if (typeof value !== 'string') return ''
+
+  return value
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]+/g, '')
+    .replace(/-{2,}/g, '-')
+}

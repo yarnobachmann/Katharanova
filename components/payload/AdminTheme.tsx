@@ -3,19 +3,19 @@
 import type { ReactNode } from 'react'
 import { useEffect } from 'react'
 
-import { normalizeSlug } from '@/lib/slug'
+import { normalizeSlugInput } from '@/lib/slug'
 
 import './admin-theme.css'
 
 export function AdminTheme({ children }: { children: ReactNode }) {
   useEffect(() => {
-    const normalizeSlugInput = (event: Event) => {
+    const handleSlugInput = (event: Event) => {
       const input = event.target
 
       if (!(input instanceof HTMLInputElement)) return
       if (input.name !== 'slug' && !input.name.endsWith('.slug')) return
 
-      const normalized = normalizeSlug(input.value)
+      const normalized = normalizeSlugInput(input.value)
       if (input.value !== normalized) {
         input.value = normalized
       }
@@ -43,11 +43,11 @@ export function AdminTheme({ children }: { children: ReactNode }) {
 
     cleanupEmptyModalContainers()
     const observer = new MutationObserver(cleanupEmptyModalContainers)
-    document.addEventListener('input', normalizeSlugInput, true)
+    document.addEventListener('input', handleSlugInput, true)
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] })
 
     return () => {
-      document.removeEventListener('input', normalizeSlugInput, true)
+      document.removeEventListener('input', handleSlugInput, true)
       observer.disconnect()
     }
   }, [])
