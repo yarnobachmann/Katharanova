@@ -5,6 +5,10 @@ import { useState, useTransition } from 'react'
 
 import { Button } from './ui/Button'
 
+const cleanPhoneInput = (event: React.FormEvent<HTMLInputElement>) => {
+  event.currentTarget.value = event.currentTarget.value.replace(/[^0-9+()\s.-]/g, '')
+}
+
 export function ContactForm({
   intro,
   availabilityText
@@ -66,11 +70,21 @@ export function ContactForm({
         <Field label="E-mailadres" name="email" type="email" required placeholder="naam@voorbeeld.nl" />
       </div>
       <div className="form-grid">
-        <Field label="Telefoon" name="telefoon" type="tel" placeholder="06 ..." hint="Optioneel" />
+        <Field
+          label="Telefoon"
+          name="telefoon"
+          type="tel"
+          placeholder="06 12 34 56 78"
+          hint="Optioneel - alleen cijfers, spaties en +"
+          inputMode="tel"
+          pattern="[0-9+()\s.-]{10,20}"
+          maxLength={20}
+          onInput={cleanPhoneInput}
+        />
         <label className="field">
-          <span>Voorkeursbehandeling</span>
+          <span>Waarmee kan ik je helpen? <small>Optioneel</small></span>
           <span className="select-wrap">
-            <select name="voorkeursbehandeling" defaultValue="">
+            <select name="redenVoorContact" defaultValue="">
               <option value="" disabled>Maak een keuze...</option>
               <option>Weet ik nog niet</option>
               <option>Transheling</option>
@@ -84,8 +98,8 @@ export function ContactForm({
         </label>
       </div>
       <label className="field">
-        <span>Bericht</span>
-        <textarea name="bericht" rows={5} required placeholder="Vertel kort waar je tegenaan loopt..." />
+        <span>Bericht <small>Verplicht</small></span>
+        <textarea name="bericht" rows={5} required maxLength={2000} placeholder="Vertel kort waar je tegenaan loopt..." />
       </label>
       {error ? <p className="form-error" role="alert">{error}</p> : null}
       <div className="form-actions">
@@ -96,11 +110,11 @@ export function ContactForm({
   )
 }
 
-function Field({ label, hint, ...props }: { label: string; hint?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({ label, hint, required, ...props }: { label: string; hint?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="field">
-      <span>{label}</span>
-      <input {...props} />
+      <span>{label} <small>{required ? 'Verplicht' : 'Optioneel'}</small></span>
+      <input required={required} {...props} />
       {hint ? <small>{hint}</small> : null}
     </label>
   )

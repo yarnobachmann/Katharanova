@@ -4,6 +4,19 @@ import { contactRecipient, defaultFromAddress, defaultFromName, sendEmail } from
 
 export const runtime = 'nodejs'
 
+const contactReasons = new Set([
+  'Weet ik nog niet',
+  'Transheling',
+  'Opstelling',
+  'Innerlijke werk',
+  'Workshop',
+  'Kennismakingsgesprek'
+])
+
+const rateLimitWindowMs = 10 * 60 * 1000
+const rateLimitMax = 5
+const rateLimits = new Map<string, { count: number; resetAt: number }>()
+
 const escapeHtml = (value: string) =>
   value
     .replaceAll('&', '&amp;')
@@ -13,15 +26,47 @@ const escapeHtml = (value: string) =>
     .replaceAll("'", '&#039;')
 
 const clean = (value: unknown) => typeof value === 'string' ? value.trim() : ''
+const limit = (value: string, max: number) => value.slice(0, max)
+const safeHeader = (value: string) => value.replace(/[\r\n"]/g, ' ').trim()
+
+const isValidPhone = (value: string) => {
+  if (!value) return true
+  if (!/^\+?[0-9][0-9\s().-]{7,18}$/.test(value)) return false
+
+  const digits = value.replace(/\D/g, '')
+  return digits.length >= 10 && digits.length <= 15
+}
+
+const getClientKey = (request: Request) =>
+  request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+  request.headers.get('x-real-ip') ||
+  'unknown'
+
+const isRateLimited = (key: string) => {
+  const now = Date.now()
+  const current = rateLimits.get(key)
+
+  if (!current || current.resetAt <= now) {
+    rateLimits.set(key, { count: 1, resetAt: now + rateLimitWindowMs })
+    return false
+  }
+
+  current.count += 1
+  return current.count > rateLimitMax
+}
 
 export async function POST(request: Request) {
   try {
+    if (isRateLimited(getClientKey(request))) {
+      return NextResponse.json({ error: 'Je hebt te vaak geprobeerd te versturen. Wacht even en probeer het opnieuw.' }, { status: 429 })
+    }
+
     const data = await request.json()
-    const name = clean(data.naam)
-    const email = clean(data.email).toLowerCase()
-    const phone = clean(data.telefoon)
-    const treatment = clean(data.voorkeursbehandeling)
-    const message = clean(data.bericht)
+    const name = limit(clean(data.naam), 120)
+    const email = limit(clean(data.email).toLowerCase(), 180)
+    const phone = limit(clean(data.telefoon), 20)
+    const contactReason = limit(clean(data.redenVoorContact || data.voorkeursbehandeling), 80)
+    const message = limit(clean(data.bericht), 2000)
     const website = clean(data.website)
 
     if (website) {
@@ -36,27 +81,65 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Vul een geldig e-mailadres in.' }, { status: 400 })
     }
 
+    if (!isValidPhone(phone)) {
+      return NextResponse.json({ error: 'Vul een geldig telefoonnummer in of laat dit veld leeg.' }, { status: 400 })
+    }
+
+    if (contactReason && !contactReasons.has(contactReason)) {
+      return NextResponse.json({ error: 'Kies een geldige reden voor contact.' }, { status: 400 })
+    }
+
+    const escapedName = escapeHtml(name)
+    const escapedEmail = escapeHtml(email)
+    const escapedPhone = escapeHtml(phone)
+    const escapedContactReason = escapeHtml(contactReason)
+    const escapedMessage = escapeHtml(message).replaceAll('\n', '<br />')
+    const senderName = safeHeader(name)
+
     await sendEmail({
-      from: `"${defaultFromName}" <${defaultFromAddress}>`,
-      replyTo: `"${name.replaceAll('"', '')}" <${email}>`,
+      from: { name: defaultFromName, address: defaultFromAddress },
+      replyTo: { name: senderName, address: email },
       to: contactRecipient,
-      subject: `Nieuw contactformulier bericht van ${name}`,
+      subject: `Nieuw contactformulier bericht van ${senderName}`,
       text: [
         `Naam: ${name}`,
         `E-mailadres: ${email}`,
         phone ? `Telefoon: ${phone}` : null,
-        treatment ? `Voorkeursbehandeling: ${treatment}` : null,
+        contactReason ? `Waarmee kan ik helpen: ${contactReason}` : null,
         '',
         message
       ].filter(Boolean).join('\n'),
       html: `
-        <h2>Nieuw contactformulier bericht</h2>
-        <p><strong>Naam:</strong> ${escapeHtml(name)}</p>
-        <p><strong>E-mailadres:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
-        ${phone ? `<p><strong>Telefoon:</strong> ${escapeHtml(phone)}</p>` : ''}
-        ${treatment ? `<p><strong>Voorkeursbehandeling:</strong> ${escapeHtml(treatment)}</p>` : ''}
-        <hr />
-        <p>${escapeHtml(message).replaceAll('\n', '<br />')}</p>
+        <!doctype html>
+        <html lang="nl">
+          <body style="margin:0;background:#f7f1e6;color:#2a211a;font-family:Georgia,'Times New Roman',serif;">
+            <div style="max-width:680px;margin:0 auto;padding:32px 18px;">
+              <div style="background:#fbf7ef;border:1px solid #e8dac2;border-radius:22px;overflow:hidden;box-shadow:0 12px 32px rgba(42,33,26,0.10);">
+                <div style="background:#2a211a;padding:28px 30px;color:#fbf7ef;">
+                  <div style="color:#e7c16a;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:700;">Kathara Nova</div>
+                  <h1 style="margin:8px 0 0;font-size:30px;line-height:1.15;font-weight:700;">Nieuw contactformulier bericht</h1>
+                </div>
+                <div style="padding:28px 30px 10px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">
+                    <tr>
+                      <td style="padding:0 0 14px;color:#6f6257;width:180px;font-weight:700;">Naam</td>
+                      <td style="padding:0 0 14px;color:#2a211a;">${escapedName}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:0 0 14px;color:#6f6257;font-weight:700;">E-mailadres</td>
+                      <td style="padding:0 0 14px;"><a href="mailto:${escapedEmail}" style="color:#a87a22;text-decoration:none;font-weight:700;">${escapedEmail}</a></td>
+                    </tr>
+                    ${phone ? `<tr><td style="padding:0 0 14px;color:#6f6257;font-weight:700;">Telefoon</td><td style="padding:0 0 14px;color:#2a211a;">${escapedPhone}</td></tr>` : ''}
+                    ${contactReason ? `<tr><td style="padding:0 0 14px;color:#6f6257;font-weight:700;">Waarmee kan ik helpen?</td><td style="padding:0 0 14px;color:#2a211a;">${escapedContactReason}</td></tr>` : ''}
+                  </table>
+                </div>
+                <div style="margin:8px 30px 30px;padding:22px 24px;background:#f7f1e6;border:1px solid #e8dac2;border-radius:16px;font-family:Arial,sans-serif;font-size:16px;line-height:1.75;color:#2a211a;">
+                  ${escapedMessage}
+                </div>
+              </div>
+            </div>
+          </body>
+        </html>
       `
     })
 
