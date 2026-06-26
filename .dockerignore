@@ -1,0 +1,13 @@
+.git
+.next
+node_modules
+tsconfig.tsbuildinfo
+npm-debug.log
+
+.env
+.env.*
+
+Dockerfile
+.dockerignore
+
+media
