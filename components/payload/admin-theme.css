@@ -60,7 +60,7 @@ body {
 .select-input,
 .react-select,
 .upload,
-.rich-text-lexical,
+.rich-text-lexical__wrap,
 .lexical-editor,
 .checkbox-input {
   background: #fffaf2;
@@ -84,7 +84,7 @@ body {
 .text-input:focus,
 .textarea-input:focus,
 .select-input:focus,
-.rich-text-lexical:focus-within,
+.rich-text-lexical__wrap:focus-within,
 .lexical-editor:focus-within {
   border-color: #c9942e;
   box-shadow: 0 0 0 3px rgba(201, 148, 46, 0.24);
