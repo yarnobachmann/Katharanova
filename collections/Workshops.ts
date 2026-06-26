@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
+import { slugField } from '@/lib/payload/slugField'
 
 export const Workshops: CollectionConfig = {
   slug: 'workshops',
@@ -20,7 +21,7 @@ export const Workshops: CollectionConfig = {
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   fields: [
     { name: 'title', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true, index: true },
+    slugField(),
     { name: 'date', type: 'date', required: true },
     { name: 'startTime', type: 'text' },
     { name: 'endTime', type: 'text' },

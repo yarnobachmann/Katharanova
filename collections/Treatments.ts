@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
+import { slugField } from '@/lib/payload/slugField'
 
 const toneOptions = ['cream', 'sage', 'clay', 'sand']
 const iconOptions = [
@@ -30,7 +31,7 @@ export const Treatments: CollectionConfig = {
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   fields: [
     { name: 'title', label: 'Paginatitel', type: 'text', required: true },
-    { name: 'slug', label: 'URL-slug', type: 'text', required: true, unique: true, index: true, admin: { description: 'Bijvoorbeeld: transheling. Gebruik kleine letters en streepjes.' } },
+    slugField({ description: 'Bijvoorbeeld: transheling. Spaties worden automatisch streepjes.' }),
     { name: 'navLabel', label: 'Label in navigatie', type: 'text', required: true },
     { name: 'eyebrow', label: 'Label boven titel', type: 'text' },
     { name: 'summary', label: 'Korte samenvatting', type: 'textarea', required: true, admin: { description: 'Korte tekst voor kaarten en zoekmachines.' } },

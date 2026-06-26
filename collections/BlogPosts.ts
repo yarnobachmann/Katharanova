@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
+import { slugField } from '@/lib/payload/slugField'
 
 export const BlogPosts: CollectionConfig = {
   slug: 'blog-posts',
@@ -20,7 +21,7 @@ export const BlogPosts: CollectionConfig = {
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   fields: [
     { name: 'title', label: 'Titel', type: 'text', required: true },
-    { name: 'slug', label: 'Slug', type: 'text', required: true, unique: true, index: true },
+    slugField(),
     {
       name: 'categories',
       label: 'Categorieen',
