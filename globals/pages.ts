@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 import { admins } from '@/lib/payload/access'
 import { previewForGlobal } from '@/lib/payload/preview'
+import { globalVersions } from '@/lib/payload/versions'
 
 const heroFields = [
   { name: 'eyebrow', label: 'Label boven titel', type: 'text' as const },
@@ -38,6 +39,7 @@ export const Homepage: GlobalConfig = {
   label: 'Homepage',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('homepage') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -121,6 +123,7 @@ export const GalleryPage: GlobalConfig = {
   label: 'Fotogallerij pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('gallery-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -136,6 +139,7 @@ export const AboutPage: GlobalConfig = {
   label: 'Over mij pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('about-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -206,6 +210,7 @@ export const WorkshopsPage: GlobalConfig = {
   label: 'Workshops pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('workshops-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -236,6 +241,7 @@ export const BlogPage: GlobalConfig = {
   label: 'Blog pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('blog-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -256,6 +262,7 @@ export const TarievenPage: GlobalConfig = {
   label: 'Tarieven pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('tarieven-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -288,6 +295,7 @@ export const ContactPage: GlobalConfig = {
   label: 'Contact pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('contact-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: [
     {
       type: 'collapsible',
@@ -341,6 +349,7 @@ export const TermsPage: GlobalConfig = {
   label: 'Algemene voorwaarden pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('terms-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: legalPageFields
 }
 
@@ -349,5 +358,6 @@ export const PrivacyPage: GlobalConfig = {
   label: 'Privacy pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('privacy-page') },
   access: publicEditable,
+  versions: globalVersions,
   fields: legalPageFields
 }

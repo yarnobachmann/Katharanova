@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
 import { slugField } from '@/lib/payload/slugField'
+import { collectionVersions } from '@/lib/payload/versions'
 
 const toneOptions = ['cream', 'sage', 'clay', 'sand']
 const iconOptions = [
@@ -27,7 +28,7 @@ export const Treatments: CollectionConfig = {
     preview: previewForCollection('treatments'),
     description: 'Deze pagina\'s verschijnen automatisch in de dropdown "Behandelingen" zodra ze gepubliceerd zijn. Gebruik "Navigatie" alleen voor vaste navbar-links.'
   },
-  versions: { drafts: true },
+  versions: collectionVersions,
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   fields: [
     { name: 'title', label: 'Paginatitel', type: 'text', required: true },

@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
 import { previewForCollection } from '@/lib/payload/preview'
 import { slugField } from '@/lib/payload/slugField'
+import { collectionVersions } from '@/lib/payload/versions'
 
 export const Workshops: CollectionConfig = {
   slug: 'workshops',
@@ -17,7 +18,7 @@ export const Workshops: CollectionConfig = {
     livePreview: {},
     preview: previewForCollection('workshops')
   },
-  versions: { drafts: true },
+  versions: collectionVersions,
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   fields: [
     { name: 'title', type: 'text', required: true },
