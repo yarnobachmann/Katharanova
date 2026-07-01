@@ -14,7 +14,7 @@ import { Media } from '@/collections/Media'
 import { PricingItems } from '@/collections/PricingItems'
 import { Treatments } from '@/collections/Treatments'
 import { Workshops } from '@/collections/Workshops'
-import { AboutPage, BlogPage, ContactPage, GalleryPage, Homepage, PrivacyPage, TarievenPage, TermsPage, WorkshopsPage } from '@/globals/pages'
+import { AboutPage, BlogPage, ContactPage, GalleryPage, Homepage, LocationPage, PrivacyPage, TarievenPage, TermsPage, WorkshopsPage } from '@/globals/pages'
 import { Navigation } from '@/globals/Navigation'
 import { SiteSettings } from '@/globals/SiteSettings'
 import { smtpEmailAdapter } from '@/lib/email/smtp'
@@ -50,7 +50,7 @@ export default buildConfig({
     livePreview: {
       ...livePreview,
       collections: ['treatments', 'workshops', 'blog-posts', 'gallery-photos'],
-      globals: ['homepage', 'gallery-page', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page', 'terms-page', 'privacy-page']
+      globals: ['homepage', 'gallery-page', 'location-page', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page', 'terms-page', 'privacy-page']
     }
   },
   collections: [
@@ -80,7 +80,7 @@ export default buildConfig({
     PricingItems,
     FAQs
   ],
-  globals: [SiteSettings, Navigation, Homepage, GalleryPage, AboutPage, WorkshopsPage, BlogPage, TarievenPage, ContactPage, TermsPage, PrivacyPage],
+  globals: [SiteSettings, Navigation, Homepage, GalleryPage, LocationPage, AboutPage, WorkshopsPage, BlogPage, TarievenPage, ContactPage, TermsPage, PrivacyPage],
   i18n: {
     supportedLanguages: { nl },
     fallbackLanguage: 'nl'

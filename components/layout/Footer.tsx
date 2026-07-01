@@ -6,10 +6,12 @@ import type { Navigation, SiteSettings } from '@/lib/types'
 
 export function Footer({ settings, navigation }: { settings: SiteSettings; navigation: Navigation }) {
   const treatments = [...(navigation.treatmentItems || []), ...navigation.navItems.filter((item) => item.href === '/workshops')]
-  const practice = withRequiredItem(
-    navigation.navItems.filter((item) => ['/over-mij', '/fotogallerij', '/tarieven', '/contact', '/blog'].includes(item.href)),
-    { label: 'Fotogallerij', href: '/fotogallerij' },
-    1
+  const practice = withRequiredItems(
+    navigation.navItems.filter((item) => ['/over-mij', '/fotogallerij', '/locatie', '/tarieven', '/contact', '/blog'].includes(item.href)),
+    [
+      { item: { label: 'Fotogallerij', href: '/fotogallerij' }, index: 1 },
+      { item: { label: 'Locatie', href: '/locatie' }, index: 2 }
+    ]
   )
 
   return (
@@ -45,11 +47,12 @@ export function Footer({ settings, navigation }: { settings: SiteSettings; navig
   )
 }
 
-function withRequiredItem(items: { label: string; href: string }[], item: { label: string; href: string }, index: number) {
-  if (items.some((navItem) => navItem.href === item.href)) return items
-
+function withRequiredItems(items: { label: string; href: string }[], requiredItems: { item: { label: string; href: string }; index: number }[]) {
   const nextItems = [...items]
-  nextItems.splice(index, 0, item)
+  requiredItems.forEach(({ item, index }) => {
+    if (nextItems.some((navItem) => navItem.href === item.href)) return
+    nextItems.splice(index, 0, item)
+  })
   return nextItems
 }
 

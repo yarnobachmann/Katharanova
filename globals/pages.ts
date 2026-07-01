@@ -134,6 +134,66 @@ export const GalleryPage: GlobalConfig = {
   ]
 }
 
+export const LocationPage: GlobalConfig = {
+  slug: 'location-page',
+  label: 'Locatie pagina',
+  admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('location-page') },
+  access: publicEditable,
+  fields: [
+    {
+      type: 'collapsible',
+      label: 'Hero',
+      admin: { initCollapsed: false },
+      fields: [{ name: 'hero', label: 'Hero tekst en afbeelding', type: 'group', fields: heroFields }]
+    },
+    {
+      type: 'collapsible',
+      label: 'Introductie',
+      fields: [
+        { name: 'introTitle', label: 'Titel', type: 'text' },
+        { name: 'intro', label: 'Tekst', type: 'richText' }
+      ]
+    },
+    {
+      type: 'collapsible',
+      label: 'Afbeeldingen carousel',
+      fields: [
+        {
+          name: 'carouselItems',
+          label: 'Afbeeldingen',
+          type: 'array',
+          fields: [
+            { name: 'image', label: 'Afbeelding', type: 'upload', relationTo: 'media', required: true },
+            { name: 'caption', label: 'Bijschrift', type: 'text' },
+            { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
+          ]
+        }
+      ]
+    },
+    {
+      type: 'collapsible',
+      label: 'Tekstblokken',
+      fields: [
+        {
+          name: 'textBlocks',
+          label: 'Tekst elementen',
+          type: 'array',
+          fields: [
+            { name: 'title', label: 'Titel', type: 'text', required: true },
+            { name: 'text', label: 'Tekst', type: 'textarea', required: true },
+            { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0 }
+          ]
+        }
+      ]
+    },
+    {
+      type: 'collapsible',
+      label: 'CTA onderaan',
+      fields: [{ name: 'cta', label: 'CTA', type: 'group', fields: ctaFields }]
+    }
+  ]
+}
+
 export const AboutPage: GlobalConfig = {
   slug: 'about-page',
   label: 'Over mij pagina',

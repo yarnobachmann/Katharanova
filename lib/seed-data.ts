@@ -11,6 +11,9 @@ export const photos = {
   opstelling: ux('1470071459604-3b5ec3a7fe05', 1200, 900),
   innerlijk: ux('1447752875215-b2761acb3c5d', 1200, 900),
   contact: ux('1441974231531-c6227db76b6e', 1200, 800),
+  location: ux('1497366754035-f200968a6e72', 1300, 900),
+  locationRoom: ux('1513694203232-719a280e022f', 1100, 820),
+  locationDetail: ux('1518005020951-eccb494ad742', 1100, 820),
   ws1: ux('1501785888041-af3ef285b470', 900, 640),
   ws2: ux('1470071459604-3b5ec3a7fe05', 900, 640),
   ws3: ux('1441974231531-c6227db76b6e', 900, 640),
@@ -42,6 +45,7 @@ export const navigation: Navigation = {
     { label: 'Home', href: '/' },
     { label: 'Over mij', href: '/over-mij' },
     { label: 'Fotogallerij', href: '/fotogallerij' },
+    { label: 'Locatie', href: '/locatie' },
     { label: 'Workshops', href: '/workshops' },
     { label: 'Blog', href: '/blog' },
     { label: 'Tarieven', href: '/tarieven' },
@@ -141,6 +145,36 @@ export const aboutPage = {
     text: 'Een vrijblijvend kennismakingsgesprek is de zachtste manier om te beginnen. Ik denk graag met je mee.',
     primaryLabel: 'Plan een kennismaking',
     primaryHref: '/contact'
+  }
+}
+
+export const locationPage = {
+  hero: {
+    eyebrow: 'Locatie',
+    title: 'Een rustige plek om te landen',
+    intro: 'De praktijkruimte is ingericht als een warme, stille bedding voor sessies, opstellingen en verdiepende begeleiding.',
+    image: photos.location
+  } satisfies Hero,
+  introTitle: 'Welkom in de praktijk',
+  intro: 'De locatie is bewust rustig gehouden: zachte materialen, natuurlijk licht en genoeg ruimte om even aan te komen voordat we beginnen.\n\nTijdens een sessie is er aandacht voor privacy, vertraging en een heldere afstemming op wat jij nodig hebt.',
+  carouselItems: [
+    { image: photos.location, caption: 'Rustige ontvangstruimte', order: 1 },
+    { image: photos.locationRoom, caption: 'Ruimte voor sessies en opstellingen', order: 2 },
+    { image: photos.locationDetail, caption: 'Zachte details en natuurlijke materialen', order: 3 },
+    { image: photos.aboutWarm, caption: 'Een warme plek om te verdiepen', order: 4 }
+  ],
+  textBlocks: [
+    { title: 'Bereikbaarheid', text: 'De praktijk is op afspraak geopend. Na het plannen ontvang je de exacte adresgegevens en praktische informatie voor je bezoek.', order: 1 },
+    { title: 'Online of op locatie', text: 'Een deel van de begeleiding kan ook online plaatsvinden. We kijken samen wat passend is voor jouw vraag en situatie.', order: 2 },
+    { title: 'Aankomen in rust', text: 'Plan als het kan wat ruimte rondom je afspraak, zodat je niet gehaast hoeft binnen te komen of direct weer door hoeft.', order: 3 }
+  ],
+  cta: {
+    title: 'Wil je weten of een sessie op locatie past?',
+    text: 'Stel gerust je vraag. Ik denk graag met je mee over wat praktisch en inhoudelijk klopt.',
+    primaryLabel: 'Neem contact op',
+    primaryHref: '/contact',
+    secondaryLabel: 'Bekijk tarieven',
+    secondaryHref: '/tarieven'
   }
 }
 

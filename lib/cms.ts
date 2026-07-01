@@ -8,6 +8,7 @@ import {
   contactPage,
   faqs,
   home,
+  locationPage,
   navigation,
   privacyPage,
   pricingItems,
@@ -234,6 +235,26 @@ export async function getGalleryPage() {
         : normalizeGalleryItems(galleryData?.galleryItems, legacy.galleryItems)
     }
   }, fallback)
+}
+
+export async function getLocationPage() {
+  return withPayload(async (payload) => {
+    const data: any = await payload.findGlobal({ slug: 'location-page' })
+    return {
+      ...locationPage,
+      ...data,
+      hero: mergeHero(locationPage.hero, data.hero),
+      cta: mergeGroup(locationPage.cta, data.cta),
+      intro: richText(data.intro, locationPage.intro),
+      carouselItems: data.carouselItems?.length
+        ? sortByOrder(data.carouselItems).map((item: any) => ({
+          ...item,
+          image: mediaUrl(item.image)
+        })).filter((item: any) => item.image)
+        : locationPage.carouselItems,
+      textBlocks: data.textBlocks?.length ? sortByOrder(data.textBlocks) : locationPage.textBlocks
+    }
+  }, locationPage)
 }
 
 export async function getAboutPage() {

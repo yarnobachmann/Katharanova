@@ -5,6 +5,7 @@ import { serverUrl } from '../env'
 const globalRoutes: Record<string, string> = {
   homepage: '/',
   'gallery-page': '/fotogallerij',
+  'location-page': '/locatie',
   'about-page': '/over-mij',
   'workshops-page': '/workshops',
   'blog-page': '/blog',

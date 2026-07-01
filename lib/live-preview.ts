@@ -135,6 +135,23 @@ export function normalizeAboutPage(initial: any, data: any) {
   }
 }
 
+export function normalizeLocationPage(initial: any, data: any) {
+  return {
+    ...initial,
+    ...data,
+    hero: normalizeHero(initial.hero, data.hero),
+    cta: normalizeGroup(initial.cta, data.cta),
+    intro: richText(data.intro, initial.intro),
+    carouselItems: Array.isArray(data.carouselItems) && data.carouselItems.length
+      ? sortByOrder(data.carouselItems).map((item: any) => ({
+        ...item,
+        image: mediaUrl(item.image)
+      })).filter((item: any) => item.image)
+      : initial.carouselItems,
+    textBlocks: Array.isArray(data.textBlocks) && data.textBlocks.length ? sortByOrder(data.textBlocks) : initial.textBlocks
+  }
+}
+
 export function normalizeSimplePage(initial: any, data: any) {
   return {
     ...initial,
