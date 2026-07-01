@@ -10,6 +10,7 @@ import * as migration_20260626_073000_add_legal_pages from './20260626_073000_ad
 import * as migration_20260629_070038_autosave_drafts from './20260629_070038_autosave_drafts';
 import * as migration_20260701_120000_add_location_page from './20260701_120000_add_location_page';
 import * as migration_20260701_130000_fix_location_intro_lexical from './20260701_130000_fix_location_intro_lexical';
+import * as migration_20260701_140000_repair_location_intro_lexical from './20260701_140000_repair_location_intro_lexical';
 
 export const migrations = [
   {
@@ -71,5 +72,10 @@ export const migrations = [
     up: migration_20260701_130000_fix_location_intro_lexical.up,
     down: migration_20260701_130000_fix_location_intro_lexical.down,
     name: '20260701_130000_fix_location_intro_lexical'
+  },
+  {
+    up: migration_20260701_140000_repair_location_intro_lexical.up,
+    down: migration_20260701_140000_repair_location_intro_lexical.down,
+    name: '20260701_140000_repair_location_intro_lexical'
   },
 ];
