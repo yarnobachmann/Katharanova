@@ -82,7 +82,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
     'Een rustige plek om te landen',
     'De praktijkruimte is ingericht als een warme, stille bedding voor sessies, opstellingen en verdiepende begeleiding.',
     'Welkom in de praktijk',
-    '{"root":{"type":"root","children":[{"type":"paragraph","children":[{"text":"De locatie is bewust rustig gehouden: zachte materialen, natuurlijk licht en genoeg ruimte om even aan te komen voordat we beginnen."}]},{"type":"paragraph","children":[{"text":"Tijdens een sessie is er aandacht voor privacy, vertraging en een heldere afstemming op wat jij nodig hebt."}]}],"direction":null,"format":"","indent":0,"version":1}}'::jsonb,
+    '{"root":{"type":"root","format":"","indent":0,"version":1,"children":[{"type":"paragraph","format":"","indent":0,"version":1,"children":[{"type":"text","detail":0,"format":0,"mode":"normal","style":"","text":"De locatie is bewust rustig gehouden: zachte materialen, natuurlijk licht en genoeg ruimte om even aan te komen voordat we beginnen.","version":1}]},{"type":"paragraph","format":"","indent":0,"version":1,"children":[{"type":"text","detail":0,"format":0,"mode":"normal","style":"","text":"Tijdens een sessie is er aandacht voor privacy, vertraging en een heldere afstemming op wat jij nodig hebt.","version":1}]}]}}'::jsonb,
     'Wil je weten of een sessie op locatie past?',
     'Stel gerust je vraag. Ik denk graag met je mee over wat praktisch en inhoudelijk klopt.',
     'Neem contact op',
