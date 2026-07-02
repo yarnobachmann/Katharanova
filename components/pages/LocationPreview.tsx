@@ -7,6 +7,7 @@ import { Reveal } from '@/components/Reveal'
 import { RichTextRenderer } from '@/components/cms/RichTextRenderer'
 import { usePayloadLivePreview } from '@/components/live-preview/usePayloadLivePreview'
 import { Button } from '@/components/ui/Button'
+import { imageObjectPosition, imageSrc } from '@/components/ui/ImageFrame'
 import { PageHero } from '@/components/ui/PageHero'
 import { normalizeLocationPage } from '@/lib/live-preview'
 
@@ -85,12 +86,24 @@ function LocationCarousel({ items, title }: { items: any[]; title: string }) {
     <Reveal className="location-carousel" variant="section">
       <div className="location-carousel-frame">
         <div className="location-carousel-track" ref={trackRef} onScroll={updateActiveIndex} tabIndex={0} aria-label="Locatie afbeeldingen">
-          {items.map((item, index) => (
-            <figure className="location-slide" key={`${item.image}-${index}`}>
-              <img src={item.image} alt={item.caption || `${title} afbeelding ${index + 1}`} loading={index === 0 ? 'eager' : 'lazy'} />
-              {item.caption ? <figcaption>{item.caption}</figcaption> : null}
-            </figure>
-          ))}
+          {items.map((item, index) => {
+            const src = imageSrc(item.image)
+            const objectPosition = imageObjectPosition(item.image)
+
+            if (!src) return null
+
+            return (
+              <figure className="location-slide" key={`${src}-${index}`}>
+                <img
+                  src={src}
+                  alt={item.caption || `${title} afbeelding ${index + 1}`}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  style={objectPosition ? { objectPosition } : undefined}
+                />
+                {item.caption ? <figcaption>{item.caption}</figcaption> : null}
+              </figure>
+            )
+          })}
         </div>
         {items.length > 1 ? (
           <div className="location-carousel-controls">
@@ -108,7 +121,7 @@ function LocationCarousel({ items, title }: { items: any[]; title: string }) {
           {items.map((item, index) => (
             <button
               type="button"
-              key={`${item.image}-dot-${index}`}
+              key={`${imageSrc(item.image) || index}-dot-${index}`}
               className={activeIndex === index ? 'active' : ''}
               aria-label={`Toon afbeelding ${index + 1}`}
               aria-current={activeIndex === index}
