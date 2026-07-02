@@ -17,6 +17,25 @@
 .check-list > div { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--surface-card); border: 1px solid var(--border-soft); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); }
 .check-list svg { flex: none; color: var(--accent-hover); padding: 6px; width: 30px; height: 30px; border-radius: 50%; background: rgba(201,148,46,0.14); }
 .cards-space { margin-top: var(--space-8); }
+.home-treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.1vw, 28px);
+  align-items: stretch;
+  max-width: 980px;
+  margin-inline: auto;
+}
+.home-treatment-grid .treatment-card {
+  min-height: 0;
+}
+.home-treatment-grid .treatment-card p {
+  max-width: 48ch;
+}
+.home-treatment-grid .treatment-card:nth-child(odd):last-child {
+  grid-column: 1 / -1;
+  max-width: 480px;
+  justify-self: center;
+}
 .section-with-soft-separator,
 .section-after-soft-separator,
 .section-after-dark { position: relative; }
@@ -148,6 +167,15 @@
 }
 .section-after-dark { border-top: 1px solid rgba(201,148,46,0.2); }
 .section-split { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: var(--space-7); }
+.section-split .section-heading {
+  max-width: 620px;
+}
+.home-workshop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 380px));
+  gap: clamp(18px, 2vw, 24px);
+  align-items: stretch;
+}
 .mini-workshop { display: flex; flex-direction: column; gap: 16px; min-height: 100%; }
 .mini-workshop-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--accent-hover); }
 .mini-workshop strong { font-family: var(--font-display); font-size: 26px; color: var(--text-gold); line-height: 1; }
@@ -171,6 +199,19 @@
   .hero-media { max-width: 620px; width: 100%; }
   .recognition .grid-2,
   .about-preview { gap: clamp(1.75rem, 5vw, 3rem); }
+  .home-treatment-grid {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+  }
+  .home-treatment-grid .treatment-card:nth-child(odd):last-child {
+    grid-column: auto;
+    max-width: none;
+    justify-self: stretch;
+  }
+  .home-workshop-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 620px;
+  }
 }
 
 @media (max-width: 760px) {

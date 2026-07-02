@@ -70,7 +70,7 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
             intro={page.treatmentsIntro}
             divider
           />
-          <Reveal stagger variant="cards" className="grid-3 cards-space">
+          <Reveal stagger variant="cards" className="home-treatment-grid cards-space">
             {treatments.map((treatment) => <TreatmentCard key={treatment.slug} treatment={treatment} />)}
           </Reveal>
         </div>
@@ -101,7 +101,7 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
             <SectionHeading align="left" eyebrow={page.workshopPreviewEyebrow || 'Workshops'} title={page.workshopPreviewTitle} intro={page.workshopPreviewIntro} />
             <Button href="/workshops" variant="ghost" iconRight={<ArrowRight size={16} />}>Alle workshops</Button>
           </div>
-          <Reveal stagger variant="cards" className="grid-3">
+          <Reveal stagger variant="cards" className="home-workshop-grid">
             {workshops.slice(0, 3).map((workshop) => (
               <Card key={workshop.slug} as="article" tone={workshop.tone} interactive className="mini-workshop">
                 <div className="mini-workshop-top">

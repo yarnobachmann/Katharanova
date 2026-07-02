@@ -1,7 +1,9 @@
-.treatment-card { display: flex; flex-direction: column; gap: 14px; }
+.treatment-card { display: flex; flex-direction: column; gap: 14px; padding: clamp(1.25rem, 2.1vw, 1.75rem); }
 .treatment-card h3, .workshop-card h3, .blog-card h3, .pricing-card h3 { margin: 0; }
+.treatment-card h3 { font-size: clamp(1.35rem, 1.65vw, 1.62rem); line-height: 1.2; }
 .treatment-card p, .workshop-card p, .blog-card p, .pricing-card p { margin: 0; color: var(--text-muted); line-height: 1.65; }
-.treatment-card a { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; color: var(--text-gold); font-weight: 700; font-size: var(--text-sm); }
+.treatment-card p { font-size: var(--text-sm); line-height: 1.72; }
+.treatment-card a { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 8px; color: var(--text-gold); font-weight: 700; font-size: var(--text-sm); }
 .card-icon { width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--surface-card); box-shadow: var(--shadow-xs); display: inline-flex; align-items: center; justify-content: center; color: var(--accent-hover); }
 .card-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--accent-hover); }
 .card-row-start { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }

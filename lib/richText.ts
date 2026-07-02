@@ -39,7 +39,7 @@ export function isLexicalRichText(value: unknown): boolean {
   return root.children.every((node: any) => {
     if (!node || typeof node !== 'object') return false
     if (!Array.isArray(node.children)) return false
-    return typeof node.type === 'string' && typeof node.direction === 'string'
+    return typeof node.type === 'string'
   })
 }
 
