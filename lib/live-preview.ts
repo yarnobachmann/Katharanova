@@ -1,4 +1,5 @@
 import type { BlogPost, Treatment, Workshop } from './types'
+import { normalizeRichText } from './richText'
 
 const toLocalMediaPath = (url: string): string => {
   try {
@@ -72,7 +73,7 @@ export const categoryLabels = (value: any, fallback?: string): string[] => {
   return labels.length ? labels : fallback ? [fallback] : []
 }
 
-export const richText = (value: any, fallback: any = ''): any => value || fallback
+export const richText = (value: any, fallback: any = ''): any => normalizeRichText(value, fallback)
 
 export const normalizeGroup = <T extends Record<string, any>>(fallback: T, value: any): T => ({
   ...fallback,

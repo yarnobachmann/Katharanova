@@ -1,6 +1,7 @@
 import { unstable_noStore as noStore } from 'next/cache'
 
 import { getPayloadClient } from './payload/client'
+import { normalizeRichText } from './richText'
 import {
   aboutPage,
   blogPage,
@@ -105,7 +106,7 @@ const mergeHero = <T extends Record<string, any>>(fallback: T, value: any): T =>
     : fallback.image
 })
 
-const richText = (value: any, fallback: any = ''): any => value || fallback
+const richText = (value: any, fallback: any = ''): any => normalizeRichText(value, fallback)
 
 async function withPayload<T>(query: (payload: Awaited<ReturnType<typeof getPayloadClient>>) => Promise<T>, fallback: T): Promise<T> {
   noStore()

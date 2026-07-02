@@ -4,22 +4,7 @@ import { getPayload } from 'payload'
 
 import config from '../payload.config'
 import { aboutPage, blogCategories, blogPage, blogPosts, contactPage, faqs, home, navigation, pricingItems, siteSettings, tarievenPage, treatments, workshops, workshopsPage } from '../lib/seed-data'
-
-const textToLexical = (text: string) => ({
-  root: {
-    type: 'root',
-    format: '',
-    indent: 0,
-    version: 1,
-    children: text.split('\n\n').map((paragraph) => ({
-      type: 'paragraph',
-      format: '',
-      indent: 0,
-      version: 1,
-      children: [{ type: 'text', detail: 0, format: 0, mode: 'normal', style: '', text: paragraph, version: 1 }]
-    }))
-  }
-})
+import { textToLexical } from '../lib/richText'
 
 async function upsertGlobal(payload: any, slug: string, data: any) {
   await payload.updateGlobal({ slug, data })
