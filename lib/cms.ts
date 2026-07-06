@@ -395,12 +395,18 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
   const fallback = slug === 'terms-page' ? termsPage : privacyPage
 
   return withPayload(async (payload) => {
-    const data: any = await payload.findGlobal({ slug, draft: true })
+    const [data, versions]: any[] = await Promise.all([
+      payload.findGlobal({ slug, draft: true, overrideAccess: true }),
+      payload.findGlobalVersions({ slug, limit: 1, sort: '-updatedAt', overrideAccess: true })
+    ])
+    const latestVersion = versions.docs?.[0]?.version
+    const latest = latestVersion?.content ? latestVersion : data
+
     return {
       ...fallback,
-      ...data,
-      hero: mergeHero(fallback.hero, data.hero),
-      content: richText(data.content, fallback.content)
+      ...latest,
+      hero: mergeHero(fallback.hero, latest.hero),
+      content: richText(latest.content, fallback.content)
     }
   }, fallback)
 }
