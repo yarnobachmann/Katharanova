@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { admins } from '@/lib/payload/access'
+import { findMediaUsages, mediaUsageCount } from '@/lib/payload/mediaUsage'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -16,6 +17,19 @@ export const Media: CollectionConfig = {
     create: admins,
     update: admins,
     delete: admins
+  },
+  hooks: {
+    beforeChange: [
+      async ({ data, operation, originalDoc, req }) => {
+        const uploadedFile = (req as any).file
+        if (operation !== 'update' || !uploadedFile || !originalDoc?.id) return data
+
+        const usages = await findMediaUsages(req.payload, originalDoc.id)
+        if (mediaUsageCount(usages) <= 1) return data
+
+        throw new Error('Deze afbeelding wordt op meerdere plekken gebruikt. Upload een nieuwe afbeelding in plaats van dit media-item te vervangen.')
+      }
+    ]
   },
   upload: {
     staticDir: 'media',

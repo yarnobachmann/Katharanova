@@ -2,6 +2,8 @@ import type { ElementType, ReactNode } from 'react'
 
 import Link from 'next/link'
 
+import { safeHref } from '@/lib/safeUrl'
+
 const FORMAT_BOLD = 1
 const FORMAT_ITALIC = 2
 const FORMAT_STRIKETHROUGH = 4
@@ -51,7 +53,7 @@ function renderNode(node: any, key: number): ReactNode {
       return <li key={key}>{children}</li>
     case 'link':
     case 'autolink': {
-      const url = node.fields?.url || '#'
+      const url = safeHref(node.fields?.url, '#')
       return <Link key={key} href={url} target={node.fields?.newTab ? '_blank' : undefined} rel={node.fields?.newTab ? 'noopener noreferrer' : undefined}>{children}</Link>
     }
     case 'horizontalrule':

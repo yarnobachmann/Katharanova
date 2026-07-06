@@ -2,6 +2,7 @@ import { Instagram, Linkedin, Mail } from 'lucide-react'
 import Link from 'next/link'
 
 import { Logo } from '@/components/ui/Logo'
+import { safeHref } from '@/lib/safeUrl'
 import type { Navigation, SiteSettings } from '@/lib/types'
 
 export function Footer({ settings, navigation }: { settings: SiteSettings; navigation: Navigation }) {
@@ -21,8 +22,8 @@ export function Footer({ settings, navigation }: { settings: SiteSettings; navig
           <Logo mark={settings.logoMark} full={settings.logoFull} />
           <p>{settings.footerText}</p>
           <div className="footer-socials">
-            {settings.instagram ? <Link href={settings.instagram} aria-label="Instagram"><Instagram size={18} /></Link> : null}
-            {settings.linkedin ? <Link href={settings.linkedin} aria-label="LinkedIn"><Linkedin size={18} /></Link> : null}
+            {settings.instagram ? <Link href={safeHref(settings.instagram)} aria-label="Instagram"><Instagram size={18} /></Link> : null}
+            {settings.linkedin ? <Link href={safeHref(settings.linkedin)} aria-label="LinkedIn"><Linkedin size={18} /></Link> : null}
             <Link href={`mailto:${settings.email}`} aria-label="E-mail"><Mail size={18} /></Link>
           </div>
         </div>
@@ -60,7 +61,7 @@ function FooterCol({ title, items }: { title: string; items: { label: string; hr
   return (
     <div className="footer-col">
       <span>{title}</span>
-      {items.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+      {items.map((item) => <Link key={item.href} href={safeHref(item.href)}>{item.label}</Link>)}
     </div>
   )
 }

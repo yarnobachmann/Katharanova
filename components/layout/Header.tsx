@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
+import { safeHref } from '@/lib/safeUrl'
 import type { Navigation, SiteSettings } from '@/lib/types'
 
 export function Header({ settings, navigation }: { settings: SiteSettings; navigation: Navigation }) {
@@ -53,7 +54,7 @@ export function Header({ settings, navigation }: { settings: SiteSettings; navig
         <Logo mark={settings.logoMark} full={settings.logoFull} />
         <nav className="desktop-nav" aria-label="Hoofdnavigatie">
           {primaryItems.map((item) => (
-            <Link key={item.href} href={item.href} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
+            <Link key={item.href} href={safeHref(item.href)} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
           ))}
           <NavDropdown
             id="treatments"
@@ -83,7 +84,7 @@ export function Header({ settings, navigation }: { settings: SiteSettings; navig
       </div>
       <div className={`mobile-menu ${open ? 'mobile-menu-open' : ''}`}>
         {primaryItems.map((item) => (
-          <Link key={item.href} href={item.href} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
+          <Link key={item.href} href={safeHref(item.href)} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
         ))}
         <MobileDropdown
           id="treatments"
@@ -143,7 +144,7 @@ function MobileDropdown({
       </button>
       <div className="mobile-dropdown-panel">
         {items.map((item) => (
-          <Link key={item.href} href={item.href} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
+          <Link key={item.href} href={safeHref(item.href)} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
         ))}
       </div>
     </div>
@@ -188,7 +189,7 @@ function NavDropdown({
         if (!event.currentTarget.parentElement?.contains(event.relatedTarget)) setOpen(null)
       }}>
         {items.map((item) => (
-          <Link key={item.href} href={item.href} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
+          <Link key={item.href} href={safeHref(item.href)} className={pathname === item.href ? 'active' : ''}>{item.label}</Link>
         ))}
       </div>
     </div>

@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { admins } from '@/lib/payload/access'
+import { ensureUniqueMediaValue } from '@/lib/payload/mediaUsage'
 import { previewForGlobal } from '@/lib/payload/preview'
 import { globalVersions } from '@/lib/payload/versions'
 
@@ -34,12 +35,22 @@ const ctaFields = [
 
 const publicEditable = { read: () => true, update: admins }
 
+const uniqueGlobalImages = (global: string, fieldLabel: string, paths: string[]) => ({
+  beforeChange: [
+    async ({ data, req }: any) => {
+      await ensureUniqueMediaValue({ data, fieldLabel, global, paths, req })
+      return data
+    }
+  ]
+})
+
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
   label: 'Homepage',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('homepage') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('homepage', 'de homepage', ['hero.image', 'aboutImage', 'galleryItems.image']),
   fields: [
     {
       type: 'collapsible',
@@ -124,6 +135,7 @@ export const GalleryPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('gallery-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('gallery-page', 'de fotogallerij pagina', ['hero.image']),
   fields: [
     {
       type: 'collapsible',
@@ -139,6 +151,7 @@ export const LocationPage: GlobalConfig = {
   label: 'Locatie pagina',
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('location-page') },
   access: publicEditable,
+  hooks: uniqueGlobalImages('location-page', 'de locatie pagina', ['hero.image', 'carouselItems.image']),
   fields: [
     {
       type: 'collapsible',
@@ -200,6 +213,7 @@ export const AboutPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('about-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('about-page', 'de over mij pagina', ['hero.image', 'portrait']),
   fields: [
     {
       type: 'collapsible',
@@ -271,6 +285,7 @@ export const WorkshopsPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('workshops-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('workshops-page', 'de workshops pagina', ['hero.image']),
   fields: [
     {
       type: 'collapsible',
@@ -302,6 +317,7 @@ export const BlogPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('blog-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('blog-page', 'de blog pagina', ['hero.image']),
   fields: [
     {
       type: 'collapsible',
@@ -323,6 +339,7 @@ export const TarievenPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('tarieven-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('tarieven-page', 'de tarieven pagina', ['hero.image']),
   fields: [
     {
       type: 'collapsible',
@@ -356,6 +373,7 @@ export const ContactPage: GlobalConfig = {
   admin: { group: 'Pagina content', livePreview: {}, preview: previewForGlobal('contact-page') },
   access: publicEditable,
   versions: globalVersions,
+  hooks: uniqueGlobalImages('contact-page', 'de contact pagina', ['hero.image', 'image']),
   fields: [
     {
       type: 'collapsible',

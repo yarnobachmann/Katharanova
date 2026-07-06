@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/lib/payload/access'
+import { ensureUniqueMediaValue } from '@/lib/payload/mediaUsage'
 import { previewForCollection } from '@/lib/payload/preview'
 import { slugField } from '@/lib/payload/slugField'
 import { collectionVersions } from '@/lib/payload/versions'
@@ -30,6 +31,14 @@ export const Treatments: CollectionConfig = {
   },
   versions: collectionVersions,
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
+  hooks: {
+    beforeChange: [
+      async ({ data, originalDoc, req }) => {
+        await ensureUniqueMediaValue({ collection: 'treatments', data, fieldLabel: 'deze behandelpagina', id: originalDoc?.id, paths: ['mainImage'], req })
+        return data
+      }
+    ]
+  },
   fields: [
     { name: 'title', label: 'Paginatitel', type: 'text', required: true },
     slugField({ description: 'Bijvoorbeeld: transheling. Spaties worden automatisch streepjes.' }),
@@ -37,7 +46,7 @@ export const Treatments: CollectionConfig = {
     { name: 'eyebrow', label: 'Label boven titel', type: 'text' },
     { name: 'summary', label: 'Korte samenvatting', type: 'textarea', required: true, admin: { description: 'Korte tekst voor kaarten en zoekmachines.' } },
     { name: 'intro', label: 'Introductietekst', type: 'textarea', required: true },
-    { name: 'mainImage', label: 'Hoofdafbeelding', type: 'upload', relationTo: 'media' },
+    { name: 'mainImage', label: 'Hoofdafbeelding', type: 'upload', relationTo: 'media', admin: { description: 'Kies of upload een afbeelding. Vervang geen bestaand media-item als die ook ergens anders wordt gebruikt.' } },
     { name: 'icon', label: 'Icoon', type: 'select', options: iconOptions, defaultValue: 'sparkles' },
     { name: 'tone', label: 'Kleurstijl', type: 'select', options: toneOptions, defaultValue: 'cream', required: true },
     { name: 'order', label: 'Volgorde', type: 'number', defaultValue: 0, required: true },

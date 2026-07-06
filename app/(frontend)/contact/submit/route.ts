@@ -21,6 +21,7 @@ const minimumSubmitTimeMs = 2500
 const maximumSubmitTimeMs = 2 * 60 * 60 * 1000
 const rateLimits = new Map<string, { count: number; resetAt: number }>()
 const duplicateSubmissions = new Map<string, number>()
+let lastRateLimitCleanup = 0
 
 const escapeHtml = (value: string) =>
   value
@@ -55,6 +56,8 @@ const getClientKey = (request: Request) =>
 
 const isRateLimited = (key: string, max = rateLimitMax) => {
   const now = Date.now()
+  cleanupRateLimits(now)
+
   const current = rateLimits.get(key)
 
   if (!current || current.resetAt <= now) {
@@ -64,6 +67,15 @@ const isRateLimited = (key: string, max = rateLimitMax) => {
 
   current.count += 1
   return current.count > max
+}
+
+const cleanupRateLimits = (now: number) => {
+  if (now - lastRateLimitCleanup < rateLimitWindowMs) return
+  lastRateLimitCleanup = now
+
+  rateLimits.forEach((current, key) => {
+    if (current.resetAt <= now) rateLimits.delete(key)
+  })
 }
 
 const isEmailRateLimited = (email: string) => {
