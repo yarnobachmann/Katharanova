@@ -1,5 +1,7 @@
 import { unstable_noStore as noStore } from 'next/cache'
 
+import { sql } from '@payloadcms/db-postgres'
+
 import { getPayloadClient } from './payload/client'
 import { normalizeRichText } from './richText'
 import {
@@ -419,20 +421,77 @@ const legalVersionToPage = (doc: any) => {
   }
 }
 
+const legalTableNames = {
+  'terms-page': {
+    current: 'terms_page',
+    versions: '_terms_page_v'
+  },
+  'privacy-page': {
+    current: 'privacy_page',
+    versions: '_privacy_page_v'
+  }
+} as const
+
+const rowsFromResult = (result: any) => Array.isArray(result) ? result : result?.rows || []
+
+const latestLegalRow = async (
+  payload: Awaited<ReturnType<typeof getPayloadClient>>,
+  slug: 'terms-page' | 'privacy-page'
+) => {
+  const drizzle = (payload.db as any).drizzle
+  const tables = legalTableNames[slug]
+  if (!drizzle || !tables) return undefined
+
+  const versionRows = rowsFromResult(await drizzle.execute(sql.raw(`
+    select
+      version_hero_eyebrow,
+      version_hero_title,
+      version_hero_intro,
+      version_content,
+      version__status,
+      updated_at,
+      created_at
+    from "${tables.versions}"
+    where version_content is not null
+    order by updated_at desc nulls last, created_at desc nulls last
+    limit 1
+  `)))
+  if (versionRows[0]) return versionRows[0]
+
+  const currentRows = rowsFromResult(await drizzle.execute(sql.raw(`
+    select
+      hero_eyebrow,
+      hero_title,
+      hero_intro,
+      content,
+      _status,
+      updated_at,
+      created_at
+    from "${tables.current}"
+    where content is not null
+    order by updated_at desc nulls last, created_at desc nulls last
+    limit 1
+  `)))
+
+  return currentRows[0]
+}
+
 export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise<LegalPage> {
   const fallback = slug === 'terms-page' ? termsPage : privacyPage
 
   return withPayload(async (payload) => {
-    const [draftResult, versionResult, publishedResult] = await Promise.allSettled([
+    const [directResult, draftResult, versionResult, publishedResult] = await Promise.allSettled([
+      latestLegalRow(payload, slug),
       payload.findGlobal({ slug, draft: true, overrideAccess: true }),
       payload.findGlobalVersions({ slug, limit: 1, sort: '-updatedAt', overrideAccess: true }),
       payload.findGlobal({ slug, overrideAccess: true })
     ])
+    const direct = directResult.status === 'fulfilled' ? legalVersionToPage(directResult.value) : undefined
     const draft = draftResult.status === 'fulfilled' ? draftResult.value as any : undefined
     const versions = versionResult.status === 'fulfilled' ? versionResult.value as any : undefined
     const published = publishedResult.status === 'fulfilled' ? publishedResult.value as any : undefined
     const latestVersion = legalVersionToPage(versions?.docs?.[0])
-    const latest = latestVersion || (draft?.content ? draft : undefined) || (published?.content ? published : undefined) || fallback
+    const latest = direct || latestVersion || (draft?.content ? draft : undefined) || (published?.content ? published : undefined) || fallback
 
     return {
       ...fallback,
