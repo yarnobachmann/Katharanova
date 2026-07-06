@@ -13,6 +13,7 @@ import * as migration_20260701_130000_fix_location_intro_lexical from './2026070
 import * as migration_20260701_140000_repair_location_intro_lexical from './20260701_140000_repair_location_intro_lexical';
 import * as migration_20260702_090000_fix_location_intro_lexical_direction from './20260702_090000_fix_location_intro_lexical_direction';
 import * as migration_20260706_120000_repair_legal_rich_text_links from './20260706_120000_repair_legal_rich_text_links';
+import * as migration_20260706_130000_set_privacy_policy_content from './20260706_130000_set_privacy_policy_content';
 
 export const migrations = [
   {
@@ -89,5 +90,10 @@ export const migrations = [
     up: migration_20260706_120000_repair_legal_rich_text_links.up,
     down: migration_20260706_120000_repair_legal_rich_text_links.down,
     name: '20260706_120000_repair_legal_rich_text_links'
+  },
+  {
+    up: migration_20260706_130000_set_privacy_policy_content.up,
+    down: migration_20260706_130000_set_privacy_policy_content.down,
+    name: '20260706_130000_set_privacy_policy_content'
   },
 ];
