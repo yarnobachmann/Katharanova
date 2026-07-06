@@ -14,12 +14,14 @@ export function usePayloadLivePreview<T>({
   collectionSlug,
   globalSlug,
   initialData,
-  normalize
+  normalize,
+  previewFetchPath
 }: {
   collectionSlug?: string
   globalSlug?: string
   initialData: T
   normalize: (initialData: T, data: Record<string, any>) => T
+  previewFetchPath?: string
 }) {
   const router = useRouter()
   const [previewData, setPreviewData] = useState(initialData)
@@ -31,13 +33,32 @@ export function usePayloadLivePreview<T>({
   useEffect(() => {
     const readyMessage = { type: 'payload-live-preview', ready: true }
 
+    const refreshFromAPI = async () => {
+      if (!previewFetchPath || window.parent === window) return
+
+      try {
+        const response = await fetch(previewFetchPath, {
+          cache: 'no-store',
+          credentials: 'include'
+        })
+        if (!response.ok) return
+
+        const data = await resolveUploadFields(await response.json())
+        setPreviewData(normalize(initialData, data))
+      } catch {
+        // Live preview postMessage remains the primary update path.
+      }
+    }
+
     window.parent?.postMessage(readyMessage, '*')
     window.opener?.postMessage(readyMessage, '*')
+    void refreshFromAPI()
 
     const handleMessage = async (event: MessageEvent<LivePreviewMessage>) => {
       if (!event.data || typeof event.data !== 'object') return
 
       if (event.data.type === 'payload-document-event') {
+        void refreshFromAPI()
         router.refresh()
         return
       }
@@ -52,7 +73,7 @@ export function usePayloadLivePreview<T>({
 
     window.addEventListener('message', handleMessage)
     return () => window.removeEventListener('message', handleMessage)
-  }, [collectionSlug, globalSlug, initialData, normalize, router])
+  }, [collectionSlug, globalSlug, initialData, normalize, previewFetchPath, router])
 
   return previewData
 }

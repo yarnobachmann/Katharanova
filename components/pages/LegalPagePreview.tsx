@@ -10,7 +10,8 @@ export function LegalPagePreview({ page: initialPage, globalSlug }: { page: Lega
   const page = usePayloadLivePreview({
     globalSlug,
     initialData: initialPage,
-    normalize: normalizeLegalPage
+    normalize: normalizeLegalPage,
+    previewFetchPath: `/api/globals/${globalSlug}?draft=true&depth=2`
   })
 
   return (
