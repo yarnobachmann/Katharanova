@@ -36,11 +36,7 @@ export function isLexicalRichText(value: unknown): boolean {
   const root = (value as any).root
   if (!root || root.type !== 'root' || !Array.isArray(root.children)) return false
 
-  return root.children.every((node: any) => {
-    if (!node || typeof node !== 'object') return false
-    if (!Array.isArray(node.children)) return false
-    return typeof node.type === 'string'
-  })
+  return root.children.every((node: any) => node && typeof node === 'object' && typeof node.type === 'string')
 }
 
 export function normalizeRichText(value: unknown, fallback: unknown = ''): unknown {
