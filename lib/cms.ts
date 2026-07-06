@@ -391,6 +391,34 @@ export async function getContactPage() {
   }, contactPage)
 }
 
+const valueFrom = (source: any, ...keys: string[]) => {
+  for (const key of keys) {
+    if (source?.[key] !== undefined && source[key] !== null) return source[key]
+  }
+  return undefined
+}
+
+const legalVersionToPage = (doc: any) => {
+  const version = doc?.version || doc
+  if (!version) return undefined
+
+  const content = valueFrom(version, 'content', 'versionContent', 'version_content')
+  if (!content) return undefined
+
+  const hero = version.hero || {
+    eyebrow: valueFrom(version, 'heroEyebrow', 'hero_eyebrow', 'versionHeroEyebrow', 'version_hero_eyebrow'),
+    title: valueFrom(version, 'heroTitle', 'hero_title', 'versionHeroTitle', 'version_hero_title'),
+    intro: valueFrom(version, 'heroIntro', 'hero_intro', 'versionHeroIntro', 'version_hero_intro'),
+    image: valueFrom(version, 'heroImage', 'hero_image', 'versionHeroImage', 'version_hero_image')
+  }
+
+  return {
+    ...version,
+    hero,
+    content
+  }
+}
+
 export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise<LegalPage> {
   const fallback = slug === 'terms-page' ? termsPage : privacyPage
 
@@ -403,8 +431,8 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
     const draft = draftResult.status === 'fulfilled' ? draftResult.value as any : undefined
     const versions = versionResult.status === 'fulfilled' ? versionResult.value as any : undefined
     const published = publishedResult.status === 'fulfilled' ? publishedResult.value as any : undefined
-    const latestVersion = versions?.docs?.[0]?.version
-    const latest = latestVersion?.content ? latestVersion : draft?.content ? draft : published || fallback
+    const latestVersion = legalVersionToPage(versions?.docs?.[0])
+    const latest = latestVersion || (draft?.content ? draft : undefined) || (published?.content ? published : undefined) || fallback
 
     return {
       ...fallback,

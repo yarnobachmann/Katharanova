@@ -11,7 +11,7 @@ export function LegalPagePreview({ page: initialPage, globalSlug }: { page: Lega
     globalSlug,
     initialData: initialPage,
     normalize: normalizeLegalPage,
-    previewFetchPath: `/api/globals/${globalSlug}?draft=true&depth=2`
+    previewFetchPath: `/preview-data/legal/${globalSlug}`
   })
 
   return (
