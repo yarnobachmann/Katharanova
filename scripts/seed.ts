@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 
 import config from '../payload.config'
-import { aboutPage, blogCategories, blogPage, blogPosts, contactPage, faqs, home, navigation, pricingItems, siteSettings, tarievenPage, treatments, workshops, workshopsPage } from '../lib/seed-data'
+import { aboutPage, blogCategories, blogPage, blogPosts, contactPage, faqs, home, navigation, pricingItems, privacyPage, siteSettings, tarievenPage, termsPage, treatments, workshops, workshopsPage } from '../lib/seed-data'
 import { textToLexical } from '../lib/richText'
 
 async function upsertGlobal(payload: any, slug: string, data: any) {
@@ -69,6 +69,14 @@ async function run() {
   await upsertGlobal(payload, 'blog-page', withoutUploads(blogPage, []))
   await upsertGlobal(payload, 'tarieven-page', withoutUploads(tarievenPage, []))
   await upsertGlobal(payload, 'contact-page', withoutUploads(contactPage, ['image']))
+  await upsertGlobal(payload, 'terms-page', {
+    ...termsPage,
+    content: textToLexical(termsPage.content as string)
+  })
+  await upsertGlobal(payload, 'privacy-page', {
+    ...privacyPage,
+    content: textToLexical(privacyPage.content as string)
+  })
 
   for (const treatment of treatments) {
     await upsertBySlug(payload, 'treatments', treatment.slug, {
