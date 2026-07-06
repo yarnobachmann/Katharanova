@@ -395,7 +395,7 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
   const fallback = slug === 'terms-page' ? termsPage : privacyPage
 
   return withPayload(async (payload) => {
-    const data: any = await payload.findGlobal({ slug })
+    const data: any = await payload.findGlobal({ slug, draft: true })
     return {
       ...fallback,
       ...data,
