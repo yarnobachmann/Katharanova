@@ -434,6 +434,24 @@ const legalTableNames = {
 
 const rowsFromResult = (result: any) => Array.isArray(result) ? result : result?.rows || []
 
+const legalContentText = (content: any): string => {
+  if (!content) return ''
+  if (typeof content === 'string') return content
+  try {
+    return JSON.stringify(content)
+  } catch {
+    return ''
+  }
+}
+
+const isPlaceholderLegalContent = (content: any): boolean => {
+  const text = legalContentText(content).toLowerCase()
+  return text.includes('deze pagina is voorbereid') || text.includes('vervang deze tekst')
+}
+
+const firstRealLegalRow = (rows: any[]) =>
+  rows.find((row) => !isPlaceholderLegalContent(valueFrom(row, 'content', 'version_content'))) || rows[0]
+
 const latestLegalRow = async (
   payload: Awaited<ReturnType<typeof getPayloadClient>>,
   slug: 'terms-page' | 'privacy-page'
@@ -441,22 +459,6 @@ const latestLegalRow = async (
   const drizzle = (payload.db as any).drizzle
   const tables = legalTableNames[slug]
   if (!drizzle || !tables) return undefined
-
-  const versionRows = rowsFromResult(await drizzle.execute(sql.raw(`
-    select
-      version_hero_eyebrow,
-      version_hero_title,
-      version_hero_intro,
-      version_content,
-      version__status,
-      updated_at,
-      created_at
-    from "${tables.versions}"
-    where version_content is not null
-    order by updated_at desc nulls last, created_at desc nulls last
-    limit 1
-  `)))
-  if (versionRows[0]) return versionRows[0]
 
   const currentRows = rowsFromResult(await drizzle.execute(sql.raw(`
     select
@@ -470,10 +472,29 @@ const latestLegalRow = async (
     from "${tables.current}"
     where content is not null
     order by updated_at desc nulls last, created_at desc nulls last
-    limit 1
+    limit 10
   `)))
+  const current = firstRealLegalRow(currentRows)
+  if (current && !isPlaceholderLegalContent(current.content)) return current
 
-  return currentRows[0]
+  const versionRows = rowsFromResult(await drizzle.execute(sql.raw(`
+    select
+      version_hero_eyebrow,
+      version_hero_title,
+      version_hero_intro,
+      version_content,
+      version__status,
+      updated_at,
+      created_at
+    from "${tables.versions}"
+    where version_content is not null
+    order by updated_at desc nulls last, created_at desc nulls last
+    limit 10
+  `)))
+  const version = firstRealLegalRow(versionRows)
+  if (version) return version
+
+  return current
 }
 
 export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise<LegalPage> {
@@ -491,7 +512,11 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
     const versions = versionResult.status === 'fulfilled' ? versionResult.value as any : undefined
     const published = publishedResult.status === 'fulfilled' ? publishedResult.value as any : undefined
     const latestVersion = legalVersionToPage(versions?.docs?.[0])
-    const latest = direct || latestVersion || (draft?.content ? draft : undefined) || (published?.content ? published : undefined) || fallback
+    const candidates = [direct, latestVersion, draft, published].filter((item) => item?.content)
+    const latest =
+      candidates.find((item) => !isPlaceholderLegalContent(item.content)) ||
+      candidates[0] ||
+      fallback
 
     return {
       ...fallback,
