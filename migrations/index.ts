@@ -15,6 +15,7 @@ import * as migration_20260702_090000_fix_location_intro_lexical_direction from 
 import * as migration_20260706_120000_repair_legal_rich_text_links from './20260706_120000_repair_legal_rich_text_links';
 import * as migration_20260706_130000_set_privacy_policy_content from './20260706_130000_set_privacy_policy_content';
 import * as migration_20260707_090000_improve_homepage_local_seo from './20260707_090000_improve_homepage_local_seo';
+import * as migration_20260707_100000_add_seo_landing_pages from './20260707_100000_add_seo_landing_pages';
 
 export const migrations = [
   {
@@ -101,5 +102,10 @@ export const migrations = [
     up: migration_20260707_090000_improve_homepage_local_seo.up,
     down: migration_20260707_090000_improve_homepage_local_seo.down,
     name: '20260707_090000_improve_homepage_local_seo'
+  },
+  {
+    up: migration_20260707_100000_add_seo_landing_pages.up,
+    down: migration_20260707_100000_add_seo_landing_pages.down,
+    name: '20260707_100000_add_seo_landing_pages'
   },
 ];

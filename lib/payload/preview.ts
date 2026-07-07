@@ -50,6 +50,10 @@ export function getPreviewPath(args: {
     return slug ? `/workshops/${slug}` : '/workshops'
   }
 
+  if (collectionSlug === 'seo-landing-pages') {
+    return slug ? `/${slug}` : '/'
+  }
+
   if (collectionSlug === 'gallery-photos') {
     return '/fotogallerij'
   }

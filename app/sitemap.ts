@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-import { getBlogPosts, getTreatments } from '@/lib/cms'
+import { getBlogPosts, getSeoLandingPages, getTreatments } from '@/lib/cms'
 import { serverUrl } from '@/lib/env'
 
 const staticRoutes = [
@@ -9,9 +9,6 @@ const staticRoutes = [
   '/fotogallerij',
   '/workshops',
   '/blog',
-  '/holistische-therapie-schoonoord',
-  '/trance-healing-drenthe',
-  '/systeemopstelling-drenthe',
   '/tarieven',
   '/contact',
   '/algemene-voorwaarden',
@@ -25,7 +22,7 @@ const treatmentRoute = (slug: string) => {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [treatments, posts] = await Promise.all([getTreatments(), getBlogPosts()])
+  const [treatments, posts, seoPages] = await Promise.all([getTreatments(), getBlogPosts(), getSeoLandingPages()])
 
   const staticEntries = staticRoutes.map((route) => ({
     url: `${serverUrl}${route}`,
@@ -48,5 +45,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: post.featured ? 0.75 : 0.65
   }))
 
-  return [...staticEntries, ...treatmentEntries, ...postEntries]
+  const seoEntries = seoPages.map((page) => ({
+    url: `${serverUrl}/${page.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8
+  }))
+
+  return [...staticEntries, ...treatmentEntries, ...postEntries, ...seoEntries]
 }

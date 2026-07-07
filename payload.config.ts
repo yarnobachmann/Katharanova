@@ -12,6 +12,7 @@ import { FAQs } from '@/collections/FAQs'
 import { GalleryPhotos } from '@/collections/GalleryPhotos'
 import { Media } from '@/collections/Media'
 import { PricingItems } from '@/collections/PricingItems'
+import { SeoLandingPages } from '@/collections/SeoLandingPages'
 import { Treatments } from '@/collections/Treatments'
 import { Workshops } from '@/collections/Workshops'
 import { AboutPage, BlogPage, ContactPage, GalleryPage, Homepage, LocationPage, PrivacyPage, TarievenPage, TermsPage, WorkshopsPage } from '@/globals/pages'
@@ -49,7 +50,7 @@ export default buildConfig({
     },
     livePreview: {
       ...livePreview,
-      collections: ['treatments', 'workshops', 'blog-posts', 'gallery-photos'],
+      collections: ['treatments', 'workshops', 'blog-posts', 'gallery-photos', 'seo-landing-pages'],
       globals: ['homepage', 'gallery-page', 'location-page', 'about-page', 'workshops-page', 'blog-page', 'tarieven-page', 'contact-page', 'terms-page', 'privacy-page']
     }
   },
@@ -76,6 +77,7 @@ export default buildConfig({
     Workshops,
     BlogCategories,
     BlogPosts,
+    SeoLandingPages,
     GalleryPhotos,
     PricingItems,
     FAQs
