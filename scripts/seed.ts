@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 
 import config from '../payload.config'
-import { aboutPage, blogCategories, blogPage, blogPosts, contactPage, faqs, home, navigation, pricingItems, privacyPage, seoLandingPages, siteSettings, tarievenPage, termsPage, treatments, workshops, workshopsPage } from '../lib/seed-data'
+import { aboutPage, blogCategories, blogPage, blogPosts, contactPage, faqs, home, navigation, pricingItems, privacyPage, siteSettings, tarievenPage, termsPage, treatments, workshops, workshopsPage } from '../lib/seed-data'
 import { textToLexical } from '../lib/richText'
 
 async function upsertGlobal(payload: any, slug: string, data: any) {
@@ -114,13 +114,6 @@ async function run() {
       categories,
       image: undefined,
       content: textToLexical(post.content.map((block: { text: string }) => block.text).join('\n\n'))
-    })
-  }
-
-  for (const page of seoLandingPages) {
-    await upsertBySlug(payload, 'seo-landing-pages', page.slug, {
-      ...page,
-      highlights: page.highlights.map((label) => ({ label }))
     })
   }
 

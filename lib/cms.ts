@@ -15,7 +15,6 @@ import {
   navigation,
   privacyPage,
   pricingItems,
-  seoLandingPages,
   siteSettings,
   tarievenPage,
   treatments,
@@ -23,7 +22,7 @@ import {
   workshops,
   workshopsPage
 } from './seed-data'
-import type { BlogPost, FAQ, LegalPage, Navigation, PricingItem, SeoLandingPage, SiteSettings, Treatment, Workshop } from './types'
+import type { BlogPost, FAQ, LegalPage, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
 
 const toLocalMediaPath = (url: string): string => {
   try {
@@ -353,28 +352,6 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
   return (await getBlogPosts()).find((post) => post.slug === slug)
-}
-
-const normalizeSeoLandingPage = (doc: any): SeoLandingPage => ({
-  ...doc,
-  highlights: arrayLabels(doc.highlights),
-  relatedLinks: Array.isArray(doc.relatedLinks)
-    ? doc.relatedLinks.map((link: any) => ({ label: link.label, href: link.href })).filter((link: any) => link.label && link.href)
-    : [],
-  sections: Array.isArray(doc.sections)
-    ? doc.sections.map((section: any) => ({ title: section.title, text: section.text })).filter((section: any) => section.title && section.text)
-    : []
-})
-
-export async function getSeoLandingPages(): Promise<SeoLandingPage[]> {
-  return withPayload(async (payload) => {
-    const result: any = await payload.find({ collection: 'seo-landing-pages', sort: 'title', limit: 100 })
-    return result.docs.map(normalizeSeoLandingPage)
-  }, seoLandingPages)
-}
-
-export async function getSeoLandingPage(slug: string): Promise<SeoLandingPage | undefined> {
-  return (await getSeoLandingPages()).find((page) => page.slug === slug)
 }
 
 export async function getPricingItems(): Promise<PricingItem[]> {

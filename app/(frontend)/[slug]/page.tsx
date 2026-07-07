@@ -1,30 +1,21 @@
 import { notFound } from 'next/navigation'
 
-import { LocalServicePage } from '@/components/pages/LocalServicePage'
 import { TreatmentPageTemplate } from '@/components/pages/TreatmentPage'
-import { getSeoLandingPage, getTreatment } from '@/lib/cms'
+import { getTreatment } from '@/lib/cms'
 import { createMetadata, pageTitle } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [treatment, seoPage] = await Promise.all([getTreatment(slug), getSeoLandingPage(slug)])
-  if (!treatment && !seoPage) return {}
-
-  if (seoPage) {
-    return createMetadata({
-      title: seoPage.seo?.metaTitle || seoPage.title,
-      description: seoPage.seo?.metaDescription || seoPage.intro,
-      path: `/${seoPage.slug}`
-    })
-  }
+  const treatment = await getTreatment(slug)
+  if (!treatment) return {}
 
   return createMetadata({
-    title: treatment!.seo?.metaTitle || treatmentMetaTitle(treatment!.slug, treatment!.title),
-    description: treatment!.seo?.metaDescription || treatmentMetaDescription(treatment!.slug, treatment!.summary),
-    image: treatment!.image,
-    path: `/${treatment!.slug}`
+    title: treatment.seo?.metaTitle || treatmentMetaTitle(treatment.slug, treatment.title),
+    description: treatment.seo?.metaDescription || treatmentMetaDescription(treatment.slug, treatment.summary),
+    image: treatment.image,
+    path: `/${treatment.slug}`
   })
 }
 
@@ -44,9 +35,7 @@ function treatmentMetaDescription(slug: string, summary: string) {
 
 export default async function TreatmentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [treatment, seoPage] = await Promise.all([getTreatment(slug), getSeoLandingPage(slug)])
-
-  if (seoPage) return <LocalServicePage page={seoPage} />
+  const treatment = await getTreatment(slug)
   if (!treatment) notFound()
 
   return <TreatmentPageTemplate treatment={treatment} />

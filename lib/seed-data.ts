@@ -1,4 +1,4 @@
-import type { BlogPost, FAQ, Hero, LegalPage, Navigation, PricingItem, SeoLandingPage, SiteSettings, Treatment, Workshop } from './types'
+import type { BlogPost, FAQ, Hero, LegalPage, Navigation, PricingItem, SiteSettings, Treatment, Workshop } from './types'
 
 const ux = (id: string, w = 1300, h = 1000) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`
@@ -375,99 +375,6 @@ export const blogPosts: BlogPost[] = [
       { type: 'p', text: 'Wanneer het even donkerder of stiller in je is, betekent dat niet dat er iets mis gaat.' },
       { type: 'quote', text: 'Ook jij mag rusten voordat je weer opbloeit.' }
     ]
-  }
-]
-
-export const seoLandingPages: SeoLandingPage[] = [
-  {
-    eyebrow: 'Holistische therapie Schoonoord',
-    title: 'Holistische therapie in Schoonoord',
-    slug: 'holistische-therapie-schoonoord',
-    intro: 'Kathara Nova begeleidt je met aandacht voor lichaam, emoties, patronen en bewustwording, op afspraak in Schoonoord.',
-    sections: [
-      {
-        title: 'Voor wie is holistische therapie bedoeld?',
-        text: 'Deze begeleiding kan passend zijn als je vastloopt in terugkerende patronen, innerlijke onrust, stress, oude emoties of levensvragen. We kijken niet alleen naar de klacht, maar ook naar wat eronder ligt.'
-      },
-      {
-        title: 'Wat kun je verwachten?',
-        text: 'Tijdens een sessie stemmen we af op jouw vraag en werken we in jouw tempo. Afhankelijk van wat nodig is kan de begeleiding bestaan uit transheling, innerlijk werk, systemisch kijken of praktische integratie.'
-      },
-      {
-        title: 'Praktisch',
-        text: 'Sessies zijn op afspraak in Schoonoord. Je hoeft vooraf nog niet precies te weten welke vorm past; een eerste vraag stellen is genoeg om samen te kijken wat klopt.'
-      }
-    ],
-    highlights: ['Schoonoord', 'Drenthe', 'Op afspraak', 'Online mogelijk'],
-    relatedLinks: [
-      { label: 'Transheling', href: '/transheling' },
-      { label: 'Opstelling', href: '/opstelling' },
-      { label: 'Contact', href: '/contact' }
-    ],
-    seo: {
-      metaTitle: 'Holistische therapie in Schoonoord | Kathara Nova',
-      metaDescription: 'Holistische therapie, heling en bewustwording in Schoonoord voor wie vastloopt in klachten, emoties of patronen.'
-    }
-  },
-  {
-    eyebrow: 'Trance-healing Drenthe',
-    title: 'Trance-healing in Drenthe',
-    slug: 'trance-healing-drenthe',
-    intro: 'Bij Kathara Nova in Schoonoord kun je terecht voor transheling: energetisch en bewustzijnsgericht werk in een rustige setting.',
-    sections: [
-      {
-        title: 'Wat is trance-healing?',
-        text: 'Transheling is een vorm van energetische begeleiding waarbij rust, aandacht en bewustwording centraal staan. De sessie nodigt je uit om te vertragen en te onderzoeken wat gezien of verzacht mag worden.'
-      },
-      {
-        title: 'Wanneer kan het passen?',
-        text: 'Mensen komen vaak met spanning, vermoeidheid, terugkerende emoties, oude overtuigingen of het gevoel vast te zitten. De sessie is bedoeld als ondersteuning bij bewustwording en innerlijke ruimte.'
-      },
-      {
-        title: 'Locatie en afspraak',
-        text: 'De praktijk is gevestigd in Schoonoord en werkt op afspraak. Woon je in Drenthe, bijvoorbeeld rond Coevorden of Emmen, dan is de praktijk goed bereikbaar.'
-      }
-    ],
-    highlights: ['Transheling', 'Schoonoord', 'Drenthe', 'Rust en bewustwording'],
-    relatedLinks: [
-      { label: 'Lees meer over transheling', href: '/transheling' },
-      { label: 'Bekijk tarieven', href: '/tarieven' },
-      { label: 'Plan een afspraak', href: '/contact' }
-    ],
-    seo: {
-      metaTitle: 'Trance-healing in Drenthe | Kathara Nova',
-      metaDescription: 'Trance-healing en energetische begeleiding in Drenthe voor rust, bewustwording en persoonlijke groei.'
-    }
-  },
-  {
-    eyebrow: 'Systeemopstelling Drenthe',
-    title: 'Systeemopstelling in Drenthe',
-    slug: 'systeemopstelling-drenthe',
-    intro: 'Een opstelling bij Kathara Nova helpt zichtbaar maken welke patronen, loyaliteiten of dynamieken onbewust meebewegen.',
-    sections: [
-      {
-        title: 'Wat maakt een opstelling zichtbaar?',
-        text: 'Een systeemopstelling of familieopstelling kan inzicht geven in terugkerende patronen binnen familie, relaties, werk of levensvragen. Wat onbewust meespeelt, krijgt ruimte om gezien te worden.'
-      },
-      {
-        title: 'Voor welke vragen?',
-        text: 'Een opstelling kan passend zijn bij terugkerende relatiepatronen, schuldgevoel, loyaliteit, familiebelasting, keuzes die vastzitten of situaties waarin je merkt dat ratio alleen niet genoeg is.'
-      },
-      {
-        title: 'Op afspraak in Schoonoord',
-        text: 'De begeleiding vindt plaats in een rustige praktijksetting in Schoonoord. Samen formuleren we je vraag en onderzoeken we wat zich op een veilige manier wil laten zien.'
-      }
-    ],
-    highlights: ['Systeemopstelling', 'Familieopstelling', 'Schoonoord', 'Drenthe'],
-    relatedLinks: [
-      { label: 'Lees meer over opstellingen', href: '/opstelling' },
-      { label: 'Holistische therapie', href: '/holistische-therapie-schoonoord' },
-      { label: 'Contact', href: '/contact' }
-    ],
-    seo: {
-      metaTitle: 'Systeemopstelling in Drenthe | Kathara Nova',
-      metaDescription: 'Systeemopstelling en familieopstelling in Drenthe voor inzicht in patronen, relaties en terugkerende dynamieken.'
-    }
   }
 ]
 

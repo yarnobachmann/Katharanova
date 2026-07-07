@@ -116,19 +116,6 @@ export type PricingItem = {
 
 export type FAQ = { question: string; answer: string; pageContext: string; order: number }
 
-export type SeoLandingPage = {
-  title: string
-  slug: string
-  eyebrow: string
-  intro: string
-  sections: { title: string; text: string }[]
-  highlights: string[]
-  relatedLinks: { label: string; href: string }[]
-  ctaTitle?: string
-  ctaText?: string
-  seo?: { metaTitle?: string; metaDescription?: string }
-}
-
 export type HeroMetaItem = { icon: string; label: string; order?: number }
 
 export type LegalPage = {

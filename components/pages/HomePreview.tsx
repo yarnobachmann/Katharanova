@@ -73,9 +73,9 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
               divider
             />
             <div className="home-local-actions">
-              <Button href="/holistische-therapie-schoonoord" variant="secondary" iconRight={<ArrowRight size={16} />}>Holistische therapie</Button>
-              <Button href="/trance-healing-drenthe" variant="ghost" iconRight={<ArrowRight size={16} />}>Trance-healing in Drenthe</Button>
-              <Button href="/systeemopstelling-drenthe" variant="ghost" iconRight={<ArrowRight size={16} />}>Systeemopstelling</Button>
+              <Button href="/contact" variant="secondary" iconRight={<ArrowRight size={16} />}>Plan een kennismaking</Button>
+              <Button href="/transheling" variant="ghost" iconRight={<ArrowRight size={16} />}>Transheling</Button>
+              <Button href="/opstelling" variant="ghost" iconRight={<ArrowRight size={16} />}>Opstelling</Button>
             </div>
           </Reveal>
           <Reveal stagger variant="cards" className="home-trust-grid">

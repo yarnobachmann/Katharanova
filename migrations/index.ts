@@ -16,6 +16,7 @@ import * as migration_20260706_120000_repair_legal_rich_text_links from './20260
 import * as migration_20260706_130000_set_privacy_policy_content from './20260706_130000_set_privacy_policy_content';
 import * as migration_20260707_090000_improve_homepage_local_seo from './20260707_090000_improve_homepage_local_seo';
 import * as migration_20260707_100000_add_seo_landing_pages from './20260707_100000_add_seo_landing_pages';
+import * as migration_20260707_120000_remove_seo_landing_pages from './20260707_120000_remove_seo_landing_pages';
 
 export const migrations = [
   {
@@ -107,5 +108,10 @@ export const migrations = [
     up: migration_20260707_100000_add_seo_landing_pages.up,
     down: migration_20260707_100000_add_seo_landing_pages.down,
     name: '20260707_100000_add_seo_landing_pages'
+  },
+  {
+    up: migration_20260707_120000_remove_seo_landing_pages.up,
+    down: migration_20260707_120000_remove_seo_landing_pages.down,
+    name: '20260707_120000_remove_seo_landing_pages'
   },
 ];

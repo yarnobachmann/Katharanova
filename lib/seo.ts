@@ -124,19 +124,19 @@ export function createHomePageSchema() {
         {
           '@type': 'ListItem',
           position: 1,
-          url: `${serverUrl}/holistische-therapie-schoonoord`,
+          url: `${serverUrl}/`,
           name: 'Holistische therapie in Schoonoord'
         },
         {
           '@type': 'ListItem',
           position: 2,
-          url: `${serverUrl}/trance-healing-drenthe`,
-          name: 'Trance-healing in Drenthe'
+          url: `${serverUrl}/transheling`,
+          name: 'Transheling in Drenthe'
         },
         {
           '@type': 'ListItem',
           position: 3,
-          url: `${serverUrl}/systeemopstelling-drenthe`,
+          url: `${serverUrl}/opstelling`,
           name: 'Systeemopstelling in Drenthe'
         }
       ]
