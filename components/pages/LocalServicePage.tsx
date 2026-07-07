@@ -1,8 +1,10 @@
-import { MapPin } from 'lucide-react'
+import { ArrowRight, MapPin } from 'lucide-react'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { PageHero } from '@/components/ui/PageHero'
+import { safeHref } from '@/lib/safeUrl'
 import type { SeoLandingPage } from '@/lib/types'
 
 export function LocalServicePage({ page }: { page: SeoLandingPage }) {
@@ -32,7 +34,14 @@ export function LocalServicePage({ page }: { page: SeoLandingPage }) {
             </Card>
             <div className="local-service-links">
               <span>Ook relevant</span>
-              {page.relatedLinks.map((link) => <Button key={link.href} href={link.href} variant="ghost" fullWidth>{link.label}</Button>)}
+              <nav aria-label="Gerelateerde pagina's">
+                {page.relatedLinks.map((link) => (
+                  <Link key={link.href} href={safeHref(link.href)} className="local-service-link">
+                    <span>{link.label}</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                ))}
+              </nav>
             </div>
           </aside>
         </div>
