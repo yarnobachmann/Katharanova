@@ -1,6 +1,6 @@
 import { LocationPreview } from '@/components/pages/LocationPreview'
 import { getLocationPage } from '@/lib/cms'
-import { createMetadata, pageTitle } from '@/lib/seo'
+import { createMetadata } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,8 +8,8 @@ export async function generateMetadata() {
   const page = await getLocationPage()
 
   return createMetadata({
-    title: pageTitle(page.hero.title || 'Locatie'),
-    description: page.hero.intro || 'Een indruk van de praktijkruimte van Kathara Nova.',
+    title: 'Praktijkruimte in Schoonoord | Kathara Nova',
+    description: 'Een rustige praktijkruimte in Schoonoord voor holistische therapie, transheling, opstellingen en persoonlijke begeleiding.',
     image: page.hero.image || page.carouselItems?.[0]?.image,
     path: '/locatie'
   })

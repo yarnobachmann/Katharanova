@@ -1,6 +1,6 @@
 import { BlogPagePreview } from '@/components/pages/BlogPagePreview'
 import { getBlogPage, getBlogPosts } from '@/lib/cms'
-import { createMetadata, pageTitle } from '@/lib/seo'
+import { createMetadata } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,8 +8,8 @@ export async function generateMetadata() {
   const page = await getBlogPage()
 
   return createMetadata({
-    title: pageTitle(page.hero.title),
-    description: page.hero.intro,
+    title: 'Blog over heling en bewustwording | Kathara Nova',
+    description: 'Lees artikelen over heling, bewustwording, opstellingen, transheling, innerlijk werk en persoonlijke groei.',
     image: page.hero.image,
     path: '/blog'
   })

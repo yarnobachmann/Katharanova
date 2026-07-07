@@ -9,7 +9,7 @@ export async function generateMetadata() {
 
   return createMetadata({
     title: pageTitle(page.hero.title || 'Fotogallerij'),
-    description: page.hero.intro || 'Een indruk van de sfeer van de praktijk.',
+    description: page.hero.intro || 'Een indruk van de sfeer van de praktijk van Kathara Nova in Schoonoord.',
     image: page.hero.image || page.galleryItems?.[0]?.image,
     path: '/fotogallerij'
   })

@@ -27,15 +27,15 @@ export const photos = {
 
 export const siteSettings: SiteSettings = {
   siteName: 'Kathara Nova',
-  siteTitle: 'Kathara Nova - Holistische therapie, heling & bewustwording',
-  siteDescription: 'Een warme praktijk voor holistische therapie, heling en bewustwording.',
+  siteTitle: 'Holistische therapie in Schoonoord | Kathara Nova',
+  siteDescription: 'Holistische therapie, transheling, opstellingen en bewustwording in Schoonoord, Drenthe.',
   logoMark: '/assets/logo-phoenix-mark.png',
   logoFull: '/assets/logo-phoenix-full.png',
   email: 'hallo@katharanova.nl',
   phone: '06 12 34 56 78',
-  location: 'Op afspraak · Nederland',
+  location: 'Op afspraak · Schoonoord',
   appointmentUrl: '/contact',
-  footerText: 'Een warme praktijk voor holistische therapie, heling en bewustwording. Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
+  footerText: 'Een warme praktijk in Schoonoord voor holistische therapie, transheling, opstellingen en bewustwording. Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
   copyright: 'Kathara Nova - Heling & Bewustwording',
   kvkText: 'KvK 00000000'
 }
@@ -62,30 +62,30 @@ export const navigation: Navigation = {
 
 export const home = {
   hero: {
-    eyebrow: 'Holistische therapie · heling & bewustwording',
-    title: 'Vastgelopen in patronen, klachten of levensvragen?',
-    intro: 'Kathara Nova begeleidt je met holistische therapie, heling en bewustwording naar meer rust, inzicht en innerlijke vrijheid.',
+    eyebrow: 'Holistische therapie in Schoonoord',
+    title: 'Vastgelopen in patronen, spanning of levensvragen?',
+    intro: 'Kathara Nova begeleidt je in Schoonoord met transheling, opstellingen en innerlijk werk naar meer rust, inzicht en bewustwording.',
     image: photos.heroLight
   },
   heroChipText: 'Ruimte om te helen en te groeien',
   heroMetaItems: [
-    { icon: 'map-pin', label: 'Online & op locatie', order: 1 },
+    { icon: 'map-pin', label: 'Schoonoord, Drenthe', order: 1 },
     { icon: 'clock', label: 'Sessies 60-90 min', order: 2 }
   ],
   recognitionTitle: 'Soms voel je dat je verder wilt, maar iets houdt je tegen',
-  recognitionIntro: 'Dat kan zich uiten in chronische klachten, terugkerende emoties, oude overtuigingen, innerlijke onrust of patronen die steeds opnieuw terugkomen.',
+  recognitionIntro: 'Dat kan zich uiten in spanning, terugkerende emoties, oude overtuigingen, innerlijke onrust of patronen die steeds opnieuw terugkomen.',
   recognitionItems: [
-    'Chronische klachten die maar niet verdwijnen',
+    'Spanning of klachten waar je met aandacht naar wilt kijken',
     'Terugkerende emoties die om aandacht vragen',
     'Oude overtuigingen die je tegenhouden',
     'Innerlijke onrust en patronen die zich herhalen'
   ],
   treatmentsEyebrow: 'Behandelingen',
-  treatmentsTitle: 'Werk dat je weer in beweging brengt',
-  treatmentsIntro: 'Drie wegen naar heling en bewustwording, afgestemd op waar jij nu staat.',
+  treatmentsTitle: 'Transheling, opstellingen en innerlijk werk',
+  treatmentsIntro: 'Drie vormen van holistische begeleiding in Schoonoord, afgestemd op waar jij nu staat.',
   aboutEyebrow: 'Over Kathara Nova',
   aboutTitle: 'Begeleiding met aandacht voor de diepere laag',
-  aboutText: 'Bij Kathara Nova wordt niet alleen gekeken naar de klacht, maar naar wat eronder ligt. De begeleiding helpt je bewust worden van patronen, zodat er ruimte ontstaat voor rust, richting en verandering.',
+  aboutText: 'Bij Kathara Nova wordt niet alleen gekeken naar wat zichtbaar speelt, maar ook naar de patronen en overtuigingen eronder. De begeleiding ondersteunt bewustwording, rust, richting en verandering.',
   aboutImage: photos.aboutWarm,
   galleryEyebrow: 'Fotogallerij',
   galleryTitle: 'Sfeer van de praktijk',
@@ -99,10 +99,10 @@ export const home = {
   ],
   quote: 'Niet wat je overkomt, maar hoe je ermee omgaat bepaalt of je lijdt of niet.',
   workshopPreviewEyebrow: 'Workshops',
-  workshopPreviewTitle: 'Samen helen in een kleine groep',
+  workshopPreviewTitle: 'Workshops persoonlijke groei in Schoonoord',
   cta: {
     title: 'Voel je dat het tijd is om anders met je situatie om te gaan?',
-    text: 'Je hoeft nog niet precies te weten wat je nodig hebt. Een eerste vraag stellen is genoeg.',
+    text: 'Je hoeft nog niet precies te weten wat je nodig hebt. Een eerste vraag stellen is genoeg om samen te kijken welke begeleiding passend is.',
     primaryLabel: 'Neem contact op',
     primaryHref: '/contact',
     secondaryLabel: 'Bekijk de tarieven',
@@ -184,10 +184,10 @@ export const treatments: Treatment[] = [
     title: 'Transheling',
     slug: 'transheling',
     navLabel: 'Transheling',
-    summary: 'Energetisch en bewustzijnsgericht werk dat helpt om blokkades te verzachten en ruimte te maken voor herstel.',
-    intro: 'Energetisch en bewustzijnsgericht werk dat helpt om blokkades te verzachten en ruimte te maken voor herstel.',
+    summary: 'Energetisch en bewustzijnsgericht werk dat ondersteunt bij ontspanning, bewustwording en innerlijke ruimte.',
+    intro: 'Energetisch en bewustzijnsgericht werk dat ondersteunt bij ontspanning, bewustwording en innerlijke ruimte.',
     whatTitle: 'Wat is transheling?',
-    whatBody: 'Transheling is een zachte, krachtige vorm van energetisch werk. Door blokkades in je energiesysteem los te maken, krijgt je lichaam de ruimte om zichzelf te herstellen. Veel mensen ervaren tijdens en na een sessie meer rust, helderheid en ruimte in hun lijf.',
+    whatBody: 'Transheling is een zachte vorm van energetisch werk. Met aandacht en afstemming onderzoeken we wat spanning geeft en waar ruimte mag ontstaan. Veel mensen ervaren tijdens en na een sessie meer rust, helderheid en contact met hun lijf.',
     forWhoTitle: 'Voor wie is het bedoeld?',
     forWho: ['Chronische klachten en vermoeidheid', 'Stress, spanning en onrust', 'Vastgezette emoties of trauma', 'Het gevoel vast te zitten in je lichaam'],
     sessionTitle: 'Wat kun je verwachten tijdens een sessie?',
@@ -401,7 +401,7 @@ export const faqs: FAQ[] = [
 
 export const contactPage = {
   hero: { eyebrow: 'Contact', title: 'Stel je vraag of plan een afspraak', intro: 'Je hoeft nog niet precies te weten wat je nodig hebt. Je mag altijd contact opnemen met je vraag.' },
-  formIntro: 'Vertel kort waar je tegenaan loopt. Het formulier is voorbereid voor een echte integratie; er wordt nu nog niets naar een backend verzonden.',
+  formIntro: 'Vertel kort waar je tegenaan loopt. Je bericht wordt veilig naar mij verzonden; ik neem meestal binnen 2 werkdagen contact met je op.',
   availabilityText: 'Ik neem meestal binnen 2 werkdagen contact met je op.',
   image: photos.contact,
   quote: 'De eerste stap is vaak de moeilijkste - en de mooiste.',

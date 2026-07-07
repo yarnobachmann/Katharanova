@@ -1,6 +1,6 @@
 import { HomePreview } from '@/components/pages/HomePreview'
 import { getHomepage, getTreatments, getWorkshops } from '@/lib/cms'
-import { createMetadata } from '@/lib/seo'
+import { createHomePageSchema, createMetadata, serializeJsonLd } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,8 +8,8 @@ export async function generateMetadata() {
   const page = await getHomepage()
 
   return createMetadata({
-    title: 'Kathara Nova - Holistische therapie, heling & bewustwording',
-    description: page.hero.intro,
+    title: 'Holistische therapie in Schoonoord | Kathara Nova',
+    description: 'Kathara Nova begeleidt je in Schoonoord en Drenthe met transheling, opstellingen, innerlijk werk, heling en bewustwording.',
     image: page.hero.image,
     path: '/'
   })
@@ -18,5 +18,13 @@ export async function generateMetadata() {
 export default async function HomePage() {
   const [page, treatments, workshops] = await Promise.all([getHomepage(), getTreatments(), getWorkshops()])
 
-  return <HomePreview page={page} treatments={treatments} workshops={workshops} />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(createHomePageSchema()) }}
+      />
+      <HomePreview page={page} treatments={treatments} workshops={workshops} />
+    </>
+  )
 }

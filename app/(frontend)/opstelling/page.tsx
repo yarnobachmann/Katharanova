@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { TreatmentPageTemplate } from '@/components/pages/TreatmentPage'
 import { getTreatment } from '@/lib/cms'
-import { createMetadata, pageTitle } from '@/lib/seo'
+import { createMetadata } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,8 +11,8 @@ export async function generateMetadata() {
   if (!treatment) return {}
 
   return createMetadata({
-    title: treatment.seo?.metaTitle || pageTitle(treatment.title),
-    description: treatment.seo?.metaDescription || treatment.summary,
+    title: treatment.seo?.metaTitle || 'Systeemopstelling in Drenthe | Kathara Nova',
+    description: treatment.seo?.metaDescription || 'Krijg inzicht in familiepatronen, relaties en terugkerende dynamieken met een opstelling bij Kathara Nova.',
     image: treatment.image,
     path: '/opstelling'
   })
