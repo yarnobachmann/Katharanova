@@ -16,14 +16,6 @@
 .check-list { display: grid; gap: 14px; }
 .check-list > div { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--surface-card); border: 1px solid var(--border-soft); border-radius: var(--radius-md); box-shadow: var(--shadow-xs); }
 .check-list svg { flex: none; color: var(--accent-hover); padding: 6px; width: 30px; height: 30px; border-radius: 50%; background: rgba(201,148,46,0.14); }
-.home-seo-section { background: var(--surface-page); }
-.home-seo-layout { align-items: center; }
-.home-local-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--space-5); }
-.home-trust-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-.home-trust-card { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; align-items: start; padding: clamp(1.1rem, 2vw, 1.35rem); }
-.home-trust-card svg { grid-row: span 2; width: 42px; height: 42px; padding: 10px; border-radius: var(--radius-sm); background: rgba(201,148,46,0.14); color: var(--accent-hover); }
-.home-trust-card h3 { margin: 0; font-size: var(--text-h4); }
-.home-trust-card p { grid-column: 2; margin: 0; color: var(--text-muted); line-height: 1.65; }
 .cards-space { margin-top: var(--space-8); }
 .home-treatment-grid {
   display: grid;
@@ -236,11 +228,6 @@
     border-radius: var(--radius-sm);
     background: rgba(251,247,239,0.66);
   }
-  .home-local-actions,
-  .home-local-actions .btn { width: 100%; }
-  .home-trust-card { grid-template-columns: 1fr; }
-  .home-trust-card svg,
-  .home-trust-card p { grid-column: auto; grid-row: auto; }
   .check-list > div { padding: 14px 15px; }
   .cards-space { margin-top: var(--space-6); }
   .photo-gallery {

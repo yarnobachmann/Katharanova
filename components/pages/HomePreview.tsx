@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, CalendarHeart, Check, Clock, Heart, MapPin, ShieldCheck, Sparkles, Tag, Users } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, Clock, Heart, MapPin, Sparkles, Tag, Users } from 'lucide-react'
 
 import { Reveal } from '@/components/Reveal'
 import { TreatmentCard } from '@/components/cards/TreatmentCard'
@@ -58,42 +58,6 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
           <SectionHeading align="left" eyebrow="Herken je dit?" title={page.recognitionTitle} intro={page.recognitionIntro} divider />
           <Reveal stagger variant="section" className="check-list">
             {page.recognitionItems.map((item: string) => <div key={item}><Check size={17} />{item}</div>)}
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section home-seo-section">
-        <div className="container grid-2 home-seo-layout">
-          <Reveal variant="section">
-            <SectionHeading
-              align="left"
-              eyebrow="Holistische therapie in Schoonoord"
-              title="Begeleiding voor rust, inzicht en bewustwording in Drenthe"
-              intro="Kathara Nova is een praktijk in Schoonoord voor transheling, opstellingen en innerlijk werk. De begeleiding is bedoeld voor mensen die terugkerende patronen, spanning, emoties of levensvragen met aandacht willen onderzoeken."
-              divider
-            />
-            <div className="home-local-actions">
-              <Button href="/contact" variant="secondary" iconRight={<ArrowRight size={16} />}>Plan een kennismaking</Button>
-              <Button href="/transheling" variant="ghost" iconRight={<ArrowRight size={16} />}>Transheling</Button>
-              <Button href="/opstelling" variant="ghost" iconRight={<ArrowRight size={16} />}>Opstelling</Button>
-            </div>
-          </Reveal>
-          <Reveal stagger variant="cards" className="home-trust-grid">
-            <Card tone="sand" className="home-trust-card">
-              <MapPin size={22} />
-              <h3>Op afspraak in Schoonoord</h3>
-              <p>Een rustige praktijkplek in Drenthe, met de mogelijkheid om vooraf te overleggen wat voor jou passend is.</p>
-            </Card>
-            <Card tone="cream" className="home-trust-card">
-              <ShieldCheck size={22} />
-              <h3>Veilig en zorgvuldig</h3>
-              <p>We werken in jouw tempo, met aandacht voor grenzen, privacy en integratie na de sessie.</p>
-            </Card>
-            <Card tone="sage" className="home-trust-card">
-              <Sparkles size={22} />
-              <h3>Geen medische beloftes</h3>
-              <p>De sessies ondersteunen bewustwording, ontspanning en persoonlijke groei, naast eventuele reguliere zorg.</p>
-            </Card>
           </Reveal>
         </div>
       </section>
