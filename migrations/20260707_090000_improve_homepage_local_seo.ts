@@ -36,20 +36,20 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
 
     DELETE FROM "homepage_recognition_items";
 
-    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label", "order")
-    SELECT 0, "id", 'spanning-klachten-aandacht', 'Spanning of klachten waar je met aandacht naar wilt kijken', 1
+    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label")
+    SELECT 0, "id", 'spanning-klachten-aandacht', 'Spanning of klachten waar je met aandacht naar wilt kijken'
     FROM "homepage";
 
-    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label", "order")
-    SELECT 1, "id", 'terugkerende-emoties', 'Terugkerende emoties die om aandacht vragen', 2
+    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label")
+    SELECT 1, "id", 'terugkerende-emoties', 'Terugkerende emoties die om aandacht vragen'
     FROM "homepage";
 
-    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label", "order")
-    SELECT 2, "id", 'oude-overtuigingen', 'Oude overtuigingen die je tegenhouden', 3
+    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label")
+    SELECT 2, "id", 'oude-overtuigingen', 'Oude overtuigingen die je tegenhouden'
     FROM "homepage";
 
-    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label", "order")
-    SELECT 3, "id", 'innerlijke-onrust-patronen', 'Innerlijke onrust en patronen die zich herhalen', 4
+    INSERT INTO "homepage_recognition_items" ("_order", "_parent_id", "id", "label")
+    SELECT 3, "id", 'innerlijke-onrust-patronen', 'Innerlijke onrust en patronen die zich herhalen'
     FROM "homepage";
 
     UPDATE "treatments"
