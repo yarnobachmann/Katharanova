@@ -70,7 +70,8 @@ export type Treatment = {
 export type Workshop = {
   title: string
   slug: string
-  date: string
+  date?: string
+  dateLabel?: string
   location: string
   durationLabel: string
   spotsLabel: string
@@ -122,3 +123,4 @@ export type LegalPage = {
   hero: Hero
   content: RichContent
 }
+

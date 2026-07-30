@@ -10,7 +10,7 @@ import { CTASection } from '@/components/ui/CTASection'
 import { Card } from '@/components/ui/Card'
 import { ImageFrame } from '@/components/ui/ImageFrame'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { shortDate } from '@/lib/format'
+import { shortWorkshopDateLabel } from '@/lib/format'
 import { normalizeHomepage } from '@/lib/live-preview'
 import type { Treatment, Workshop } from '@/lib/types'
 
@@ -105,7 +105,7 @@ export function HomePreview({ page: initialPage, treatments, workshops }: { page
             {workshops.slice(0, 3).map((workshop) => (
               <Card key={workshop.slug} as="article" tone={workshop.tone} interactive className="mini-workshop">
                 <div className="mini-workshop-top">
-                  <strong>{shortDate(workshop.date)}</strong>
+                  <strong>{shortWorkshopDateLabel(workshop.date, workshop.dateLabel || 'Op aanvraag')}</strong>
                   <CalendarHeart size={22} />
                 </div>
                 <h3>{workshop.title}</h3>
@@ -134,3 +134,4 @@ function metaIcon(icon: string) {
   if (icon === 'sparkles') return Sparkles
   return MapPin
 }
+

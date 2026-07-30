@@ -17,6 +17,7 @@ import * as migration_20260706_130000_set_privacy_policy_content from './2026070
 import * as migration_20260707_090000_improve_homepage_local_seo from './20260707_090000_improve_homepage_local_seo';
 import * as migration_20260707_100000_add_seo_landing_pages from './20260707_100000_add_seo_landing_pages';
 import * as migration_20260707_120000_remove_seo_landing_pages from './20260707_120000_remove_seo_landing_pages';
+import * as migration_20260730_120000_add_workshop_date_label from './20260730_120000_add_workshop_date_label';
 
 export const migrations = [
   {
@@ -114,4 +115,10 @@ export const migrations = [
     down: migration_20260707_120000_remove_seo_landing_pages.down,
     name: '20260707_120000_remove_seo_landing_pages'
   },
+  {
+    up: migration_20260730_120000_add_workshop_date_label.up,
+    down: migration_20260730_120000_add_workshop_date_label.down,
+    name: '20260730_120000_add_workshop_date_label'
+  },
 ];
+

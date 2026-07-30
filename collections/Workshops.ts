@@ -15,7 +15,7 @@ export const Workshops: CollectionConfig = {
   admin: {
     group: 'Website content',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'date', 'featured', 'active', '_status'],
+    defaultColumns: ['title', 'date', 'dateLabel', 'featured', 'active', '_status'],
     livePreview: {},
     preview: previewForCollection('workshops')
   },
@@ -32,7 +32,8 @@ export const Workshops: CollectionConfig = {
   fields: [
     { name: 'title', type: 'text', required: true },
     slugField(),
-    { name: 'date', type: 'date', required: true },
+    { name: 'date', type: 'date', admin: { description: 'Laat leeg voor workshops op aanvraag of prive-workshops.' } },
+    { name: 'dateLabel', label: 'Datum label', type: 'text', admin: { description: 'Tekst die wordt getoond als er geen datum is, bijvoorbeeld Op aanvraag of Boek met een vriend(in).' } },
     { name: 'startTime', type: 'text' },
     { name: 'endTime', type: 'text' },
     { name: 'location', type: 'text', required: true },
@@ -48,3 +49,4 @@ export const Workshops: CollectionConfig = {
     { name: 'seo', type: 'group', fields: [{ name: 'metaTitle', type: 'text' }, { name: 'metaDescription', type: 'textarea' }] }
   ]
 }
+

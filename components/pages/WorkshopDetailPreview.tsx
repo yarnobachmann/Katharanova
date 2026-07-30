@@ -8,7 +8,7 @@ import { usePayloadLivePreview } from '@/components/live-preview/usePayloadLiveP
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ImageFrame } from '@/components/ui/ImageFrame'
-import { formatDate } from '@/lib/format'
+import { workshopDateLabel } from '@/lib/format'
 import { normalizeWorkshop } from '@/lib/live-preview'
 import type { Workshop } from '@/lib/types'
 
@@ -26,7 +26,7 @@ export function WorkshopDetailPreview({ workshop: initialWorkshop }: { workshop:
         <div className="container-text">
           <Link href="/workshops" className="back-link"><ArrowLeft size={16} /> Terug naar workshops</Link>
           <div className="article-hero-meta">
-            <span className="badge badge-gold"><CalendarHeart size={15} />{formatDate(workshop.date)}</span>
+            <span className="badge badge-gold"><CalendarHeart size={15} />{workshopDateLabel(workshop.date, workshop.dateLabel || 'Op aanvraag')}</span>
           </div>
           <h1>{workshop.title}</h1>
           <p className="lead">{workshop.excerpt}</p>
@@ -55,3 +55,4 @@ export function WorkshopDetailPreview({ workshop: initialWorkshop }: { workshop:
     </main>
   )
 }
+

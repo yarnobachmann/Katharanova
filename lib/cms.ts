@@ -300,11 +300,18 @@ export async function getTreatment(slug: string): Promise<Treatment | undefined>
 export async function getWorkshops(): Promise<Workshop[]> {
   return withPayload(async (payload) => {
     const result: any = await payload.find({ collection: 'workshops', sort: 'date', depth: 2, limit: 50, where: { active: { equals: true } } })
-    return result.docs.map((doc: any) => ({
-      ...doc,
-      image: mediaUrl(doc.image),
-      content: richText(doc.content, doc.excerpt)
-    }))
+    return result.docs
+      .map((doc: any) => ({
+        ...doc,
+        image: mediaUrl(doc.image),
+        content: richText(doc.content, doc.excerpt)
+      }))
+      .sort((a: Workshop, b: Workshop) => {
+        if (!a.date && !b.date) return a.title.localeCompare(b.title)
+        if (!a.date) return 1
+        if (!b.date) return -1
+        return new Date(a.date).getTime() - new Date(b.date).getTime()
+      })
   }, workshops)
 }
 
@@ -526,3 +533,4 @@ export async function getLegalPage(slug: 'terms-page' | 'privacy-page'): Promise
     }
   }, fallback)
 }
+

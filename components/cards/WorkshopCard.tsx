@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { ImageFrame } from '@/components/ui/ImageFrame'
-import { formatDate } from '@/lib/format'
+import { workshopDateLabel } from '@/lib/format'
 import type { Workshop } from '@/lib/types'
 
 export function WorkshopCard({ workshop }: { workshop: Workshop }) {
@@ -13,7 +13,7 @@ export function WorkshopCard({ workshop }: { workshop: Workshop }) {
       <Card as="article" tone={workshop.tone} interactive className="workshop-card">
         <ImageFrame src={workshop.image} alt={workshop.title} ratio="16 / 9" tone={workshop.tone === 'cream' ? 'sand' : workshop.tone} />
         <div className="card-row">
-          <Badge tone="gold">{formatDate(workshop.date)}</Badge>
+          <Badge tone="gold">{workshopDateLabel(workshop.date, workshop.dateLabel || 'Op aanvraag')}</Badge>
           <CalendarHeart size={22} />
         </div>
         <h3>{workshop.title}</h3>
@@ -29,3 +29,4 @@ export function WorkshopCard({ workshop }: { workshop: Workshop }) {
     </Link>
   )
 }
+
